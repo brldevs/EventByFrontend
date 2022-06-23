@@ -1,0 +1,37 @@
+.dropdown.custom {
+    .dropdown-menu {
+        z-index: 5;
+        background-color: #faf9ff;
+        border-radius: 10px;
+        border: 1px solid #e9ecf0;
+        padding: 0;
+        overflow: hidden;
+        .dropdown-item {
+            margin-left: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            padding: 0.3rem 1rem;
+            color: $gray2;
+            span.icon {
+                height: 12px;
+                width: 12px;
+                border-radius: 50%;
+                background-color: $secondary;
+                color: $white;
+                font-size: 8px;
+                display: inline-block;
+                text-align: center;
+                opacity: 0;
+            }
+        }
+        .dropdown-item:hover {
+            background-color: $primary;
+            color: $white;
+            span.icon {
+                opacity: 1;
+            }
+        }
+    }
+}

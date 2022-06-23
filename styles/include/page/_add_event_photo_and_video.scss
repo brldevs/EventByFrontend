@@ -1,0 +1,19 @@
+.grid-image {
+    span {
+        opacity: 0;
+        transition: 0.3s;
+        cursor: pointer;
+        top: 9px;
+        right: 9px;
+        border-radius: 4px;
+        width: 20px;
+        background-color: #c7cdde;
+        text-align: center;
+        height: 20px;
+    }
+}
+.grid-image:hover {
+    span {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,222 @@
+.hr-line {
+  border-bottom: 1px solid $gray3;
+  text-align: center;
+  span {
+    background-color: $white;
+    display: inline-block;
+    transform: translateY(10px);
+    padding: 0 10px;
+    color: $gray2;
+  }
+}
+.mw-1370 {
+  max-width: 1370px;
+  margin: auto;
+  padding: 0 15px;
+}
+.d-inherit {
+  display: inherit;
+}
+.lh-1 {
+  line-height: 1;
+}
+.flex-1 {
+  flex: 1;
+}
+a {
+  text-decoration: none;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.mb-250 {
+  margin-bottom: 250px;
+}
+.mb-130 {
+  margin-bottom: 130px;
+}
+
+.border-radius-bottom-0 {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.sm.input-group .input-group-text,
+.sm.input-group .form-control {
+  padding: 13px;
+}
+.border-radius-10 {
+  border-radius: 10px;
+}
+.bg-gray-3 {
+  background-color: rgba(82, 50, 248, 0.03);
+}
+.border-gray-3 {
+  border: 1px solid $gray3;
+}
+
+.ck-editor__editable {
+  min-height: 118px;
+  font-family: $font-family;
+}
+.btn {
+  i {
+    line-height: 22px;
+  }
+}
+.p-20 {
+  padding: 20px;
+}
+.p-30 {
+  padding: 30px;
+}
+.py-30 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.px-50 {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.py-50 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.p-50 {
+  padding: 50px;
+}
+.px-130 {
+  padding-left: 130px;
+  padding-right: 130px;
+}
+.mt-30 {
+  margin-top: 30px;
+}
+.mt-50 {
+  margin-top: 50px;
+}
+.mt-80 {
+  margin-top: 80px;
+}
+
+.text-dark {
+  color: $dark;
+}
+hr {
+  background-color: #f4f4f6;
+  opacity: 1;
+}
+hr.hr {
+  background-color: #e9ecf0;
+}
+.tooltip.show {
+  opacity: 1;
+}
+.tooltip-inner {
+  background-color: #2f2f3f;
+  max-width: 270px !important;
+  font-size: 10px !important;
+  text-align: left !important;
+  font-weight: 400 !important;
+  padding: 10px 15px !important;
+}
+.rounded {
+  border-radius: 5px !important;
+}
+
+.modal {
+  background-color: rgba(#3a445b, 0.7);
+}
+.mw-470 {
+  max-width: 470px;
+}
+
+#dashboard {
+  .organizer-details {
+    .logo {
+      height: 100px;
+      width: 100px;
+      background-color: #f4f4f6;
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+  }
+}
+
+.bg-primary-5 {
+  background-color: rgba($color: $primary, $alpha: 0.05) !important;
+}
+
+.badge {
+  border-radius: 50px;
+  padding: 8px 25px;
+  font-size: 14px;
+  display: inline-block;
+  font-weight: 600;
+}
+.badge-secondary {
+  background-color: rgba($color: $secondary, $alpha: 0.1);
+  color: $secondary;
+}
+
+.badge-warning {
+  background-color: rgba($color: $warning, $alpha: 0.1);
+  color: $warning;
+}
+
+.badge-danger {
+  background-color: rgba($color: $danger, $alpha: 0.1);
+  color: $danger;
+}
+.bg-light {
+  background-color: #f4f4f6 !important;
+}
+#cke_description {
+  width: auto !important;
+}
+.django-ckeditor-widget {
+  width: 100%;
+}
+.mx-470 {
+  max-width: 470px;
+}
+.mx-770 {
+  max-width: 770px;
+}
+.plus-btn {
+  height: 50px;
+  width: 50px;
+  background: rgba($primary, 0.1);
+}
+.repeat-on {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7px;
+  span {
+    line-height: 35px;
+    width: 35px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgba($primary, 0.05);
+    display: inline-block;
+    font-size: 12px;
+    color: $primary;
+    cursor: pointer;
+  }
+  span.active {
+    background-color: $primary;
+    color: $white;
+  }
+}
+
+a.icon::before {
+  vertical-align: middle;
+  margin-right: 10px;
+  font-family: "remixicon" !important;
+}

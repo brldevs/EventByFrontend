@@ -1,0 +1,34 @@
+.attendees {
+    .payment-history {
+        background-color: $white;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #e9ecf0;
+        max-width: 970px;
+        table {
+            color: #3a445b;
+            width: 100%;
+            tr {
+                border-bottom: 1px solid #e9ecf0;
+                th,
+                td {
+                    font-weight: 400;
+                    padding: 20px 30px;
+                }
+                td.invoice {
+                    a {
+                        font-size: 14px;
+                        color: #3a445b;
+                    }
+                    a:hover {
+                        color: $primary;
+                        text-decoration: underline;
+                    }
+                }
+            }
+            tr:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+}

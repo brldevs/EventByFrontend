@@ -1,0 +1,33 @@
+.search-event {
+    .input-group .input-group-text,
+    .form-control {
+        padding: 13px 20px;
+    }
+    .input-group {
+        max-width: 300px;
+        margin-bottom: 10px;
+    }
+    select.form-control {
+        padding-left: 0 !important;
+        option {
+            padding-right: 20px;
+        }
+    }
+}
+.search-event {
+    .input-group .input-group-text,
+    .form-control {
+        padding: 13px 20px;
+    }
+    .input-group {
+        max-width: 300px;
+        min-width: 200px;
+        margin-bottom: 10px;
+    }
+    select.form-control {
+        padding-left: 0 !important;
+        option {
+            padding-right: 20px;
+        }
+    }
+}

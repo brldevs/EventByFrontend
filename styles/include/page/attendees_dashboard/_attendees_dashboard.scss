@@ -1,0 +1,80 @@
+.attendees {
+    .upcoming-events {
+        position: relative;
+        .right-arrow,
+        .left-arrow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            z-index: 9;
+            top: 28%;
+            cursor: pointer;
+            height: 40px;
+            width: 40px;
+            background-color: $white;
+            border: 1px solid #e9ecf0;
+            box-shadow: 0px 4px 4px rgba(155, 164, 187, 0.3);
+            border-radius: 5px;
+            color: #c7cdde;
+        }
+        .right-arrow {
+            right: 0;
+        }
+        .left-arrow {
+            left: 0;
+        }
+        .right-arrow:hover,
+        .left-arrow:hover {
+            opacity: 0.9;
+        }
+        .event {
+            .image {
+                padding: 0 10px;
+                position: relative;
+                .time {
+                    position: absolute;
+                    top: 15px;
+                    right: 25px;
+                    border-radius: 5px;
+                    padding: 10px 15px;
+                    background-color: rgba($white, 0.8);
+                    span {
+                        opacity: 0.5;
+                        font-size: 15px;
+                    }
+                }
+            }
+            .event-content {
+                margin-top: -11%;
+                padding-top: 11%;
+                i {
+                    vertical-align: middle;
+                }
+                .pt-30 {
+                    padding-top: 30px;
+                }
+            }
+        }
+    }
+
+    .event-attended {
+        .event-attended-item {
+            .img {
+                height: 80px;
+                width: 80px;
+            }
+            .btn {
+                margin-top: 10px;
+                font-weight: 400;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-size: 10px;
+            }
+            .btn:hover {
+                background-color: $primary !important;
+                color: $white;
+            }
+        }
+    }
+}
