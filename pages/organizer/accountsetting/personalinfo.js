@@ -578,7 +578,7 @@ const personalinfo = () => {
                     </div>
                     <div
                       onClick={handleStatus}
-                      className={`wrapper-dropdown-4 ${isActiveFilterTimeZone ? "active" : ""
+                      className={`wrapper-dropdown-4 custom-linhight ${isActiveFilterTimeZone ? "active" : ""
                         } form-select form-control form-control-sm`}
                     >
                       {timeZoneSelectedValue ? timeZoneSelectedValue : ""}
@@ -659,20 +659,20 @@ const personalinfo = () => {
                 />
               </div>
             </div>
-            <div className="mb-3 pb-5">
+            <div className="mb-3">
               <label htmlFor>Location*</label>
-              {defaultValueLocation && (
-                <GooglePlacesAutocomplete
-                  apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-                  className="input-group"
-                  selectProps={{
-                    defaultInputValue: defaultValueLocation,
-                    isClearable: true,
-                    values,
-                    onChange: setValues,
-                  }}
-                />
-              )}
+
+              <GooglePlacesAutocomplete
+                apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+                className="input-group"
+                selectProps={{
+                  defaultInputValue: defaultValueLocation,
+                  isClearable: true,
+                  values,
+                  onChange: setValues,
+                }}
+              />
+
             </div>
             <div className="mb-3 pb-5">
               <label htmlFor>Language*</label>
@@ -687,7 +687,7 @@ const personalinfo = () => {
                 </div>
                 <div
                   onClick={handleLanguage}
-                  className={`wrapper-dropdown-4 ${isActiveFilterLanguage ? "active" : ""
+                  className={`wrapper-dropdown-4 custom-linhight ${isActiveFilterLanguage ? "active" : ""
                     } form-select form-control form-control-sm`}
                 >
                   {languageSelectedValue ? languageSelectedValue : ""}
