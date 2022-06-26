@@ -192,6 +192,42 @@ function dashboard() {
                   </Link>
                 </div>
               )}
+              <div className="single-event bg-white p-4 border-radius-10 my-4">
+                <div className="row">
+                  <div className="col-md-9 d-table">
+                    <span className="align-middle inline-block d-table-cell"
+                      style={{ color: "red" }} >
+                      <b>Ticket Payment Option</b> not found! Please add a{" "}
+                      <b>Ticket Payment Option</b> so that your event attendees
+                      can pay for tickets!
+                    </span>
+                  </div>
+                  <div className="col-md-3">
+                    <div className="text-right">
+                      <a className="btn btn-secondary text-white">Add Checkout Method</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="single-event bg-white p-4 border-radius-10 my-4">
+                <div className="row">
+                  <div className="col-md-9 d-table ">
+                    <span className="align-middle inline-block d-table-cell"
+                      style={{ color: "red" }}>
+                      You did not <b>subscribe</b> to any plan yet! <b>Please subscribe to a package</b> and enjoy the premium facilities.
+                    </span>
+                  </div>
+                  <div className="col-md-3">
+                    <div className="text-right">
+                      <a className="btn btn-secondary text-white">Add Package Subscription</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
 
               <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
                 <CountByEventType

@@ -711,6 +711,10 @@ i.ri-add-line {
 .tui-full-calendar-time-resize-handle.handle-x {
   display: none !important;
 }
+
+.text-right {
+  text-align: right;
+}
 @media (hover: none) and (pointer: coarse) {
   .left-arrow,
   .right-arrow {

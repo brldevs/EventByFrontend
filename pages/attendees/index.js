@@ -687,7 +687,7 @@ function eventCalender() {
                 <div className="col-lg-8">
                   <div className="bg-white">
                     <div className="bg-white rounded">
-                      <CustomEventCalender />
+                      <CustomEventCalender />...
                     </div>
                   </div>
                 </div>
