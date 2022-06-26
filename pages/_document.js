@@ -32,3 +32,4 @@ class MyDocument extends Document {
 }
 
 export default MyDocumen
+
