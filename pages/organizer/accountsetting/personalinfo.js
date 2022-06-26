@@ -345,6 +345,7 @@ const personalinfo = () => {
 
   const [isActiveFilterTimeZone, setIsActiveFilterTimeZone] = useState(false);
   const handleStatus = () => {
+    setIsActiveFilterLanguage(false);
     setIsActiveFilterTimeZone(!isActiveFilterTimeZone);
   };
 
@@ -359,6 +360,7 @@ const personalinfo = () => {
 
   const [isActiveFilterLanguage, setIsActiveFilterLanguage] = useState(false);
   const handleLanguage = () => {
+    setIsActiveFilterTimeZone(false);
     setIsActiveFilterLanguage(!isActiveFilterLanguage);
   };
 
