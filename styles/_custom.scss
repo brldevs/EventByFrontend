@@ -702,12 +702,16 @@ i.ri-add-line {
 
 .notification > div > div {
   background-color: #fff !important;
-  box-shadow: 1px 10px 40px #f5f5f6;
+  box-shadow: 1px 10px 40px #f5f5f6 !important;
   color: #060508 !important;
-  margin-top: 30% !important;
   font-size: 80% !important;
   text-transform: capitalize !important;
+  margin: 5px !important;
 }
+.notification > div:first-child {
+  margin-top: 101px !important;
+}
+
 .tui-full-calendar-time-resize-handle.handle-x {
   display: none !important;
 }

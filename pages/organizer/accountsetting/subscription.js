@@ -182,7 +182,7 @@ function Subscription() {
 
   return (
     <>
-      <div className="bg-white mt-4  border-radius-10">
+      <div className="bg-white border-radius-10">
         <div className="text-end px-50 py-50 pb-0">
           {/* <button className="btn btn-secondary text-white">Save Changes</button> */}
         </div>
@@ -224,20 +224,10 @@ function Subscription() {
 
             {subscriptionErrorMessage && (
               <div
-                style={{
-                  backgroundColor: "#f8d7da",
-                  marginTop: "16px",
-                  marginBottom: "16px",
-                  padding: "20px",
-                }}
+                className="single-event bg-warning p-4 border-radius-10 "
               >
                 {subscriptionErrorMessage && (
-                  <span
-                    style={{
-                      color: "red",
-                      fontSize: "16px",
-                    }}
-                  >
+                  <span >
                     {subscriptionErrorMessage}
                   </span>
                 )}

@@ -105,9 +105,9 @@ function PasswordChange() {
 
   return (
     <>
-      <div className="content_area flex-1 p-30">
+      <div className="content_area flex-1">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="bg-white mt-4  border-radius-10">
+          <div className="bg-white border-radius-10">
             <div className="text-end px-50 py-50 pb-0">
               <button type="submit" className="btn btn-secondary text-white">
                 Save Changes

@@ -371,7 +371,7 @@ const personalinfo = () => {
 
   return (
     <>
-      <div className="bg-white mt-4  border-radius-10">
+      <div className="bg-white border-radius-10">
         <form>
           <div className="text-end px-50 py-50 pb-0">
             <button
@@ -532,9 +532,8 @@ const personalinfo = () => {
                 <div className="mb-3">
                   <label htmlFor>Date of Birth*</label>
                   <div
-                    className={`input-group border-radius-bottom-0 calender-focus ${
-                      isDateOfBirthOpen ? "onfocus" : ""
-                    }`}
+                    className={`input-group border-radius-bottom-0 calender-focus ${isDateOfBirthOpen ? "onfocus" : ""
+                      }`}
                     style={{ overflow: "visible" }}
                     onClick={toggleClass}
                   >
@@ -579,9 +578,8 @@ const personalinfo = () => {
                     </div>
                     <div
                       onClick={handleStatus}
-                      className={`wrapper-dropdown-4 ${
-                        isActiveFilterTimeZone ? "active" : ""
-                      } form-select form-control form-control-sm`}
+                      className={`wrapper-dropdown-4 ${isActiveFilterTimeZone ? "active" : ""
+                        } form-select form-control form-control-sm`}
                     >
                       {timeZoneSelectedValue ? timeZoneSelectedValue : ""}
 
@@ -655,8 +653,8 @@ const personalinfo = () => {
                     values
                       ? values.label
                       : defaultValueLocation
-                      ? defaultValueLocation
-                      : ""
+                        ? defaultValueLocation
+                        : ""
                   }
                 />
               </div>
@@ -689,9 +687,8 @@ const personalinfo = () => {
                 </div>
                 <div
                   onClick={handleLanguage}
-                  className={`wrapper-dropdown-4 ${
-                    isActiveFilterLanguage ? "active" : ""
-                  } form-select form-control form-control-sm`}
+                  className={`wrapper-dropdown-4 ${isActiveFilterLanguage ? "active" : ""
+                    } form-select form-control form-control-sm`}
                 >
                   {languageSelectedValue ? languageSelectedValue : ""}
 
