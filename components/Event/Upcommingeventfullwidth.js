@@ -17,6 +17,7 @@ import {
 import { useRouter } from "next/router";
 import { useAlert } from "react-alert";
 import TimeCounter from "./TimeCounter";
+import { generateTicket } from "../../services/service";
 
 function UpcommingEventFullWidth({
   eventData,
@@ -181,7 +182,78 @@ function UpcommingEventFullWidth({
 
   const [isJoinSuccessful, setIsJoinSuccessful] = useState(false);
 
+  const [ticketData, setTicketData] = useState({});
+
+  const downloadTicket = async () => {
+    console.log("Ticket Data: ");
+    console.log(ticketData);
+
+    const participant_id =
+      typeof window !== "undefined"
+        ? localStorage.getItem("participant_id")
+        : null;
+    const data = {
+      p_id: participant_id,
+      p_name: `${firstName} ${lastName}`,
+      p_email: email,
+      event_id: eventID,
+      event_name: ticketData.name,
+      event_start_date: ticketData.start_date,
+      event_end_date: ticketData.end_date,
+      event_location: ticketData.event_location,
+      ticket_name: ticketData.ticket.custom_ticket[0].name,
+      ticket_price: ticketData.ticket.custom_ticket[0].price,
+      buy_date: "",
+      organizer: ticketData.organizer,
+    };
+    console.log(data);
+
+    //-----------------
+
+    var blob = new Blob([data], { type: "application/octetstream" });
+
+    //Check the Browser type and download the File.
+    var isIE = false || !!document.documentMode;
+    if (isIE) {
+      window.navigator.msSaveBlob(blob, fileName);
+    } else {
+      var url = window.URL || window.webkitURL;
+      var link = url.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.setAttribute("download", "Ticket.pdf");
+      a.setAttribute("href", link);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    //--------------------------------
+    return await generateTicket(data);
+    // const response = await generateTicket(data);
+
+    // const url = window.URL.createObjectURL(new Blob([response.data]));
+    // const link = document.createElement("a");
+    // link.href = url;
+    // link.setAttribute("download", "ticket.pdf"); //or any other extension
+    // document.body.appendChild(link);
+    // link.click();
+  };
+
   useEffect(async () => {
+    setTicketData({
+      name,
+      start_date,
+      end_date,
+      event_address_line1,
+      event_address_line2,
+      event_location,
+      event_state,
+      event_city_town,
+      event_postal_code,
+      event_country,
+      organizer: `${organizer.firstName} ${organizer.lastName}`,
+      ticket,
+    });
     // it is calling from http://localhost:3000/attendees/ page
     // IF LAST VISITED EVENT  EXISTS THEN IT IS COME FROM EVENT PAGE
 
@@ -337,7 +409,7 @@ function UpcommingEventFullWidth({
         }
       }
     }
-  }, [session_id]);
+  }, []);
 
   const [selectedTicket, setSelectedTicket] = useState(null);
   const handleTicketChange = (e) => {
@@ -391,16 +463,31 @@ function UpcommingEventFullWidth({
               </div>
             </div>
           </div>
+
           <div className="col-md-4">
             <div className="d-flex h-100 justify-content-between align-items-center">
               <div>
                 {isJoinSuccessful ? (
-                  <span
-                    className="badge"
-                    style={{ backgroundColor: "green", color: "white" }}
-                  >
-                    Join Successful
-                  </span>
+                  <>
+                    <span
+                      className="badge"
+                      style={{ backgroundColor: "green", color: "white" }}
+                    >
+                      Join Successful
+                    </span>
+                    <span
+                      className="badge"
+                      style={{
+                        backgroundColor: "blue",
+                        color: "white",
+                        marginLeft: "10px",
+                        cursor: "pointer",
+                      }}
+                      onClick={downloadTicket}
+                    >
+                      Download Ticket
+                    </span>
+                  </>
                 ) : (
                   <>
                     <span className="badge badge-danger">

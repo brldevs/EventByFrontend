@@ -874,6 +874,11 @@ const getEventSummary = async (data, token) => {
   return res;
 };
 
+const generateTicket = async (data) => {
+  const res = await API.post("/event/generateTicket", data);
+  return res;
+};
+
 module.exports = {
   signUpOrganizer,
   signUpAttendee,
@@ -960,4 +965,5 @@ module.exports = {
   checkEventCreationFacility,
   checkUserProfileSetupStatus,
   getEventSummary,
+  generateTicket,
 };
