@@ -1,0 +1,240 @@
+//For Grid View
+.grid-event {
+    .event-item {
+        .image {
+            position: relative;
+            .online-btn {
+                display: inline-block;
+                background-color: $secondary;
+                color: $white;
+                font-size: 14px;
+                border-radius: 100px;
+                padding: 6px 18px;
+                text-align: center;
+                cursor: context-menu;
+                position: absolute;
+                right: 20px;
+                top: 20px;
+            }
+        }
+    }
+    .event-content {
+        padding: 0 10px;
+        position: relative;
+        margin-top: -50px;
+
+        .all-content {
+            background-color: $white;
+            border-radius: 10px;
+            padding: 30px;
+            .date-and-option {
+                display: flex;
+                justify-content: space-between;
+                .dropdown {
+                    .dropdown-menu {
+                        z-index: 5;
+                        background-color: #faf9ff;
+                        border-radius: 10px;
+                        border: 1px solid #e9ecf0;
+                        .dropdown-item {
+                            margin-left: auto;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            font-size: 12px;
+                            span.icon {
+                                height: 12px;
+                                width: 12px;
+                                border-radius: 50%;
+                                background-color: $secondary;
+                                color: $white;
+                                font-size: 8px;
+                                display: inline-block;
+                                text-align: center;
+                                opacity: 0;
+                            }
+                        }
+                        .dropdown-item:hover {
+                            background-color: $primary;
+                            color: $white;
+                            span.icon {
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.list-event {
+    .event-item {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        background-color: $white;
+        padding: 20px;
+        border-radius: 10px;
+        .image {
+            position: relative;
+            margin-right: 20px;
+            align-self: flex-start;
+            img {
+                height: 130px;
+                width: 130px !important;
+            }
+            .online-btn {
+                display: inline-block;
+                background-color: $secondary;
+                color: $white;
+                font-size: 14px;
+                border-radius: 100px;
+                padding: 6px 18px;
+                text-align: center;
+                cursor: context-menu;
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 10px;
+                margin-left: auto;
+                margin-right: auto;
+                width: 100px;
+            }
+        }
+        .event-content {
+            flex: 1;
+            .all-content {
+                display: flex;
+                flex-wrap: wrap;
+                flex-grow: 3;
+                .texts {
+                    padding-right: 15px;
+                    width: 50%;
+                    .title {
+                        font-size: 24px;
+                        margin: 5px 0;
+                    }
+                    .date-and-option {
+                        display: flex;
+                        justify-content: space-between;
+                        .dropdown {
+                            position: absolute;
+                            right: 40px;
+                            top: 38%;
+                            i[data-bs-toggle="dropdown"] {
+                                font-size: 25px;
+                            }
+                            .dropdown-menu {
+                                z-index: 5;
+                                background-color: #faf9ff;
+                                border-radius: 10px;
+                                border: 1px solid #e9ecf0;
+                                .dropdown-item {
+                                    margin-left: auto;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    font-size: 12px;
+                                    span.icon {
+                                        height: 12px;
+                                        width: 12px;
+                                        border-radius: 50%;
+                                        background-color: $secondary;
+                                        color: $white;
+                                        font-size: 8px;
+                                        display: inline-block;
+                                        text-align: center;
+                                        opacity: 0;
+                                    }
+                                }
+                                .dropdown-item:hover {
+                                    background-color: $primary;
+                                    color: $white;
+                                    span.icon {
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .upcoming-event {
+                    width: 30%;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .list-event .event-item .event-content .all-content .texts {
+        width: 100%;
+    }
+    .list-event .event-item .event-content .all-content .upcoming-event {
+        width: 100%;
+        justify-content: start !important;
+    }
+    .list-event .event-item .event-content .all-content .texts {
+        padding-right: 50px;
+    }
+    .list-event .my-progress {
+        margin-left: 20px;
+    }
+    .list-event .event-item .event-content .all-content .texts .date-and-option .dropdown {
+        right: 20px;
+        top: 20px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .list-event .event-item .image img {
+        width: 80px !important;
+        height: 80px;
+    }
+    .list-event .event-item .event-content .all-content .texts .title {
+        font-size: 20px;
+    }
+    .list-event .event-item .event-content .all-content .texts .date-and-option .dropdown {
+        right: 20px;
+        top: 20px;
+    }
+    .list-event .event-item .image .online-btn {
+        width: unset;
+        padding: 2px 5px;
+        bottom: 5px;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .list-event .event-item {
+        padding: 10px;
+        .image {
+            margin-right: 10px;
+            img {
+                width: 45px !important;
+                height: 45px;
+            }
+        }
+    }
+    .list-event .event-item .event-content .all-content .texts .title {
+        font-size: 18px;
+    }
+    .list-event .event-item .event-content .all-content .texts .date-and-option .dropdown {
+        right: 10px;
+        top: 10px;
+    }
+    .list-event .event-item .event-content .all-content .texts {
+        padding-right: 22px;
+    }
+    .list-event .my-progress {
+        margin-left: 0;
+        width: 100%;
+    }
+    .list-event .event-item .image .online-btn {
+        padding: 0px 2px;
+        bottom: 3px;
+        font-size: 10px;
+    }
+}

@@ -1,0 +1,26 @@
+.dashboard.page {
+    .pagination {
+        .page-item {
+            .page-link {
+                color: $gray2;
+                border: 1px solid #e9ecf0;
+                margin-right: 10px;
+                border-radius: 5px;
+                height: 40px;
+                width: 40px;
+                text-align: center;
+                vertical-align: middle;
+                padding: 7px 0;
+            }
+            .page-link:focus {
+                box-shadow: none;
+                //background-color: $white;
+            }
+        }
+        .page-item.active {
+            .page-link {
+                color: $white;
+            }
+        }
+    }
+}

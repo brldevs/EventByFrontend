@@ -1,0 +1,44 @@
+@import "../variables";
+.custom_ticket {
+    .item {
+        border-width: 2px;
+        border-style: solid;
+        padding: 20px;
+        .title {
+            font-size: 20px;
+            font-weight: 500;
+        }
+        i:hover {
+            color: $primary;
+        }
+        .form-control {
+            padding: 7px 15px;
+        }
+    }
+    .item.silver {
+        border-color: $secondary;
+    }
+    .item.gold {
+        border-color: $danger;
+    }
+    .item.platinum {
+        border-color: $info;
+    }
+}
+.add-ticket {
+background: rgba(82, 50, 248, 0.03) !important;
+    border: 2px dashed #E6EDF5 !important;
+box-sizing: border-box;
+border-radius: 10px;
+width: 220px;
+font-weight: 500;
+font-size: 18px;
+line-height: 20px;
+/* identical to box height, or 111% */
+
+text-align: center;
+letter-spacing: -0.04em;
+
+color: #5232F8 !important;
+
+}

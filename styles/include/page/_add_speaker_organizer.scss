@@ -1,0 +1,81 @@
+.organizer {
+    border: 1px solid #e9ecf0;
+    height: 100px;
+    cursor: context-menu;
+    img {
+        height: 60px;
+        width: 60px;
+    }
+    .close-btn {
+        opacity: 0;
+        transition: 0.3s;
+        cursor: pointer;
+        top: 9px;
+        right: 9px;
+        border-radius: 4px;
+        width: 20px;
+        background-color: #c7cdde;
+        text-align: center;
+        height: 20px;
+    }
+}
+.organizer:hover {
+    .close-btn {
+        opacity: 1;
+    }
+}
+.organizer.add {
+    cursor: pointer;
+    background: rgba(82, 50, 248, 0.03);
+    border: 2px dashed #e6edf5;
+}
+.organizer.add:hover {
+    background: rgba(82, 50, 248, 0.07);
+}
+
+.sponsor {
+    height: 137px;
+    img {
+        height: unset;
+        width: unset;
+    }
+}
+
+.custom-modal {
+    .modal {
+        .modal-dialog {
+            max-width: 600px;
+            .modal-content {
+                border-radius: 10px;
+                padding: 40px;
+                .btn {
+                    width: 100px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    font-weight: 500;
+                }
+                .checkbox {
+                    .bg-primary {
+                        background-color: $white !important;
+                    }
+                    .text-white {
+                        color: $gray2 !important;
+                    }
+                    label {
+                        padding: 16px;
+                        background-color: $white;
+                        img {
+                            margin-right: 10px;
+                        }
+                    }
+                    .sponsor {
+                        height: 103px;
+                        img {
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

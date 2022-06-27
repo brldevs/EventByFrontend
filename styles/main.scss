@@ -1,0 +1,48 @@
+$theme-colors: (
+        'primary': #5232f8,
+    'secondary': #2dc774
+);
+.bg-dark {
+    background: #262626;
+}
+.bsgpsK div:first-child {
+    overflow: unset !important;
+}
+.form-check-input {
+    padding: 10px;
+}
+.css-lpahdxg-control:hover{
+    border-color: olivedrab !important;
+}
+@import "~bootstrap/scss/bootstrap";
+@import "include/variables";
+@import "include/component/button";
+@import "include/component/container";
+@import "include/component/typography";
+@import "include/component/form";
+@import "include/component/checkbox";
+@import "include/component/upcoming_event";
+@import "include/component/dashboard_top_view";
+@import "include/component/dashboard_pagination";
+@import "include/component/dashboard_search_event";
+@import "include/component/dropdown";
+@import "include/nav";
+@import "include/sidebar";
+@import "include/page/profile_page";
+@import "include/page/ticket_page_free";
+@import "include/page/add_event_photo_and_video";
+@import "include/page/add_speaker_organizer";
+@import "include/page/event_preview_physical_event_feee";
+@import "include/page/event_preview_online_event_rsvp";
+@import "include/page/event_dashboard_overview";
+@import "include/page/event_page_grid_view";
+@import "include/page/single_event_dashboard_overview";
+@import "include/page/event_attendance";
+@import "include/page/moderate_comment";
+@import "include/page/account_setting_payment_setting";
+@import "include/page/attendees_dashboard/attendees_dashboard";
+@import "include/page/attendees_dashboard/payment_history";
+@import "include/page/attendees_dashboard/modals";
+@import "include/page/attendees_dashboard/attendees_dashboard_single_event";
+@import "include/classes";
+@import "custom";

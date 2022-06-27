@@ -1,0 +1,49 @@
+@import "../variables";
+
+.checkbox {
+  label {
+    background: rgba(82, 50, 248, 0.03);
+    border: 1px solid #e9ecf0;
+    border-radius: 10px;
+    color: $gray2;
+    //padding: 22px;
+    padding: 15px;
+    cursor: pointer;
+    position: relative;
+    i:first-child {
+      font-size: 185%;
+      margin-right: 17px;
+    }
+    .tik-icon {
+      line-height: 16px;
+      height: 16px;
+      width: 16px;
+      background-color: $secondary;
+      position: absolute;
+      right: 11px;
+      display: inline-block;
+      border-radius: 50%;
+      top: 11px;
+      text-align: center;
+      i {
+        font-size: 83%;
+        margin: 0;
+      }
+    }
+    span {
+      user-select: none;
+    }
+  }
+}
+/*You Must Follow the html structure
+<div className="checkbox">
+    <input type="checkbox" hidden id="uu">
+    <label for="uu" className="d-flex align-items-center">
+        <i className="ri-basketball-line"></i>
+        <span>Sports & Fitness</span>
+        <span className="tik-icon d-none">
+            <i className="ri-check-line"></i>
+        </span>
+    </label>
+</div>
+*/

@@ -1,0 +1,39 @@
+#dashboard {
+    .content_area {
+        .top-view-event {
+            .image {
+                position: relative;
+                display: inline-block;
+                margin-right: 4%;
+                img {
+                    height: 130px;
+                    width: 130px;
+                }
+                .online-btn {
+                    display: inline-block;
+                    background-color: $secondary;
+                    color: $white;
+                    font-size: 14px;
+                    border-radius: 100px;
+                    padding: 6px 18px;
+                    text-align: center;
+                    cursor: context-menu;
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 10px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 100px;
+                }
+            }
+            .badge {
+                border-radius: 30px;
+                padding: 5px 15px;
+                font-weight: 400;
+                color: $state_danger !important;
+                background-color: rgba(250, 131, 133, 0.1) !important;
+            }
+        }
+    }
+}
