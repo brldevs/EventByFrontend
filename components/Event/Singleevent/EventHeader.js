@@ -463,6 +463,9 @@ function EventHeader({
     true
   );
 
+  const tempModal = "";
+  const myButton = "myButton";
+
   const onSubmit = async (d) => {
     setIsLoading(true);
     console.table(d);
@@ -500,6 +503,29 @@ function EventHeader({
       };
       const res = await addEventParticipant(data2);
       if (res.status === 200 || res.status === 203) {
+        // // test code start
+        // // data-bs-toggle={
+        // //   isDisableNextPopUpWindow
+        // //     ? ""
+        // //     : isCreateAccountWithEventBy.current
+        // //     ? ""
+        // //     : "modal"
+        // // }
+        // // data-bs-target={
+        // //   isDisableNextPopUpWindow
+        // //     ? ""
+        // //     : ticket?.ticket_type === "free"
+        // //     ? "#checkout-modal-free"
+        // //     : "#checkout-modal-paid"
+        // // }
+        // setIsDisableNextPopUpWindow(false);
+        // const myElement = document.getElementById("submitButton");
+        // console.log("Result: ");
+        // console.log(myElement);
+        // myElement.setAttribute("data-bs-toggle", "modal");
+        // myElement.setAttribute("data-bs-target", "#checkout-modal-paid");
+        // myElement.click();
+        // // test code end
         setIsDisableNextPopUpWindow(false);
         if (res.data.name && res.data.email && res.data._id) {
           localStorage.setItem("isSignUpWithoutEventBy", true);
@@ -509,7 +535,11 @@ function EventHeader({
         }
 
         // router.push(`/attendees/singleevent/${eventId}`);
-        alert.show(res.message);
+        // alert.show("My custom alert");
+        const tempClicker = document.getElementById(myButton);
+        tempClicker.click();
+        //alert.show(res.message);
+        alert.show("Success! Checking payment info...");
         setIsLoading(false);
       } else if (res.status === 201) {
         setUserAlreadyJoinedAndPaymentDoneMsg(res.message);
@@ -2059,6 +2089,30 @@ function EventHeader({
                       ? "Sign-Up"
                       : "Join Event"}
                   </button>
+
+                  <button
+                    id={myButton}
+                    type="button"
+                    data-bs-toggle={
+                      isDisableNextPopUpWindow
+                        ? ""
+                        : isCreateAccountWithEventBy.current
+                        ? ""
+                        : "modal"
+                    }
+                    data-bs-target={
+                      isDisableNextPopUpWindow
+                        ? ""
+                        : ticket?.ticket_type === "free"
+                        ? "#checkout-modal-free"
+                        : "#checkout-modal-paid"
+                    }
+                    onClick={() => console.log("working")}
+                    hidden
+                  >
+                    Click me
+                  </button>
+
                   <div className="mb-3 text-gray-2">
                     Already have an account on EventBy? Please{" "}
                     <a href="/attendees/login">Log In</a>
