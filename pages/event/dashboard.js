@@ -80,7 +80,7 @@ function dashboard() {
     if (resSubscription.status === 202) {
       alert.show(resSubscription.message, { type: "error" });
       setSubscriptionErrorMessage(
-        "You did not subscribe to any plan yet! Please subscribe to a package and enjoy the premium facilities."
+        "You did not subscribe to any plan yet! Please subscribe to a package and enjoy the premium facilities.test"
       );
     }
 
