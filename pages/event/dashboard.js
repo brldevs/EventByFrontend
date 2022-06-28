@@ -80,7 +80,7 @@ function dashboard() {
     if (resSubscription.status === 202) {
       alert.show(resSubscription.message, { type: "error" });
       setSubscriptionErrorMessage(
-        "You did not subscribe to any plan yet! Please subscribe to a package and enjoy the premium facilities.test"
+        "You did not subscribe to any plan yet! Please subscribe to a package and enjoy the premium facilities."
       );
     }
 
@@ -137,7 +137,7 @@ function dashboard() {
                         className="align-middle inline-block d-table-cell"
                         style={{ color: "red" }}
                       >
-                        <b>Ticket Payment Option</b> not found! Please add a{" "}
+                        <b>test Ticket Payment Option</b> not found! Please add a{" "}
                         <b>Ticket Payment Option</b> so that your event
                         attendees can pay for tickets!
                       </span>
