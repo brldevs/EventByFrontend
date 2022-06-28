@@ -143,7 +143,13 @@ function SponsorForm({ setShow, handleAddFields, inputFields }) {
               </div>
               <div className="col-sm-3">
                 <label htmlFor>Logo</label>
-                <input type="file" hidden id="logo" onChange={handleChange} />
+                <input
+                  accept="image/*"
+                  type="file"
+                  hidden
+                  id="logo"
+                  onChange={handleChange}
+                />
                 <label htmlFor="logo" className="m-0 d-block">
                   {!fileSponsorPreview && (
                     <img src="/img/upload_icon.png" width={100} className />

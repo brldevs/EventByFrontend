@@ -70,8 +70,10 @@ function SponsorForm({ setShow, handleAddFields, inputFields, eventId }) {
   const [isLeftBoxSelected, setIsLeftBoxSelected] = useState(false);
   const [isRightBoxSelected, setIsRightBoxSelected] = useState(false);
 
-  const [alreadySponsorAddedErrorMsg, setAlreadySponsorAddedErrorMsg] =
-    useState(null);
+  const [
+    alreadySponsorAddedErrorMsg,
+    setAlreadySponsorAddedErrorMsg,
+  ] = useState(null);
 
   const platformHandler = async (id, sponsorId) => {
     setAlreadySponsorAddedErrorMsg(null);
@@ -134,7 +136,13 @@ function SponsorForm({ setShow, handleAddFields, inputFields, eventId }) {
               </div>
               <div className="col-sm-3">
                 <label htmlFor>Logo</label>
-                <input type="file" hidden id="logo" onChange={handleChange} />
+                <input
+                  accept="image/*"
+                  type="file"
+                  hidden
+                  id="logo"
+                  onChange={handleChange}
+                />
                 <label htmlFor="logo" className="m-0 d-block">
                   {!fileSponsorPreview && (
                     <img src="/img/upload_icon.png" width={100} className />

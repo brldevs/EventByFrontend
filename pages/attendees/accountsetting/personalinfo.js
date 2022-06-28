@@ -417,7 +417,13 @@ const personalinfo = () => {
                   className="rounded-circle"
                 />
               )}
-              <input type="file" id="photo" onChange={handleImage} hidden />
+              <input
+                accept="image/*"
+                type="file"
+                id="photo"
+                onChange={handleImage}
+                hidden
+              />
               <label
                 htmlFor="photo"
                 className="btn btn-outline-primary font-weight-500 px-3 ms-2"

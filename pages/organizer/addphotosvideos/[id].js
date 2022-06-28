@@ -392,6 +392,7 @@ function addphotosvideos() {
 
                       <div className="mt-4">
                         <input
+                          accept="image/*"
                           type="file"
                           id="galleryphot"
                           onChange={handleMultipleImages}
@@ -405,6 +406,7 @@ function addphotosvideos() {
                         </label>
 
                         <input
+                          accept="video/*"
                           type="file"
                           id="galleryVideos"
                           onChange={handleMultipleVideos}
