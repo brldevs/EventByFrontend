@@ -130,66 +130,60 @@ function dashboard() {
           <div className="mw-1370">
             <div className="dashboard-overview">
               {checkoutMethodErrorMessage && (
-                <div
-                  style={{
-                    backgroundColor: "#f8d7da",
-                    marginTop: "16px",
-                    marginBottom: "16px",
-                    padding: "20px",
-                  }}
-                >
-                  {checkoutMethodErrorMessage && (
-                    <span
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                      }}
-                    >
-                      <b>Ticket Payment Option</b> not found! Please add a{" "}
-                      <b>Ticket Payment Option</b> so that your event attendees
-                      can pay for tickets!
-                    </span>
-                  )}
-                  <Link href={`/organizer/accountsetting/paymentsetting`}>
-                    <a
-                      target="_blank"
-                      className="btn btn-primary"
-                      style={{ marginLeft: "40px" }}
-                    >
-                      Add Checkout Method
-                    </a>
-                  </Link>
+                <div className="single-event bg-white p-4 border-radius-10 my-4">
+                  <div className="row">
+                    <div className="col-md-9 d-table">
+                      <span
+                        className="align-middle inline-block d-table-cell"
+                        style={{ color: "red" }}
+                      >
+                        <b>Ticket Payment Option</b> not found! Please add a{" "}
+                        <b>Ticket Payment Option</b> so that your event
+                        attendees can pay for tickets!
+                      </span>
+                    </div>
+                    <div className="col-md-3">
+                      <div className="text-right">
+                        <Link href={`/organizer/accountsetting/paymentsetting`}>
+                          <a
+                            target="_blank"
+                            className="btn btn-secondary text-white"
+                          >
+                            Add Checkout Method
+                          </a>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
 
               {subscriptionErrorMessage && (
-                <div
-                  style={{
-                    backgroundColor: "#f8d7da",
-                    marginTop: "16px",
-                    marginBottom: "16px",
-                    padding: "20px",
-                  }}
-                >
-                  {subscriptionErrorMessage && (
-                    <span
-                      style={{
-                        color: "red",
-                        fontSize: "16px",
-                      }}
-                    >
-                      {subscriptionErrorMessage}
-                    </span>
-                  )}
-                  <Link href={`/organizer/accountsetting/subscription`}>
-                    <a
-                      target="_blank"
-                      className="btn btn-primary"
-                      style={{ marginLeft: "40px" }}
-                    >
-                      Add Package Subscription
-                    </a>
-                  </Link>
+                <div className="single-event bg-white p-4 border-radius-10 my-4">
+                  <div className="row">
+                    <div className="col-md-9 d-table ">
+                      <span
+                        className="align-middle inline-block d-table-cell"
+                        style={{ color: "red" }}
+                      >
+                        You did not <b>subscribe</b> to any plan yet!{" "}
+                        <b>Please subscribe to a package</b> and enjoy the
+                        premium facilities.
+                      </span>
+                    </div>
+                    <div className="col-md-3">
+                      <div className="text-right">
+                        <Link href={`/organizer/accountsetting/subscription`}>
+                          <a
+                            target="_blank"
+                            className="btn btn-secondary text-white"
+                          >
+                            Add Package Subscription
+                          </a>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
 
