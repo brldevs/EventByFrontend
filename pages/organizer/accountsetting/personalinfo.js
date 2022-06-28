@@ -318,8 +318,10 @@ const personalinfo = () => {
         if (response.data.time_zone) {
           setTimeZoneSelectedValue(response.data.time_zone);
         }
-        if (response.data.location_address) {
-          setDefaultValueLocation(response.data.location_address);
+        if (response.data.location || response.data.location_address) {
+          setDefaultValueLocation(
+            response.data.location || response.data.location_address
+          );
         }
         if (response.data.language) {
           setLanguageSelectedValue(response.data.language);
