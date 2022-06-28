@@ -875,7 +875,9 @@ const getEventSummary = async (data, token) => {
 };
 
 const generateTicket = async (data) => {
-  const res = await API.post("/event/generateTicket", data);
+  const res = await API.post("/event/generateTicket", data, {
+    responseType: "arraybuffer",
+  });
   return res;
 };
 

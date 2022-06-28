@@ -208,35 +208,15 @@ function UpcommingEventFullWidth({
     };
     console.log(data);
 
-    //-----------------
+    const response = await generateTicket(data);
+    const file = new Blob([response], { type: "application/pdf" });
 
-    var blob = new Blob([data], { type: "application/octetstream" });
-
-    //Check the Browser type and download the File.
-    var isIE = false || !!document.documentMode;
-    if (isIE) {
-      window.navigator.msSaveBlob(blob, fileName);
-    } else {
-      var url = window.URL || window.webkitURL;
-      var link = url.createObjectURL(blob);
-      var a = document.createElement("a");
-      a.setAttribute("download", "Ticket.pdf");
-      a.setAttribute("href", link);
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-
-    //--------------------------------
-    return await generateTicket(data);
-    // const response = await generateTicket(data);
-
-    // const url = window.URL.createObjectURL(new Blob([response.data]));
-    // const link = document.createElement("a");
-    // link.href = url;
-    // link.setAttribute("download", "ticket.pdf"); //or any other extension
-    // document.body.appendChild(link);
-    // link.click();
+    // process to auto download it
+    const fileURL = URL.createObjectURL(file);
+    const link = document.createElement("a");
+    link.href = fileURL;
+    link.download = "Ticket" + ".pdf";
+    link.click();
   };
 
   useEffect(async () => {
