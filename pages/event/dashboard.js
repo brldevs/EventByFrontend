@@ -137,7 +137,7 @@ function dashboard() {
                         className="align-middle inline-block d-table-cell"
                         style={{ color: "red" }}
                       >
-                        <b>test Ticket Payment Option</b> not found! Please add a{" "}
+                        <b>Ticket Payment Option</b> not found! Please add a{" "}
                         <b>Ticket Payment Option</b> so that your event
                         attendees can pay for tickets!
                       </span>
