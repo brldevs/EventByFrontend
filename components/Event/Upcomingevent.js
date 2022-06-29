@@ -29,7 +29,9 @@ function UpcomingEvent({ organizerId, organizerName }) {
         <p>Loading...</p>
       ) : (
         <div className="upcoming-event">
-          <h5 className="font-20 m-0 text-dark">Upcoming Event</h5>
+          {upComingEventData > 0 && (
+            <h5 className="font-20 m-0 text-dark">Upcoming Event</h5>
+          )}
 
           {upComingEventData &&
             upComingEventData.slice(0, 3).map((dataItem, index) => {

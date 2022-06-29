@@ -138,7 +138,7 @@ function eventattendees() {
     const res = await eventAddInviteeByEventId(data, token);
 
     if (res.status === 200) {
-      alert.show(res.message);
+      alert.show("Success!");
       router.reload();
     } else {
       setIsAddInviteeError(true);
@@ -225,8 +225,9 @@ function eventattendees() {
     //alert(showResults);
   };
 
-  const [isActiveFilterEntryPerPage, setActiveFilterEntryPerPage] =
-    useState(false);
+  const [isActiveFilterEntryPerPage, setActiveFilterEntryPerPage] = useState(
+    false
+  );
   const HandlerEntryPerPage = () => {
     setActiveFilterEntryPerPage(!isActiveFilterEntryPerPage);
     //alert(showResults);
@@ -234,8 +235,9 @@ function eventattendees() {
 
   const [bulkActionSelectedValue, setBulkActionSelectedValue] = useState(null);
   const [statusSelectedValue, setStatusSelectedValue] = useState(null);
-  const [entryPerPageSelectedValue, setEntryPerPageSelectedValue] =
-    useState(null);
+  const [entryPerPageSelectedValue, setEntryPerPageSelectedValue] = useState(
+    null
+  );
   const bulkActionRadioHandler = (e) => {
     setActiveFilterBulkAction(false);
     setBulkActionSelectedValue(e.target.value);
@@ -760,8 +762,7 @@ function eventattendees() {
                       {...register("inviteeEmail", {
                         required: "This is required.",
                         pattern: {
-                          value:
-                            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                          value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                           message: "Please enter a valid email",
                         },
                       })}
@@ -840,8 +841,7 @@ function eventattendees() {
                           {...register2("addInviteEmail", {
                             required: "This is required.",
                             pattern: {
-                              value:
-                                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                              value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                               message: "Please enter a valid email",
                             },
                           })}
