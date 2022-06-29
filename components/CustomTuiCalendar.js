@@ -1188,22 +1188,7 @@ const CustomTuiCalendar = forwardRef(
                                       target="_blank"
                                       className="dropdown-item"
                                     >
-                                      <span>Event Invitee</span>
-                                      <span className="icon">
-                                        <i className="ri-check-line" />
-                                      </span>
-                                    </a>
-                                  </Link>
-                                </li>
-                                <li>
-                                  <Link
-                                    href={`/organizer/eventparticipants/${selectschedule.schedule.id}`}
-                                  >
-                                    <a
-                                      target="_blank"
-                                      className="dropdown-item"
-                                    >
-                                      <span>Event Participant</span>
+                                      <span>Event Attendees</span>
                                       <span className="icon">
                                         <i className="ri-check-line" />
                                       </span>
@@ -1227,19 +1212,19 @@ const CustomTuiCalendar = forwardRef(
                           </div>
                         </div>
                         <div className="upcoming-event mt-3 flex-wrap d-flex align-items-center justify-content-between">
-                          {selectschedule.schedule.totalParticipant > 0 ? (
+                          {selectschedule.schedule.raw.totalParticipant > 0 ? (
                             <>
                               <div className="d-flex flex-wrap align-items-center mb-2">
                                 <div className="followers me-2 mb-2">
-                                  {selectschedule.schedule.totalParticipant ===
-                                    1 && (
+                                  {selectschedule.schedule.raw
+                                    .totalParticipant === 1 && (
                                     <span className="d-inline-block rounded-circle">
                                       <img src="/img/organizer_1.png" />
                                     </span>
                                   )}
 
-                                  {selectschedule.schedule.totalParticipant ===
-                                    2 && (
+                                  {selectschedule.schedule.raw
+                                    .totalParticipant === 2 && (
                                     <>
                                       <span className="d-inline-block rounded-circle">
                                         <img src="/img/organizer_1.png" />
@@ -1250,8 +1235,8 @@ const CustomTuiCalendar = forwardRef(
                                     </>
                                   )}
 
-                                  {selectschedule.schedule.totalParticipant ===
-                                    3 && (
+                                  {selectschedule.schedule.raw
+                                    .totalParticipant === 3 && (
                                     <>
                                       <span className="d-inline-block rounded-circle">
                                         <img src="/img/organizer_1.png" />
@@ -1265,8 +1250,8 @@ const CustomTuiCalendar = forwardRef(
                                     </>
                                   )}
 
-                                  {selectschedule.schedule.totalParticipant ===
-                                    4 && (
+                                  {selectschedule.schedule.raw
+                                    .totalParticipant === 4 && (
                                     <>
                                       <span className="d-inline-block rounded-circle">
                                         <img src="/img/organizer_1.png" />
@@ -1282,8 +1267,8 @@ const CustomTuiCalendar = forwardRef(
                                       </span>
                                     </>
                                   )}
-                                  {selectschedule.schedule.totalParticipant >
-                                    4 && (
+                                  {selectschedule.schedule.raw
+                                    .totalParticipant > 4 && (
                                     <>
                                       <span className="d-inline-block rounded-circle">
                                         <img src="/img/organizer_1.png" />
@@ -1301,10 +1286,11 @@ const CustomTuiCalendar = forwardRef(
                                   )}
                                 </div>
                                 <span className="font-10 text-gray-2">
-                                  {selectschedule.schedule.totalParticipant >
-                                  500
-                                    ? `${selectschedule.schedule.totalParticipant}+ More`
-                                    : selectschedule.schedule.totalParticipant}
+                                  {selectschedule.schedule.raw
+                                    .totalParticipant > 500
+                                    ? `${selectschedule.schedule.raw.totalParticipant}+ More`
+                                    : selectschedule.schedule.raw
+                                        .totalParticipant}
                                 </span>
                               </div>
                             </>

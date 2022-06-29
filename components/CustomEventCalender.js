@@ -559,7 +559,7 @@ export default function CustomEventCalender() {
 
     if (response.status === 200) {
       setSchedules(
-        tempData.map((item) => {
+        response.data.map((item) => {
           return {
             id: item.data._id,
             title: item.data.name,
@@ -572,7 +572,7 @@ export default function CustomEventCalender() {
 
             raw: {
               by: `${item.organizer[0].firstName} ${item.organizer[0].lastName} `,
-              totalParticipant: 200,
+              totalParticipant: item.totalParticipant,
               address: item.event_type_details.event_location,
               ticketSold: `${item.financialInfo.sold} / ${item.financialInfo.totalTickets}`,
             },
