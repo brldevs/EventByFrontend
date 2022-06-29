@@ -552,7 +552,7 @@ export default function CustomEventCalender() {
     const token = localStorage.getItem("token");
 
     const data = {
-      type: "day",
+      type: "month",
     };
 
     const response = await getEventsForCalender(data, token);
@@ -585,7 +585,33 @@ export default function CustomEventCalender() {
   return (
     <>
       {/* <p>{JSON.stringify(schedules)}</p> */}
-      {schedules.length > 0 && (
+
+      {schedules.length > 0 ? (
+        <div className="bg-white p-4 rounded">
+          <CustomTuiCalendar
+            ref={childRef}
+            {...{
+              showSlidebar: false,
+              showMenu: true,
+              taskView: false,
+              isReadOnly: true,
+              scheduleView: ["time"],
+              useCreationPopup: false,
+              onCreate: () => {
+                console.log("create that!!!");
+                childRef.current.getAlert();
+              },
+              createText: "Tao moi",
+              calendars: formatCalendars,
+              // calendarData,
+              schedules,
+              /*onBeforeCreateSchedule,
+            onBeforeUpdateSchedule,
+            onBeforeDeleteSchedule,*/
+            }}
+          />
+        </div>
+      ) : (
         <div className="bg-white p-4 rounded">
           <CustomTuiCalendar
             ref={childRef}
