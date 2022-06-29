@@ -548,6 +548,7 @@ export default function CustomEventCalender() {
     },
   ];
   const [calendarData, setCalendarData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(async () => {
     const token = localStorage.getItem("token");
 
@@ -555,6 +556,7 @@ export default function CustomEventCalender() {
       type: "month",
     };
 
+    setIsLoading(true);
     const response = await getEventsForCalender(data, token);
 
     if (response.status === 200) {
@@ -579,63 +581,43 @@ export default function CustomEventCalender() {
           };
         })
       );
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
     }
   }, []);
 
   return (
     <>
       {/* <p>{JSON.stringify(schedules)}</p> */}
-
-      {schedules.length > 0 ? (
-        <div className="bg-white p-4 rounded">
-          <CustomTuiCalendar
-            ref={childRef}
-            {...{
-              showSlidebar: false,
-              showMenu: true,
-              taskView: false,
-              isReadOnly: true,
-              scheduleView: ["time"],
-              useCreationPopup: false,
-              onCreate: () => {
-                console.log("create that!!!");
-                childRef.current.getAlert();
-              },
-              createText: "Tao moi",
-              calendars: formatCalendars,
-              // calendarData,
-              schedules,
-              /*onBeforeCreateSchedule,
+      {!isLoading && (
+        <>
+          {/* {JSON.stringify(schedules)} */}
+          <div className="bg-white p-4 rounded">
+            <CustomTuiCalendar
+              ref={childRef}
+              {...{
+                showSlidebar: false,
+                showMenu: true,
+                taskView: false,
+                isReadOnly: true,
+                scheduleView: ["time"],
+                useCreationPopup: false,
+                onCreate: () => {
+                  console.log("create that!!!");
+                  childRef.current.getAlert();
+                },
+                createText: "Tao moi",
+                calendars: formatCalendars,
+                // calendarData,
+                schedules,
+                /*onBeforeCreateSchedule,
             onBeforeUpdateSchedule,
             onBeforeDeleteSchedule,*/
-            }}
-          />
-        </div>
-      ) : (
-        <div className="bg-white p-4 rounded">
-          <CustomTuiCalendar
-            ref={childRef}
-            {...{
-              showSlidebar: false,
-              showMenu: true,
-              taskView: false,
-              isReadOnly: true,
-              scheduleView: ["time"],
-              useCreationPopup: false,
-              onCreate: () => {
-                console.log("create that!!!");
-                childRef.current.getAlert();
-              },
-              createText: "Tao moi",
-              calendars: formatCalendars,
-              // calendarData,
-              schedules,
-              /*onBeforeCreateSchedule,
-            onBeforeUpdateSchedule,
-            onBeforeDeleteSchedule,*/
-            }}
-          />
-        </div>
+              }}
+            />
+          </div>
+        </>
       )}
     </>
   );
