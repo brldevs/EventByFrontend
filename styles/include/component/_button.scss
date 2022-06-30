@@ -1,104 +1,103 @@
 .btn {
-    padding: 12px 17px;
-    border-radius: 10px;
-    font-size: 106%;
-    font-weight: 600;
+  padding: 12px 17px;
+  border-radius: 10px;
+  font-weight: 600;
 }
 .btn-lg {
-    padding: 20px;
+  padding: 20px;
 }
 
 .btn-sm.active,
 .btn-sm:hover {
-    color: $primary;
-    border-color: $primary;
+  color: $primary;
+  border-color: $primary;
 }
 .btn:focus,
 button:focus,
 .navbar-toggler:focus {
-    box-shadow: none;
-    outline: none;
+  box-shadow: none;
+  outline: none;
 }
 .btn-light {
-    border: 1px solid $gray3;
-    background-color: transparent;
-    color: $dark;
+  border: 1px solid $gray3;
+  background-color: transparent;
+  color: $dark;
 }
 .btn-light:hover,
 .btn-light:focus {
-    border: 1px solid $gray3;
-    background-color: transparent;
+  border: 1px solid $gray3;
+  background-color: transparent;
 }
 .light-btn {
-    background-color: rgba($color: $primary, $alpha: 0.1);
-    color: $primary;
-    border-color: transparent;
+  background-color: rgba($color: $primary, $alpha: 0.1);
+  color: $primary;
+  border-color: transparent;
 }
 .light-btn:hover {
-    background-color: rgba($color: $primary, $alpha: 0.2);
-    border-color: transparent;
-    color: $primary;
+  background-color: rgba($color: $primary, $alpha: 0.2);
+  border-color: transparent;
+  color: $primary;
 }
 .btn-reply {
-    background-color: #f4f4f6;
-    border-radius: 3px;
-    font-size: 12px;
-    padding: 5px 15px;
-    font-weight: 500;
+  background-color: #f4f4f6;
+  border-radius: 3px;
+  font-size: 12px;
+  padding: 5px 15px;
+  font-weight: 500;
 }
 .btn-reply:hover {
-    background-color: darken(#f4f4f6, 10%);
+  background-color: darken(#f4f4f6, 10%);
 }
 
 //For Dashboard Only
 .btn-sm {
-    font-weight: 400;
-    font-size: 15px;
-    color: $gray2;
-    border: 1px solid #e9ecf0;
-    padding: 5px 10px;
-    background-color: $white;
-    border-radius: 5px;
-    i {
-        margin-right: 5px;
-    }
+  font-weight: 400;
+  font-size: 15px;
+  color: $gray2;
+  border: 1px solid #e9ecf0;
+  padding: 5px 10px;
+  background-color: $white;
+  border-radius: 5px;
+  i {
+    margin-right: 5px;
+  }
 }
 
 .btn-outline-primary {
-    background-color: rgba($color: $primary, $alpha: 0.1) !important;
-    border: 0 !important;
+  background-color: rgba($color: $primary, $alpha: 0.1) !important;
+  border: 0 !important;
 }
 .btn-outline-primary:hover {
-    background-color: rgba($color: $primary, $alpha: 0.2) !important;
-    border: 0 !important;
-    color: darken($primary, 5%);
+  background-color: rgba($color: $primary, $alpha: 0.2) !important;
+  border: 0 !important;
+  color: darken($primary, 5%);
 }
 
 .rsvip-badge {
-    padding: 5px 22px;
+  padding: 5px 22px;
 }
 .rsvip-badge.success {
-    color: $secondary;
-    background: rgba(45, 199, 116, 0.1);
-    font-size: 14px;
+  color: $secondary;
+  background: rgba(45, 199, 116, 0.1);
+  font-size: 14px;
 }
 .rsvip-badge.danger {
-    background-color: rgba(254, 65, 64, 0.1);
-    color: $danger;
-    font-weight: 700;
+  background-color: rgba(254, 65, 64, 0.1);
+  color: $danger;
+  font-weight: 700;
 }
 .rsvip-badge.warning {
-    background-color: rgba(#f9a22e, 0.1);
-    color: #f9a22e;
+  background-color: rgba(#f9a22e, 0.1);
+  color: #f9a22e;
 }
 .invite-badge {
-    background-color: rgba($color: $primary, $alpha: 0.1);
-    color: $primary;
-    cursor: pointer;
-    padding: 10px 30px;
+  background-color: rgba($color: $primary, $alpha: 0.1);
+  color: $primary;
+  cursor: pointer;
+  padding: 10px 30px;
 }
 .invite-badge.active,
 .invite-badge:hover {
-    background-color: $primary;
-    color: $white;
+  background-color: $primary;
+  color: $white;
 }
