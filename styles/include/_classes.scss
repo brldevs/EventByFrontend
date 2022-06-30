@@ -58,11 +58,11 @@ a {
   min-height: 118px;
   font-family: $font-family;
 }
-.btn {
-  i {
-    line-height: 22px;
-  }
-}
+// .btn {
+//   i {
+//     line-height: 22px;
+//   }
+// }
 .p-20 {
   padding: 20px;
 }
@@ -215,8 +215,9 @@ hr.hr {
   }
 }
 
-a.icon::before {
-  vertical-align: middle;
-  margin-right: 10px;
+.sidebar > div.menu > ul > li > a.icon::before {
+  vertical-align: top;
+  margin-right: 6px;
   font-family: "remixicon" !important;
+  font-size: 95% !important;
 }

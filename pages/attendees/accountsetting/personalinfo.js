@@ -381,7 +381,7 @@ const personalinfo = () => {
 
   return (
     <>
-      <div className="bg-white mt-4  border-radius-10">
+      <div className="bg-white border-radius-10">
         <form>
           <div className="text-end px-50 py-50 pb-0">
             <button
@@ -428,7 +428,7 @@ const personalinfo = () => {
                 htmlFor="photo"
                 className="btn btn-outline-primary font-weight-500 px-3 ms-2"
               >
-                <i className="ri-image-add-fill" />
+                <i className="ri-image-add-fill pe-1" />
                 Change Photo
               </label>
             </div>
@@ -594,7 +594,7 @@ const personalinfo = () => {
                     </div>
                     <div
                       onClick={handleStatus}
-                      className={`wrapper-dropdown-4 ${
+                      className={`wrapper-dropdown-4 custom-linhight ${
                         isActiveFilterTimeZone ? "active" : ""
                       } form-select form-control form-control-sm`}
                       style={{ lineHeight: "62px" }}
@@ -603,7 +603,7 @@ const personalinfo = () => {
 
                       <ul
                         className="dropdown ps-0 rounded-bottom"
-                        style={{ width: "420px", marginLeft: "-58px" }}
+                        style={{ width: "435px", marginLeft: "-41px" }}
                       >
                         {tzStrings.slice(0, 10).map((item, index) => {
                           return (

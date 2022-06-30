@@ -363,6 +363,7 @@ const personalinfo = () => {
 
   const [isActiveFilterTimeZone, setIsActiveFilterTimeZone] = useState(false);
   const handleStatus = () => {
+    setIsActiveFilterLanguage(false);
     setIsActiveFilterTimeZone(!isActiveFilterTimeZone);
   };
 
@@ -377,6 +378,7 @@ const personalinfo = () => {
 
   const [isActiveFilterLanguage, setIsActiveFilterLanguage] = useState(false);
   const handleLanguage = () => {
+    setIsActiveFilterTimeZone(false);
     setIsActiveFilterLanguage(!isActiveFilterLanguage);
   };
 
@@ -389,7 +391,7 @@ const personalinfo = () => {
 
   return (
     <>
-      <div className="bg-white mt-4  border-radius-10">
+      <div className="bg-white border-radius-10">
         <form>
           <div className="text-end px-50 py-50 pb-0">
             <button
@@ -437,7 +439,7 @@ const personalinfo = () => {
                 htmlFor="photo"
                 className="btn btn-outline-primary font-weight-500 px-3 ms-2"
               >
-                <i className="ri-image-add-fill" />
+                <i className="ri-image-add-fill pe-1" />
                 Change Photo
               </label>
             </div>
@@ -603,7 +605,7 @@ const personalinfo = () => {
                     </div>
                     <div
                       onClick={handleStatus}
-                      className={`wrapper-dropdown-4 ${
+                      className={`wrapper-dropdown-4 custom-linhight ${
                         isActiveFilterTimeZone ? "active" : ""
                       } form-select form-control form-control-sm`}
                     >
@@ -685,7 +687,7 @@ const personalinfo = () => {
                 />
               </div>
             </div>
-            <div className="mb-3 pb-5">
+            <div className="mb-3">
               <label htmlFor>Location*</label>
               {defaultValueLocation && (
                 <GooglePlacesAutocomplete
@@ -713,7 +715,7 @@ const personalinfo = () => {
                 </div>
                 <div
                   onClick={handleLanguage}
-                  className={`wrapper-dropdown-4 ${
+                  className={`wrapper-dropdown-4 custom-linhight ${
                     isActiveFilterLanguage ? "active" : ""
                   } form-select form-control form-control-sm`}
                 >

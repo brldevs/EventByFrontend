@@ -5,6 +5,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import EventsAttendedSidebar from "../../../components/Event/EventsAttendedSidebar";
 import UpcomingEvent from "../../../components/Event/Upcomingevent";
+import CustomEventCalender from "../../../components/CustomEventCalender";
 import UpcommingEventFullWidth from "../../../components/Event/Upcommingeventfullwidth";
 import {
   getEventPreviewDataOPVById,
@@ -278,20 +279,10 @@ function eventCalender() {
               />
             )}
 
-            <div className="mt-5">
+            <div className="mt-4">
               <div className="row">
                 <div className="col-lg-8">
-                  <div className="bg-white">
-                    <div className="bg-white p-3 pt-5 pb-5 rounded">
-                      <Calendar
-                        localizer={localizer}
-                        events={eventlist}
-                        startAccessor="start"
-                        endAccessor="end"
-                        style={{ height: 500 }}
-                      />
-                    </div>
-                  </div>
+                  <CustomEventCalender />
                 </div>
                 <EventsAttendedSidebar />
               </div>

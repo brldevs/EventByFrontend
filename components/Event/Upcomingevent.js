@@ -29,7 +29,7 @@ function UpcomingEvent({ organizerId, organizerName }) {
         <p>Loading...</p>
       ) : (
         <div className="upcoming-event">
-          {upComingEventData > 0 && (
+          {upComingEventData.length > 0 && (
             <h5 className="font-20 m-0 text-dark">Upcoming Event</h5>
           )}
 

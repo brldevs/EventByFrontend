@@ -69,6 +69,9 @@
 .MuiInput-underline:before {
   border: 0px !important;
 }
+.wrapper-dropdown-4.custom-linhight {
+  line-height: 60px;
+}
 
 .googleplaceapi > div > div > div {
   text-align: left !important;
@@ -92,9 +95,6 @@
 .css-yk16xz-control {
   padding: 12px;
   outline: 0px !important;
-}
-.btn {
-  line-height: 20px;
 }
 
 a {
@@ -344,10 +344,10 @@ i {
 .ql-toolbar.ql-snow {
   background: #f4f4f6;
   padding: 14px 12px;
-  border: 0px;
+  border: 0px !important;
 }
 .ql-container.ql-snow {
-  border: 0px;
+  border: 0px !important;
 }
 .ql-toolbar.ql-snow + .ql-container.ql-snow {
   border-top: 0px;
@@ -367,6 +367,7 @@ i {
   border: 1px solid #e9ecf0;
   background: #fff;
   border-radius: 5px;
+  line-height: 2px !important;
 }
 
 .ql-snow .ql-picker {
@@ -696,20 +697,24 @@ i.ri-add-line {
   padding: 5px 15px;
 }
 
-.btn i {
-  line-height: 22px !important;
-}
-
 .notification > div > div {
   background-color: #fff !important;
-  box-shadow: 1px 10px 40px #f5f5f6;
+  box-shadow: 1px 10px 40px #f5f5f6 !important;
   color: #060508 !important;
-  margin-top: 30% !important;
   font-size: 80% !important;
   text-transform: capitalize !important;
+  margin: 5px !important;
 }
+.notification > div:first-child {
+  margin-top: 101px !important;
+}
+
 .tui-full-calendar-time-resize-handle.handle-x {
   display: none !important;
+}
+
+.text-right {
+  text-align: right;
 }
 @media (hover: none) and (pointer: coarse) {
   .left-arrow,

@@ -17,8 +17,8 @@ function PaymentHistory() {
   });
 
   return (
-    <div className="content_area flex-1 p-30">
-      <div className="bg-white pt-5 border-radius-10">
+    <div className="content_area flex-1">
+      <div className="bg-white border-radius-10">
         <div className="dashboard_event_container pb-5">
           <h2 className="text-center">Payment History</h2>
           <p className="text-gray-2 text-center mb-5">
