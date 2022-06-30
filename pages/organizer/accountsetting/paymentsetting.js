@@ -243,7 +243,7 @@ function Paymentsetting() {
                       <img src="/img/stripe.svg" />
                     </span>
                     <span className="tik-icon">
-                      <i className="ri-check-line" />
+                      <i className="ri-check-line text-white" />
                     </span>
                   </label>
                 </div>
@@ -302,7 +302,7 @@ function Paymentsetting() {
                   /> */}
                   <div className="input-group password">
                     <input
-                      className="form-control"
+                      className="form-control ps-4"
                       type={isClientIdShown ? "text" : "password"}
                       onChange={(e) => onChangePublicIdHandler(e)}
                       defaultValue={publicId || ""}
@@ -325,7 +325,7 @@ function Paymentsetting() {
                   /> */}
                   <div className="input-group password">
                     <input
-                      className="form-control"
+                      className="form-control ps-4"
                       type={isClientSecretShown ? "text" : "password"}
                       onChange={(e) => onChangeSecretIdHandler(e)}
                       defaultValue={secretId || ""}
