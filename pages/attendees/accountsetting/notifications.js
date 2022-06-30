@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 function Notifications() {
   return (
-    <div className="content_area flex-1 p-30">
-      <div className="bg-white mt-4  border-radius-10">
+    <div className="content_area flex-1 ">
+      <div className="bg-white border-radius-10">
         <div className="text-end px-50 py-50 pb-0">
           <button className="btn btn-secondary text-white">Save Changes</button>
         </div>
