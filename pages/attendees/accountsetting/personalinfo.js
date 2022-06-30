@@ -428,7 +428,7 @@ const personalinfo = () => {
                 htmlFor="photo"
                 className="btn btn-outline-primary font-weight-500 px-3 ms-2"
               >
-                <i className="ri-image-add-fill" />
+                <i className="ri-image-add-fill pe-1" />
                 Change Photo
               </label>
             </div>
