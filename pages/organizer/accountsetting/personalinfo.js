@@ -603,7 +603,7 @@ const personalinfo = () => {
                     </div>
                     <div
                       onClick={handleStatus}
-                      className={`wrapper-dropdown-4 ${
+                      className={`wrapper-dropdown-4 custom-linhight ${
                         isActiveFilterTimeZone ? "active" : ""
                       } form-select form-control form-control-sm`}
                     >
@@ -685,7 +685,7 @@ const personalinfo = () => {
                 />
               </div>
             </div>
-            <div className="mb-3 pb-5">
+            <div className="mb-3">
               <label htmlFor>Location*</label>
               {defaultValueLocation && (
                 <GooglePlacesAutocomplete
@@ -713,7 +713,7 @@ const personalinfo = () => {
                 </div>
                 <div
                   onClick={handleLanguage}
-                  className={`wrapper-dropdown-4 ${
+                  className={`wrapper-dropdown-4 custom-linhight ${
                     isActiveFilterLanguage ? "active" : ""
                   } form-select form-control form-control-sm`}
                 >

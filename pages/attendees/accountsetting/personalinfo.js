@@ -594,7 +594,7 @@ const personalinfo = () => {
                     </div>
                     <div
                       onClick={handleStatus}
-                      className={`wrapper-dropdown-4 ${
+                      className={`wrapper-dropdown-4 custom-linhight ${
                         isActiveFilterTimeZone ? "active" : ""
                       } form-select form-control form-control-sm`}
                       style={{ lineHeight: "62px" }}
