@@ -381,7 +381,7 @@ const personalinfo = () => {
 
   return (
     <>
-      <div className="bg-white mt-4  border-radius-10">
+      <div className="bg-white border-radius-10">
         <form>
           <div className="text-end px-50 py-50 pb-0">
             <button
@@ -603,7 +603,7 @@ const personalinfo = () => {
 
                       <ul
                         className="dropdown ps-0 rounded-bottom"
-                        style={{ width: "420px", marginLeft: "-58px" }}
+                        style={{ width: "435px", marginLeft: "-41px" }}
                       >
                         {tzStrings.slice(0, 10).map((item, index) => {
                           return (
