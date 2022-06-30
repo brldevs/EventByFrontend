@@ -1,6 +1,6 @@
 function ImagesGallery({ images, defaultGalleryImg = null, removeMediaImg }) {
   return (
-    <div className="row row-cols-2 g-3 row-cols-sm-5 mt-3">
+    <div className="row row-cols-2 g-4 row-cols-sm-5 mt-3">
       {defaultGalleryImg && defaultGalleryImg.length > 0 && (
         <>
           {defaultGalleryImg.map((item, index) => {
@@ -15,7 +15,7 @@ function ImagesGallery({ images, defaultGalleryImg = null, removeMediaImg }) {
                             ? `${process.env.NEXT_PUBLIC_BASE_URL}/getAssetWithPath/${item.path}/image`
                             : "/img/photo_drag_background.svg"
                         }
-                        className="d-block w-100"
+                        className="d-block w-100 rounded border border-light"
                         width={200}
                         height={150}
                       />
@@ -42,8 +42,8 @@ function ImagesGallery({ images, defaultGalleryImg = null, removeMediaImg }) {
                 <div className="grid-image position-relative">
                   <img
                     src={url}
-                    className="d-block w-100"
-                    width={200}
+                    className="d-block w-100 rounded border border-light"
+                    width={150}
                     height={150}
                   />
                   <span
