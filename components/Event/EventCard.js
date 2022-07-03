@@ -38,9 +38,9 @@ export default function EventCard({ eventId }) {
 
       if (resCoOrgSponsorSpeakerList.data) {
         const name =
-          resCoOrgSponsorSpeakerList.data.organizers[0].firstName +
+          resCoOrgSponsorSpeakerList?.data?.organizers[0]?.firstName +
           " " +
-          resCoOrgSponsorSpeakerList.data.organizers[0].lastName;
+          resCoOrgSponsorSpeakerList?.data?.organizers[0]?.lastName;
         setOrganizerName(name);
       }
     }
