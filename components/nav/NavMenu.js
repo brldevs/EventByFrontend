@@ -49,7 +49,7 @@ const NavMenu = (params) => {
       const responseUserPersonalDetails = await userPersonalDetails(
         accessToken
       );
-      if (responseUserPersonalDetails.data.profile_picture) {
+      if (responseUserPersonalDetails?.data?.profile_picture) {
         // setProfileImgPath(responseUserPersonalDetails.data.profile_picture);
         // localStorage.setItem(
         //   "profileImage",
