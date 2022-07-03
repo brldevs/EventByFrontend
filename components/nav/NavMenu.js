@@ -115,8 +115,19 @@ const NavMenu = (params) => {
                 />
               </a>
             </Link>
-          ) : (
+          ) : data.token && data.result.role === "attendee" ? (
             <Link href="/attendees">
+              <a className="navbar-brand">
+                <object
+                  data="/img/logo.svg"
+                  width={140}
+                  type="image/svg+xml"
+                  style={{ pointerEvents: "none" }}
+                />
+              </a>
+            </Link>
+          ) : (
+            <Link href="/">
               <a className="navbar-brand">
                 <object
                   data="/img/logo.svg"
