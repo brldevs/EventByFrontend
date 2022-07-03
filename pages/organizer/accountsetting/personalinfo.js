@@ -15,6 +15,8 @@ import { ErrorMessage } from "@hookform/error-message";
 import { useRouter } from "next/router";
 import { useAlert } from "react-alert";
 import { useAuthData } from "../../../context/auth";
+import { MAX_PROFILE_PHOTO_SIZE } from "../../../constants";
+
 var languageStrings = [
   {
     label: "Afrikaans",
@@ -345,18 +347,60 @@ const personalinfo = () => {
   };
   const [image, setImage] = useState(null);
   const handleImage = async (e) => {
-    setImage(URL.createObjectURL(e.target.files[0]));
+    if (fileValidationHandler(e)) {
+      setImage(URL.createObjectURL(e.target.files[0]));
 
-    const profileImgData = {
-      file: e.target.files[0],
-    };
-    const response = await saveUserProfileImg(profileImgData, token);
-    if (response.status === 200) {
-      setAuthValues({
-        result: { ...data.result, profileImage: e.target.files[0].name },
-      });
-      alert.show("Profile Image Saved Successfully", { type: "success" });
+      const profileImgData = {
+        file: e.target.files[0],
+      };
+      const response = await saveUserProfileImg(profileImgData, token);
+      if (response.status === 200) {
+        setAuthValues({
+          result: { ...data.result, profileImage: e.target.files[0].name },
+        });
+        alert.show("Profile Image Saved Successfully", { type: "success" });
+      } else if (response.status === 401) {
+        alert.show(response.msg, { type: "error" });
+      } else {
+        alert.show(response.message, { type: "error" });
+      }
     }
+  };
+
+  const [fileValidationErrorMessage, setFileValidationErrorMessage] = useState(
+    null
+  );
+  const fileValidationHandler = (e) => {
+    let file_size = e?.target?.files[0]?.size;
+
+    let temp_img_size = file_size / 1000 / 1000;
+
+    // console.log("temp_img_size: " + temp_img_size);
+    // console.log("MAX_PROFILE_PHOTO_SIZE: " + MAX_PROFILE_PHOTO_SIZE);
+
+    if (temp_img_size > MAX_PROFILE_PHOTO_SIZE) {
+      setFileValidationErrorMessage("Maximum File Size is 5 mb!");
+    } else if (
+      ["image/jpeg", "image/png", "image/gif"].includes(
+        e.target.files[0].type
+      ) === false
+    ) {
+      // console.log("FILE TYPE IS: ");
+      // console.log(
+      //   ["image/jpeg", "image/png", "image/gif"].includes(
+      //     e.target.files[0].type
+      //   )
+      // );
+      setFileValidationErrorMessage("Only JPEG, PNG & GIF file allowed!");
+    } else {
+      setFileValidationErrorMessage(null);
+      return true;
+    }
+
+    //or if you like to have name and type
+    // let file_name = event.target.files[0].name;
+    // let file_type = event.target.files[0].type;
+    //do whatever operation you want to do here
   };
 
   // TIMEZONE DROP DOWN START==========================================
@@ -435,6 +479,9 @@ const personalinfo = () => {
                 onChange={handleImage}
                 hidden
               />
+              {fileValidationErrorMessage && (
+                <p style={{ color: "red" }}>{fileValidationErrorMessage}</p>
+              )}
               <label
                 htmlFor="photo"
                 className="btn btn-outline-primary font-weight-500 px-3 ms-2"

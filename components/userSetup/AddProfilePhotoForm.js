@@ -97,15 +97,27 @@ function AddProfilePhotoForm({
   }, []);
 
   const fileValidationHandler = (event) => {
-    let file_size = event.target.files[0].size;
+    let file_size = event?.target?.files[0]?.size;
 
     let temp_img_size = file_size / 1000 / 1000;
 
-    console.log("temp_img_size: " + temp_img_size);
-    console.log("MAX_PROFILE_PHOTO_SIZE: " + MAX_PROFILE_PHOTO_SIZE);
+    // console.log("temp_img_size: " + temp_img_size);
+    // console.log("MAX_PROFILE_PHOTO_SIZE: " + MAX_PROFILE_PHOTO_SIZE);
 
     if (temp_img_size > MAX_PROFILE_PHOTO_SIZE) {
       setFileValidationErrorMessage("Maximum File Size is 5 mb!");
+    } else if (
+      ["image/jpeg", "image/png", "image/gif"].includes(
+        event.target.files[0].type
+      ) === false
+    ) {
+      // console.log("FILE TYPE IS: ");
+      // console.log(
+      //   ["image/jpeg", "image/png", "image/gif"].includes(
+      //     event.target.files[0].type
+      //   )
+      // );
+      setFileValidationErrorMessage("Only JPEG, PNG & GIF file allowed!");
     } else {
       setFileValidationErrorMessage(null);
       return true;

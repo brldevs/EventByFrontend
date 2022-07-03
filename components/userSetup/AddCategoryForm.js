@@ -83,6 +83,9 @@ function AddCategoryForm({
         } else {
           alert.show(res.message);
         }
+      } else if (res.status === 401) {
+        alert.show(res.msg, { type: "error" });
+        setIsLoading(false);
       } else {
         alert.show(res.message);
         setIsLoading(false);
