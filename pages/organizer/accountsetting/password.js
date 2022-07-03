@@ -143,7 +143,7 @@ function PasswordChange() {
                                 "Your password must contain at least one special character.",
 
                               isLengthLessThanEight: (v) =>
-                                v.length > 8 ||
+                                v.length > 7 ||
                                 "Your password must be at least 8 characters.",
                             },
                           })}
@@ -198,7 +198,7 @@ function PasswordChange() {
                                 "Your password must contain at least one special character.",
 
                               isLengthLessThanEight: (v) =>
-                                v.length > 8 ||
+                                v.length > 7 ||
                                 "Your password must be at least 8 characters.",
                             },
                           })}
@@ -253,7 +253,7 @@ function PasswordChange() {
                                 "Your password must contain at least one special character.",
 
                               isLengthLessThanEight: (v) =>
-                                v.length > 8 ||
+                                v.length > 7 ||
                                 "Your password must be at least 8 characters.",
                               isCurrentPasswordAndConfirmPasswordSame: (v) =>
                                 v === newPassword.current ||
