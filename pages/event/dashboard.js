@@ -69,36 +69,45 @@ function dashboard() {
       typeof window !== "undefined" ? localStorage.getItem("token") : null;
     setToken(token);
 
-    const res = await getDefaultCheckoutMethod(token);
-
-    if (res.status === 404) {
-      alert.show("No Checkout Method Found!", { type: "error" });
-      setCheckoutMethodErrorMessage(res.message);
-    }
-
-    const resSubscription = await checkUserSubscription(token);
-    if (resSubscription.status === 202) {
-      alert.show(resSubscription.message, { type: "error" });
-      setSubscriptionErrorMessage(
-        "You did not subscribe to any plan yet! Please subscribe to a package and enjoy the premium facilities."
-      );
-    }
-
     if (token) {
-      const response = await getEventsCounter(token);
-      if (response.status === 200) {
-        setTotalPublishedEvent(response.data.total_events);
-        setTotalDraftedEvent(response.data.drafted_events);
-        setTotalScheduledEvent(response.data.scheduled_events);
-        setIsLoading(false);
+      const result =
+        typeof window !== "undefined" ? localStorage.getItem("result") : null;
+
+      const tempResult = JSON.parse(result);
+
+      if (!tempResult.profile_setup_completed) {
+        router.replace("/users/setup");
       } else {
-        setIsLoading(false);
-      }
-      const response2 = await getEventsFinancialCounter(token);
-      if (response2.status === 200) {
-        setTotalViews(response2.data.total_views);
-        setTotalRSVP(response2.data.total_RSVP);
-        setTotalTicketSale(response2.data.total_ticket_sold);
+        const res = await getDefaultCheckoutMethod(token);
+
+        if (res.status === 404) {
+          alert.show("No Checkout Method Found!", { type: "error" });
+          setCheckoutMethodErrorMessage(res.message);
+        }
+
+        const resSubscription = await checkUserSubscription(token);
+        if (resSubscription.status === 202) {
+          alert.show(resSubscription.message, { type: "error" });
+          setSubscriptionErrorMessage(
+            "You did not subscribe to any plan yet! Please subscribe to a package and enjoy the premium facilities."
+          );
+        }
+
+        const response = await getEventsCounter(token);
+        if (response.status === 200) {
+          setTotalPublishedEvent(response.data.total_events);
+          setTotalDraftedEvent(response.data.drafted_events);
+          setTotalScheduledEvent(response.data.scheduled_events);
+          setIsLoading(false);
+        } else {
+          setIsLoading(false);
+        }
+        const response2 = await getEventsFinancialCounter(token);
+        if (response2.status === 200) {
+          setTotalViews(response2.data.total_views);
+          setTotalRSVP(response2.data.total_RSVP);
+          setTotalTicketSale(response2.data.total_ticket_sold);
+        }
       }
     }
 

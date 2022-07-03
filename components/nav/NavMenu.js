@@ -64,6 +64,10 @@ const NavMenu = (params) => {
           setProfileImgView(res);
         }
       }
+      if (!responseUserPersonalDetails.data) {
+        localStorage.clear();
+        router.push("/organizer/login");
+      }
     }
   }, [data]);
 
