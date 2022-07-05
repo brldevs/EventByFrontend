@@ -651,7 +651,7 @@ function BasicInfoForm({ currentStep, totalStep, nextFormStep, prevFormStep }) {
         <div className="mw-770">
           {/* name */}
           <Col md={12}>
-            <label htmlFor>Name Your Event</label>
+            <label htmlFor>Name Your Event*</label>
             <div className="input-group">
               <FromAppendPrepend icon="ri-calendar-event-line" />
               <Form.Control
