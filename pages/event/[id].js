@@ -422,9 +422,7 @@ const eventDetails = ({ dataServerSideProps }) => {
           content={dataServerSideProps.data.event_banner_description}
         />
       </Head>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
+      {isLoading ? null : (
         <div>
           {/* <>
             <a
