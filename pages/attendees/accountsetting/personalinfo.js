@@ -374,7 +374,7 @@ const personalinfo = () => {
       setFileValidationErrorMessage("Maximum File Size is 5 mb!");
     } else if (
       ["image/jpeg", "image/png", "image/gif"].includes(
-        e.target.files[0].type
+        e?.target?.files[0]?.type
       ) === false
     ) {
       // console.log("FILE TYPE IS: ");
