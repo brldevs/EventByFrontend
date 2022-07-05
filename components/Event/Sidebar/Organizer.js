@@ -3,7 +3,10 @@ function Organizer({ co_organizer }) {
   return (
     <>
       <div className="event-co-organizer mt-4">
-        <h5 className="font-16">Event Co-Organizers</h5>
+        {co_organizer.length > 0 && (
+          <h5 className="font-16">Event Co-Organizers</h5>
+        )}
+
         {co_organizer &&
           co_organizer.map((data, index) => {
             return (
