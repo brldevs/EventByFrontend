@@ -34,7 +34,6 @@ function AddLocationForm({
   const [isDisableNextButton, setIsDisableNextButton] = useState(false);
   const [isDisableBackButton, setIsDisableBackButton] = useState(false);
   const onSubmit = async (d) => {
-    localStorage.setItem("location_address_default", defaultLocationAddress);
     setIsLocationError(false);
 
     console.log(values);
@@ -43,6 +42,7 @@ function AddLocationForm({
     } else {
       setIsLocationError(false);
       console.log("ONsubmit defaultLocationAddress" + defaultLocationAddress);
+      localStorage.setItem("location_address_default", defaultLocationAddress);
       data = { ...data, ...d, location_address: defaultLocationAddress };
       setFormValues(data);
       console.table(data);
