@@ -108,7 +108,7 @@ function AddProfilePhotoForm({
       setFileValidationErrorMessage("Maximum File Size is 5 mb!");
     } else if (
       ["image/jpeg", "image/png", "image/gif"].includes(
-        event.target.files[0].type
+        event?.target?.files[0]?.type
       ) === false
     ) {
       // console.log("FILE TYPE IS: ");
