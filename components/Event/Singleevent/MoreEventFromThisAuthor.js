@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import Image from "next/image";
+import Link from "next/link";
 function MoreEventFromThisAuthor({
   moreEventsFromOrganizerList,
   organizerName,
@@ -21,13 +22,16 @@ function MoreEventFromThisAuthor({
               return (
                 <div className="col">
                   <div>
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_BASE_URL}/getAssetWithPath/${data.event_banner}/image`}
-                      alt="me"
-                      width={500}
-                      height={300}
-                      className="border-radius-10 w-100"
-                    />
+                    <Link href={`/event/${data._id}`}>
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_BASE_URL}/getAssetWithPath/${data.event_banner}/image`}
+                        alt="me"
+                        width={500}
+                        height={300}
+                        className="border-radius-10 w-100"
+                        style={{ cursor: "pointer" }}
+                      />
+                    </Link>
                     <div className="name d-flex align-items-center">
                       <span className="letter me-2 font-18 text-white text-center rounded">
                         <img
@@ -37,12 +41,15 @@ function MoreEventFromThisAuthor({
                           width="40"
                         />
                       </span>
+
                       <div className="font-16">
                         <span className="text-gray-2 font-weight-500">By </span>
                         <span>{organizerName}</span>
                       </div>
                     </div>
-                    <h4>{data.name}</h4>
+                    <Link href={`/event/${data._id}`}>
+                      <h4 style={{ cursor: "pointer" }}>{data.name}</h4>
+                    </Link>
                     <div>
                       <i className="ri-calendar-check-line text-gray-2 me-2" />{" "}
                       <span className="text-gray-1">

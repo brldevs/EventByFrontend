@@ -47,111 +47,116 @@ function BasicInfoForm({ currentStep, totalStep, nextFormStep, prevFormStep }) {
 
   const [currentEventID, setCurrentEventID] = useState(null);
   const onSubmit = async (data) => {
-    if (!summaryErrorMessage) {
-      const recurringEventData = {
-        event_start_date: rSelectedStartDate,
-        event_end_date: rSelectedEndDate,
-        numOfRecurrence: currentNumOfRecurrenceValue.toString(),
-        recurrenceType: dropDownSelectedOption,
-        selectedDays: weekCheckBoxList,
-        selectedDatesForMonth: monthCheckBoxList,
-        selectedDatesForYear: yearCheckBoxList,
-        timeInputs: inputFields,
-      };
-      // console.log("===RECURRING EVENT DATA===");
-      // console.log(recurringEventData);
-      const rEventData = await getRecurringEventData(recurringEventData);
-      console.log(rEventData);
-      data = {
-        ...data,
-        isSingleEvent,
-        isRecurringEvent,
-        event_start_date: isSingleEvent
-          ? selectedStartDate
-          : rSelectedStartDate,
-        event_start_time: selectedStartTime,
-        event_end_date: isSingleEvent ? selectedEndDate : rSelectedEndDate,
-        event_end_time: selectedEndTime,
-        addASummary: addASummary,
-        rSelectedStartDate: rSelectedStartDate,
-        rSelectedEndDate: rSelectedEndDate,
-        recurringEventData: rEventData,
-      };
-      console.table(data);
-      setFormValues(data);
+    if (addASummary) {
+      setSummaryErrorMessage(null);
+      if (!summaryErrorMessage) {
+        const recurringEventData = {
+          event_start_date: rSelectedStartDate,
+          event_end_date: rSelectedEndDate,
+          numOfRecurrence: currentNumOfRecurrenceValue.toString(),
+          recurrenceType: dropDownSelectedOption,
+          selectedDays: weekCheckBoxList,
+          selectedDatesForMonth: monthCheckBoxList,
+          selectedDatesForYear: yearCheckBoxList,
+          timeInputs: inputFields,
+        };
+        // console.log("===RECURRING EVENT DATA===");
+        // console.log(recurringEventData);
+        const rEventData = await getRecurringEventData(recurringEventData);
+        console.log(rEventData);
+        data = {
+          ...data,
+          isSingleEvent,
+          isRecurringEvent,
+          event_start_date: isSingleEvent
+            ? selectedStartDate
+            : rSelectedStartDate,
+          event_start_time: selectedStartTime,
+          event_end_date: isSingleEvent ? selectedEndDate : rSelectedEndDate,
+          event_end_time: selectedEndTime,
+          addASummary: addASummary,
+          rSelectedStartDate: rSelectedStartDate,
+          rSelectedEndDate: rSelectedEndDate,
+          recurringEventData: rEventData,
+        };
+        console.table(data);
+        setFormValues(data);
 
-      // EVENT CREATE START
-      const bodyData = await getEventCreateApiData(data);
+        // EVENT CREATE START
+        const bodyData = await getEventCreateApiData(data);
 
-      //calling event create api or event update api based on currentEventID
-      if (!currentEventID) {
-        const res = await eventCreate(
-          {
-            name: bodyData.name,
-            description: bodyData.description,
-            start_date: bodyData.start_date,
-            end_date: bodyData.end_date,
-          },
-          token
-        );
-        console.log(JSON.stringify(res, null, 2));
-        // EVENT CREATE END
+        //calling event create api or event update api based on currentEventID
+        if (!currentEventID) {
+          const res = await eventCreate(
+            {
+              name: bodyData.name,
+              description: bodyData.description,
+              start_date: bodyData.start_date,
+              end_date: bodyData.end_date,
+            },
+            token
+          );
+          console.log(JSON.stringify(res, null, 2));
+          // EVENT CREATE END
 
-        if (res.status === 200) {
-          alert.show("Data Saved Successfully", { type: "success" });
-          localStorage.setItem("currentEventID", res.data._id);
-          nextFormStep();
+          if (res.status === 200) {
+            alert.show("Data Saved Successfully", { type: "success" });
+            localStorage.setItem("currentEventID", res.data._id);
+            nextFormStep();
+          } else {
+            alert.show(res.message, { type: "error" });
+          }
         } else {
-          alert.show(res.message, { type: "error" });
-        }
-      } else {
-        const res = await updateEventBasicInfo(
-          {
-            event_id: currentEventID,
-            name: bodyData.name,
-            description: bodyData.description,
-            start_date: bodyData.start_date,
-            end_date: bodyData.end_date,
-          },
-          token
-        );
-        console.log(JSON.stringify(res, null, 2));
-        // EVENT CREATE END
+          const res = await updateEventBasicInfo(
+            {
+              event_id: currentEventID,
+              name: bodyData.name,
+              description: bodyData.description,
+              start_date: bodyData.start_date,
+              end_date: bodyData.end_date,
+            },
+            token
+          );
+          console.log(JSON.stringify(res, null, 2));
+          // EVENT CREATE END
 
-        if (res.status === 200) {
-          alert.show("Data Updated Successfully", { type: "success" });
-          nextFormStep();
-        } else {
-          alert.show(res.message, { type: "error" });
+          if (res.status === 200) {
+            alert.show("Data Updated Successfully", { type: "success" });
+            nextFormStep();
+          } else {
+            alert.show(res.message, { type: "error" });
+          }
         }
+
+        // if (res.status === 200) {
+        //   setIsDisableNextButton(false);
+        //   alert.show("Data Save Successfully", { type: "success" });
+        //   const event_id = res.data._id;
+        //   if (data.isRecurringEvent) {
+        //     const resCreateRecurrentEvent = await createRecurrentEvent(
+        //       data.recurringEventData,
+        //       token,
+        //       event_id
+        //     );
+        //     console.log(
+        //       "resCreateRecurrentEvent" + JSON.stringify(resCreateRecurrentEvent)
+        //     );
+        //   }
+        //   data = {
+        //     ...data,
+        //     event_id,
+        //   };
+
+        //   console.table(data);
+
+        //   setFormValues(data);
+        //   nextFormStep();
+        // } else {
+        //   alert.show(res.message);
+        // }
       }
-
-      // if (res.status === 200) {
-      //   setIsDisableNextButton(false);
-      //   alert.show("Data Save Successfully", { type: "success" });
-      //   const event_id = res.data._id;
-      //   if (data.isRecurringEvent) {
-      //     const resCreateRecurrentEvent = await createRecurrentEvent(
-      //       data.recurringEventData,
-      //       token,
-      //       event_id
-      //     );
-      //     console.log(
-      //       "resCreateRecurrentEvent" + JSON.stringify(resCreateRecurrentEvent)
-      //     );
-      //   }
-      //   data = {
-      //     ...data,
-      //     event_id,
-      //   };
-
-      //   console.table(data);
-
-      //   setFormValues(data);
-      //   nextFormStep();
-      // } else {
-      //   alert.show(res.message);
-      // }
+    } else {
+      setSummaryErrorMessage("This is required!");
     }
   };
 
@@ -580,6 +585,9 @@ function BasicInfoForm({ currentStep, totalStep, nextFormStep, prevFormStep }) {
   const [summaryErrorMessage, setSummaryErrorMessage] = useState(null);
 
   const isGreaterThanMaxValue = (v) => {
+    if (v.length === 0) {
+      setSummaryErrorMessage("This is required!");
+    }
     const wordCount = countCharacters(v.toString());
     return wordCount <= 150
       ? setSummaryErrorMessage(null)
@@ -651,7 +659,7 @@ function BasicInfoForm({ currentStep, totalStep, nextFormStep, prevFormStep }) {
         <div className="mw-770">
           {/* name */}
           <Col md={12}>
-            <label htmlFor>Name Your Event</label>
+            <label htmlFor>Name Your Event*</label>
             <div className="input-group">
               <FromAppendPrepend icon="ri-calendar-event-line" />
               <Form.Control
@@ -678,7 +686,7 @@ function BasicInfoForm({ currentStep, totalStep, nextFormStep, prevFormStep }) {
           </Col>
           {/* description */}
           <Col mb={12} className="mt-3 mb-3">
-            <label>Add a summary</label>
+            <label>Add a summary*</label>
             <Form.Control
               as="textarea"
               className="form-control"

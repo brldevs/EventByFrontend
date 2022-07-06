@@ -34,13 +34,8 @@ function EventHeader({
 }) {
   const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
   const { data, setAuthValues, removeAuthValues } = useAuthData();
-  const {
-    name,
-    start_date,
-    end_date,
-    event_type,
-    ticket,
-  } = eventPreviewDataOPV;
+  const { name, start_date, end_date, event_type, ticket } =
+    eventPreviewDataOPV;
   const {
     event_location,
     event_address_line1,
@@ -162,6 +157,7 @@ function EventHeader({
     }
   };
   const onSubmitCheckoutFormPaidAttendeeLogin = async (data) => {
+    setIsLoading(true);
     const dataCheckOutMethod = {
       event_id: eventId,
     };
@@ -169,7 +165,6 @@ function EventHeader({
       dataCheckOutMethod
     );
     if (respCheckOutMethod.status === 200) {
-      setIsLoading(true);
       console.table(data);
 
       localStorage.setItem(
@@ -223,32 +218,65 @@ function EventHeader({
           typeof window !== "undefined"
             ? JSON.parse(localStorage.getItem("result"))
             : null;
-        const addEventParticipantData2 = {
-          event_id: eventId,
-          name: result.firstName + " " + result.lastName,
-          email: result.email,
-          isRSVP: false,
-        };
-        const res = await addEventParticipant(addEventParticipantData2);
-        if (res.status === 200 || res.status === 203) {
-          if (res.data.name && res.data.email && res.data._id) {
-            localStorage.setItem("participant_name", res.data.name);
-            localStorage.setItem("participant_email", res.data.email);
-            localStorage.setItem("participant_id", res.data._id);
+
+        if (result) {
+          const addEventParticipantData2 = {
+            event_id: eventId,
+            name: result?.firstName + " " + result?.lastName,
+            email: result.email,
+            isRSVP: false,
+          };
+          const res = await addEventParticipant(addEventParticipantData2);
+          if (res.status === 200 || res.status === 203) {
+            if (res.data.name && res.data.email && res.data._id) {
+              localStorage.setItem("participant_name", res.data.name);
+              localStorage.setItem("participant_email", res.data.email);
+              localStorage.setItem("participant_id", res.data._id);
+            }
+
+            // router.push(`/attendees/singleevent/${eventId}`);
+            alert.show(res.message);
+            setIsLoading(false);
+            // ========================================
+            await createCheckOutSession();
+          } else if (res.status === 201) {
+            setUserAlreadyJoinedAndPaymentDoneMsg(res.message);
+
+            alert.show(res.message);
+            setIsLoading(false);
+          } else {
+            setIsLoading(false);
           }
-
-          // router.push(`/attendees/singleevent/${eventId}`);
-          alert.show(res.message);
-          setIsLoading(false);
-          // ========================================
-          await createCheckOutSession();
-        } else if (res.status === 201) {
-          setUserAlreadyJoinedAndPaymentDoneMsg(res.message);
-
-          alert.show(res.message);
-          setIsLoading(false);
         } else {
-          setIsLoading(false);
+          // NORMAL PARTICIPANT AGAIN TRY TO JOIN AND PAYMENT EVENT
+
+          const addEventParticipantData2 = {
+            event_id: eventId,
+            name: localStorage.getItem("participant_name"),
+            email: localStorage.getItem("participant_email"),
+            isRSVP: false,
+          };
+          const res = await addEventParticipant(addEventParticipantData2);
+          if (res.status === 200 || res.status === 203) {
+            if (res.data.name && res.data.email && res.data._id) {
+              localStorage.setItem("participant_name", res.data.name);
+              localStorage.setItem("participant_email", res.data.email);
+              localStorage.setItem("participant_id", res.data._id);
+            }
+
+            // router.push(`/attendees/singleevent/${eventId}`);
+            alert.show(res.message);
+            setIsLoading(false);
+            // ========================================
+            await createCheckOutSession();
+          } else if (res.status === 201) {
+            setUserAlreadyJoinedAndPaymentDoneMsg(res.message);
+
+            alert.show(res.message);
+            setIsLoading(false);
+          } else {
+            setIsLoading(false);
+          }
         }
       }
     } else if (
@@ -459,9 +487,8 @@ function EventHeader({
 
   const [signUpErrorMsg, setSignUpErrorMsg] = useState(null);
 
-  const [isDisableNextPopUpWindow, setIsDisableNextPopUpWindow] = useState(
-    true
-  );
+  const [isDisableNextPopUpWindow, setIsDisableNextPopUpWindow] =
+    useState(true);
 
   const tempModal = "";
   const myButton = "myButton";
@@ -1902,7 +1929,8 @@ function EventHeader({
                         {...register("email", {
                           required: "This is required.",
                           pattern: {
-                            value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                            value:
+                              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                             message: "Please enter a valid email",
                           },
                         })}
@@ -1964,7 +1992,7 @@ function EventHeader({
                                   "Your password must contain at least one special character.",
 
                                 isLengthLessThanEight: (v) =>
-                                  v.length > 8 ||
+                                  v.length > 7 ||
                                   "Your password must be at least 8 characters.",
                               },
                             })}
@@ -2027,7 +2055,7 @@ function EventHeader({
                                   "Your password must contain at least one special character.",
 
                                 isLengthLessThanEight: (v) =>
-                                  v.length > 8 ||
+                                  v.length > 7 ||
                                   "Your password must be at least 8 characters.",
                                 isCurrentPasswordAndConfirmPasswordSame: (v) =>
                                   v === password.current ||

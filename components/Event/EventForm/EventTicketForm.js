@@ -119,7 +119,9 @@ function EventTicketForm({
     // setIsDisableNextButton(true); ||  !inputFields[0].currency
     isTicketSellEndDateError();
     if (!endTimeValidationMsg) {
-      if (isPaidTicket && (!inputFields[0].name || !inputFields[0].price)) {
+      if (isPaidTicket && !inputFields[0].name) {
+        setTicketNameErrorMessage("This is required!");
+      } else if (isPaidTicket && !inputFields[0].price) {
         setIsCustomTicketError(true);
       } else if (isTicketNameSame()) {
         setCustomTicketErrorMsg("Ticket name can not be same");
@@ -262,6 +264,7 @@ function EventTicketForm({
     setInputFields(values);
     setIsCustomTicketError(false);
     setCustomTicketErrorMsg(null);
+    setTicketNameErrorMessage(null);
   };
 
   // dynamic end
@@ -390,6 +393,10 @@ function EventTicketForm({
       }
     }
   };
+
+  const [ticketNameErrorMessage, setTicketNameErrorMessage] = useState(null);
+  const [ticketPriceErrorMessage, setTicketPriceErrorMessage] = useState(null);
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} id="event-ticket-form">
@@ -432,6 +439,7 @@ function EventTicketForm({
                           value={inputField.name}
                           onChange={(event) => handleInputChange(index, event)}
                           placeholder="Ticket Name"
+                          required
                         />
 
                         <span style={{ marginLeft: "16px" }}>
@@ -442,6 +450,9 @@ function EventTicketForm({
                           />
                         </span>
                       </div>
+                      {ticketNameErrorMessage && (
+                        <p style={{ color: "red" }}>{ticketNameErrorMessage}</p>
+                      )}
                       <div className="row">
                         <div className="col-sm-9 ">
                           <label htmlFor>Price</label>
@@ -457,6 +468,7 @@ function EventTicketForm({
                             }
                             min={1}
                             placeholder="99"
+                            required
                           />
                         </div>
                         <div className="col-sm-3 pt-1 p-0 m-0">

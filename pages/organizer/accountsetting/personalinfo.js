@@ -15,6 +15,8 @@ import { ErrorMessage } from "@hookform/error-message";
 import { useRouter } from "next/router";
 import { useAlert } from "react-alert";
 import { useAuthData } from "../../../context/auth";
+import { MAX_PROFILE_PHOTO_SIZE } from "../../../constants";
+
 var languageStrings = [
   {
     label: "Afrikaans",
@@ -244,40 +246,77 @@ const personalinfo = () => {
     criteriaMode: "all",
   });
 
-  const [selectedStartDate, setSelectedStartDate] = useState(new Date());
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [isDateOfBirthOpen, setIsDateOfBirthOpen] = useState(false);
   const toggleClass = () => {
     setIsDateOfBirthOpen(!isDateOfBirthOpen);
   };
 
+  const [
+    timeZoneSelectedValueErrorMsg,
+    setTimeZoneSelectedValueErrorMsg,
+  ] = useState(null);
+  const [
+    languageSelectedValueErrorMsg,
+    setLanguageSelectedValueErrorMsg,
+  ] = useState(null);
+
+  const [selectedStartDateErrorMsg, setSelectedStartDateErrorMsg] = useState(
+    null
+  );
   const onSubmit = async (d) => {
-    const updateUserProfileData = {
-      firstName: d.firstName,
-      lastName: d.lastName,
-      contact_number: d.contact_number,
-      date_of_birth: selectedStartDate,
-      time_zone: timeZoneSelectedValue,
-      website: d.website,
-      location: values ? values.label : defaultValueLocation,
-      language: languageSelectedValue,
-    };
+    setTimeZoneSelectedValueErrorMsg(null);
+    setLanguageSelectedValueErrorMsg(null);
+    setSelectedStartDateErrorMsg(null);
 
-    console.log(updateUserProfileData);
+    if (selectedStartDate) {
+      if (timeZoneSelectedValue) {
+        console.log("VALUE: TIMEZONE");
+        console.log(timeZoneSelectedValue);
+        if (languageSelectedValue) {
+          const updateUserProfileData = {
+            firstName: d.firstName,
+            lastName: d.lastName,
+            contact_number: d.contact_number,
+            date_of_birth: selectedStartDate,
+            time_zone: timeZoneSelectedValue,
+            website: d.website,
+            location: values ? values.label : defaultValueLocation,
+            language: languageSelectedValue,
+          };
 
-    const response = await updateUserProfile(updateUserProfileData, token);
+          console.log(updateUserProfileData);
 
-    if (response.status === 200) {
-      const result =
-        typeof window !== "undefined" ? localStorage.getItem("result") : null;
-      const resultParse = JSON.parse(result);
-      const newResult = {
-        ...resultParse,
-        firstName: d.firstName,
-        lastName: d.lastName,
-      };
-      localStorage.setItem("result", JSON.stringify(newResult));
-      setAuthValues({ result: { ...data.result, firstName: d.firstName } });
-      alert.show("Information Saved Successfully", { type: "success" });
+          const response = await updateUserProfile(
+            updateUserProfileData,
+            token
+          );
+
+          if (response.status === 200) {
+            const result =
+              typeof window !== "undefined"
+                ? localStorage.getItem("result")
+                : null;
+            const resultParse = JSON.parse(result);
+            const newResult = {
+              ...resultParse,
+              firstName: d.firstName,
+              lastName: d.lastName,
+            };
+            localStorage.setItem("result", JSON.stringify(newResult));
+            setAuthValues({
+              result: { ...data.result, firstName: d.firstName },
+            });
+            alert.show("Information Saved Successfully", { type: "success" });
+          }
+        } else {
+          setLanguageSelectedValueErrorMsg("This field is required!");
+        }
+      } else {
+        setTimeZoneSelectedValueErrorMsg("This field is required!");
+      }
+    } else {
+      setSelectedStartDateErrorMsg("This field is required!");
     }
   };
 
@@ -302,11 +341,16 @@ const personalinfo = () => {
     const token =
       typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
-    if (!token) {
-      router.replace("/");
-    }
+    const result =
+      typeof window !== "undefined" ? localStorage.getItem("result") : null;
+
+    const tempResult = JSON.parse(result);
 
     if (token) {
+      if (!tempResult.profile_setup_completed) {
+        console.log("WHY user setup???");
+        router.replace("/users/setup");
+      }
       setToken(token);
       const response = await userPersonalDetails(token);
       if (response.status === 200) {
@@ -331,6 +375,8 @@ const personalinfo = () => {
           localStorage.setItem("profileImage", response.data.profile_picture);
         }
       }
+    } else {
+      router.replace("/");
     }
   }, [reset]);
   const [values, setValues] = useState(null);
@@ -345,18 +391,60 @@ const personalinfo = () => {
   };
   const [image, setImage] = useState(null);
   const handleImage = async (e) => {
-    setImage(URL.createObjectURL(e.target.files[0]));
+    if (fileValidationHandler(e)) {
+      setImage(URL.createObjectURL(e.target.files[0]));
 
-    const profileImgData = {
-      file: e.target.files[0],
-    };
-    const response = await saveUserProfileImg(profileImgData, token);
-    if (response.status === 200) {
-      setAuthValues({
-        result: { ...data.result, profileImage: e.target.files[0].name },
-      });
-      alert.show("Profile Image Saved Successfully", { type: "success" });
+      const profileImgData = {
+        file: e.target.files[0],
+      };
+      const response = await saveUserProfileImg(profileImgData, token);
+      if (response.status === 200) {
+        setAuthValues({
+          result: { ...data.result, profileImage: e.target.files[0].name },
+        });
+        alert.show("Profile Image Saved Successfully", { type: "success" });
+      } else if (response.status === 401) {
+        alert.show(response.msg, { type: "error" });
+      } else {
+        alert.show(response.message, { type: "error" });
+      }
     }
+  };
+
+  const [fileValidationErrorMessage, setFileValidationErrorMessage] = useState(
+    null
+  );
+  const fileValidationHandler = (e) => {
+    let file_size = e?.target?.files[0]?.size;
+
+    let temp_img_size = file_size / 1000 / 1000;
+
+    // console.log("temp_img_size: " + temp_img_size);
+    // console.log("MAX_PROFILE_PHOTO_SIZE: " + MAX_PROFILE_PHOTO_SIZE);
+
+    if (temp_img_size > MAX_PROFILE_PHOTO_SIZE) {
+      setFileValidationErrorMessage("Maximum File Size is 5 mb!");
+    } else if (
+      ["image/jpeg", "image/png", "image/gif"].includes(
+        e?.target?.files[0]?.type
+      ) === false
+    ) {
+      // console.log("FILE TYPE IS: ");
+      // console.log(
+      //   ["image/jpeg", "image/png", "image/gif"].includes(
+      //     e.target.files[0].type
+      //   )
+      // );
+      setFileValidationErrorMessage("Only JPEG, PNG & GIF file allowed!");
+    } else {
+      setFileValidationErrorMessage(null);
+      return true;
+    }
+
+    //or if you like to have name and type
+    // let file_name = event.target.files[0].name;
+    // let file_type = event.target.files[0].type;
+    //do whatever operation you want to do here
   };
 
   // TIMEZONE DROP DOWN START==========================================
@@ -371,6 +459,7 @@ const personalinfo = () => {
   const timeZoneRadioHandler = (e) => {
     setIsActiveFilterTimeZone(false);
     setTimeZoneSelectedValue(e.target.value);
+    setTimeZoneSelectedValueErrorMsg(null);
   };
   // TIMEZONE DROP DOWN END==========================================
 
@@ -386,6 +475,7 @@ const personalinfo = () => {
   const languageRadioHandler = (e) => {
     setIsActiveFilterLanguage(false);
     setLanguageSelectedValue(e.target.value);
+    setLanguageSelectedValueErrorMsg(null);
   };
   // LANGUAGE DROP DOWN END==========================================
 
@@ -435,6 +525,9 @@ const personalinfo = () => {
                 onChange={handleImage}
                 hidden
               />
+              {fileValidationErrorMessage && (
+                <p style={{ color: "red" }}>{fileValidationErrorMessage}</p>
+              )}
               <label
                 htmlFor="photo"
                 className="btn btn-outline-primary font-weight-500 px-3 ms-2"
@@ -537,7 +630,13 @@ const personalinfo = () => {
                     <input
                       type="text"
                       className="form-control"
-                      {...register("contact_number")}
+                      {...register("contact_number", {
+                        required: "This is required.",
+                        pattern: {
+                          value: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
+                          message: `Invalid contact number`,
+                        },
+                      })}
                     />
                   </div>
                   <ErrorMessage
@@ -583,6 +682,7 @@ const personalinfo = () => {
                             setSelectedStartDate(date);
                             setIsDateOfBirthOpen(!isDateOfBirthOpen);
                             setValue("date_of_birth", new Date(date));
+                            setSelectedStartDateErrorMsg(null);
                           }}
                           calendarContainer={MyContainer}
                         />
@@ -590,6 +690,9 @@ const personalinfo = () => {
                     />
                   </div>
                 </div>
+                {selectedStartDateErrorMsg && (
+                  <p style={{ color: "red" }}>{selectedStartDateErrorMsg}</p>
+                )}
               </div>
               <div className="col">
                 <div className="mb-3">
@@ -637,6 +740,11 @@ const personalinfo = () => {
                       </ul>
                     </div>
                   </div>
+                  {timeZoneSelectedValueErrorMsg && (
+                    <p style={{ color: "red" }}>
+                      {timeZoneSelectedValueErrorMsg}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -651,7 +759,13 @@ const personalinfo = () => {
                 <input
                   type="url"
                   className="form-control"
-                  {...register("website")}
+                  {...register("website", {
+                    required: "This is required.",
+                    pattern: {
+                      value: /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
+                      message: `Invalid website address`,
+                    },
+                  })}
                 />
               </div>
               <ErrorMessage
@@ -745,6 +859,9 @@ const personalinfo = () => {
                   </ul>
                 </div>
               </div>
+              {languageSelectedValueErrorMsg && (
+                <p style={{ color: "red" }}>{languageSelectedValueErrorMsg}</p>
+              )}
             </div>
           </div>
         </form>

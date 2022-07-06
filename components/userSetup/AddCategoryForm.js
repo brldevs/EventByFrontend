@@ -79,10 +79,27 @@ function AddCategoryForm({
         setIsLoading(false);
         router.push("/event/dashboard");
         if (res.status === 200) {
+          const result =
+            typeof window !== "undefined"
+              ? localStorage.getItem("result")
+              : null;
+
+          const tempResult = JSON.parse(result);
+
+          const tempResultObj = {
+            ...tempResult,
+            profile_setup_completed: true,
+          };
+
+          localStorage.setItem("result", JSON.stringify(tempResultObj));
+
           alert.show(res.message);
         } else {
           alert.show(res.message);
         }
+      } else if (res.status === 401) {
+        alert.show(res.msg, { type: "error" });
+        setIsLoading(false);
       } else {
         alert.show(res.message);
         setIsLoading(false);

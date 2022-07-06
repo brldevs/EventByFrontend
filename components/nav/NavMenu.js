@@ -49,7 +49,7 @@ const NavMenu = (params) => {
       const responseUserPersonalDetails = await userPersonalDetails(
         accessToken
       );
-      if (responseUserPersonalDetails.data.profile_picture) {
+      if (responseUserPersonalDetails?.data?.profile_picture) {
         // setProfileImgPath(responseUserPersonalDetails.data.profile_picture);
         // localStorage.setItem(
         //   "profileImage",
@@ -63,6 +63,10 @@ const NavMenu = (params) => {
           );
           setProfileImgView(res);
         }
+      }
+      if (!responseUserPersonalDetails.data) {
+        localStorage.clear();
+        router.push("/organizer/login");
       }
     }
   }, [data]);
@@ -115,8 +119,19 @@ const NavMenu = (params) => {
                 />
               </a>
             </Link>
-          ) : (
+          ) : data.token && data.result.role === "attendee" ? (
             <Link href="/attendees">
+              <a className="navbar-brand">
+                <object
+                  data="/img/logo.svg"
+                  width={140}
+                  type="image/svg+xml"
+                  style={{ pointerEvents: "none" }}
+                />
+              </a>
+            </Link>
+          ) : (
+            <Link href="/">
               <a className="navbar-brand">
                 <object
                   data="/img/logo.svg"
