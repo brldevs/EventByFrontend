@@ -549,41 +549,55 @@ export default function CustomEventCalender() {
   ];
   const [calendarData, setCalendarData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [isParticipantExists, setIsParticipantExists] = useState(false);
   useEffect(async () => {
     const token = localStorage.getItem("token");
 
-    const data = {
-      type: "month",
-    };
+    if (token) {
+      setIsParticipantExists(false);
+      const data = {
+        type: "month",
+      };
 
-    setIsLoading(true);
-    const response = await getEventsForCalender(data, token);
+      setIsLoading(true);
+      const response = await getEventsForCalender(data, token);
 
-    if (response.status === 200) {
-      setSchedules(
-        response.data.map((item) => {
-          return {
-            id: item.data._id,
-            title: item.data.name,
-            calendarId: "4",
-            category: "time",
-            attendees: ["Linh"],
-            isVisible: true,
-            start: item.data.start_date,
-            end: item.data.end_date,
+      if (response.status === 200) {
+        setSchedules(
+          response.data.map((item) => {
+            return {
+              id: item.data._id,
+              title: item.data.name,
+              calendarId: "4",
+              category: "time",
+              attendees: ["Linh"],
+              isVisible: true,
+              start: item.data.start_date,
+              end: item.data.end_date,
 
-            raw: {
-              by: `${item.organizer[0].firstName} ${item.organizer[0].lastName} `,
-              totalParticipant: item.totalParticipant,
-              address: item.event_type_details.event_location,
-              ticketSold: `${item.financialInfo.sold} / ${item.financialInfo.totalTickets}`,
-            },
-          };
-        })
-      );
-      setIsLoading(false);
+              raw: {
+                by: `${item.organizer[0].firstName} ${item.organizer[0].lastName} `,
+                totalParticipant: item.totalParticipant,
+                address: item.event_type_details.event_location,
+                ticketSold: `${item.financialInfo.sold} / ${item.financialInfo.totalTickets}`,
+              },
+            };
+          })
+        );
+        setIsLoading(false);
+      } else {
+        setIsLoading(false);
+      }
     } else {
-      setIsLoading(false);
+      const result =
+        typeof window !== "undefined"
+          ? JSON.parse(localStorage.getItem("result"))
+          : null;
+
+      if (!result) {
+        setIsParticipantExists(true);
+      }
     }
   }, []);
 
@@ -593,30 +607,32 @@ export default function CustomEventCalender() {
       {!isLoading && (
         <>
           {/* {JSON.stringify(schedules)} */}
-          <div className="bg-white p-4 rounded">
-            <CustomTuiCalendar
-              ref={childRef}
-              {...{
-                showSlidebar: false,
-                showMenu: true,
-                taskView: false,
-                isReadOnly: true,
-                scheduleView: ["time"],
-                useCreationPopup: false,
-                onCreate: () => {
-                  console.log("create that!!!");
-                  childRef.current.getAlert();
-                },
-                createText: "Tao moi",
-                calendars: formatCalendars,
-                // calendarData,
-                schedules,
-                /*onBeforeCreateSchedule,
+          {!isParticipantExists && (
+            <div className="bg-white p-4 rounded">
+              <CustomTuiCalendar
+                ref={childRef}
+                {...{
+                  showSlidebar: false,
+                  showMenu: true,
+                  taskView: false,
+                  isReadOnly: true,
+                  scheduleView: ["time"],
+                  useCreationPopup: false,
+                  onCreate: () => {
+                    console.log("create that!!!");
+                    childRef.current.getAlert();
+                  },
+                  createText: "Tao moi",
+                  calendars: formatCalendars,
+                  // calendarData,
+                  schedules,
+                  /*onBeforeCreateSchedule,
             onBeforeUpdateSchedule,
             onBeforeDeleteSchedule,*/
-              }}
-            />
-          </div>
+                }}
+              />
+            </div>
+          )}
         </>
       )}
     </>
