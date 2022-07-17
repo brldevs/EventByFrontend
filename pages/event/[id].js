@@ -281,10 +281,8 @@ const eventDetails = ({ dataServerSideProps }) => {
   const [organizerEmail, setOrganizerEmail] = useState(null);
   const [organizerProfilePicture, setOrganizerProfilePicture] = useState(null);
 
-  const [
-    moreEventsFromOrganizerList,
-    setMoreEventsFromOrganizerList,
-  ] = useState([]);
+  const [moreEventsFromOrganizerList, setMoreEventsFromOrganizerList] =
+    useState([]);
 
   const getMediaFilesData = async (accessToken, event_assets) => {
     const imgPathArray = await event_assets.map((d, i) => d.path);
@@ -324,13 +322,13 @@ const eventDetails = ({ dataServerSideProps }) => {
 
         const resBannerImg = await getEventBannerByEventId(eventId);
 
-        const resCoOrgSponsorSpeakerList = await getEventCoOrgSponsorSpeakerById(
-          eventId
-        );
+        const resCoOrgSponsorSpeakerList =
+          await getEventCoOrgSponsorSpeakerById(eventId);
 
-        const resAllEventsByOrganizerWithoutTokenByOrganizerId = await getAllEventsByOrganizerWithoutTokenByOrganizerId(
-          res.data.organizer
-        );
+        const resAllEventsByOrganizerWithoutTokenByOrganizerId =
+          await getAllEventsByOrganizerWithoutTokenByOrganizerId(
+            res.data.organizer
+          );
 
         if (resAllEventsByOrganizerWithoutTokenByOrganizerId.status === 200) {
           setMoreEventsFromOrganizerList(
@@ -385,15 +383,15 @@ const eventDetails = ({ dataServerSideProps }) => {
   return (
     <>
       <Head>
-        <title>{dataServerSideProps.data.name}</title>
-        <meta property="og:title" content={dataServerSideProps.data.name} />
+        <title>{dataServerSideProps?.data?.name}</title>
+        <meta property="og:title" content={dataServerSideProps?.data?.name} />
         <meta
           property="og:description"
-          content={dataServerSideProps.data.event_banner_description}
+          content={dataServerSideProps?.data?.event_banner_description}
         />
         <meta
           property="og:image"
-          content={`${process.env.NEXT_PUBLIC_BASE_URL}/getAssetWithPath/${dataServerSideProps.data.event_banner}/image`}
+          content={`${process.env.NEXT_PUBLIC_BASE_URL}/getAssetWithPath/${dataServerSideProps?.data?.event_banner}/image`}
         />
         <meta property="og:image:width" content="600" />
         <meta property="og:image:height" content="600" />
@@ -413,13 +411,13 @@ const eventDetails = ({ dataServerSideProps }) => {
         />
         <meta
           name="twitter:image"
-          content={`${process.env.NEXT_PUBLIC_BASE_URL}/getAssetWithPath/${dataServerSideProps.data.event_banner}/image`}
+          content={`${process.env.NEXT_PUBLIC_BASE_URL}/getAssetWithPath/${dataServerSideProps?.data?.event_banner}/image`}
         />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={dataServerSideProps.data.name} />
+        <meta name="twitter:title" content={dataServerSideProps?.data?.name} />
         <meta
           name="twitter:description"
-          content={dataServerSideProps.data.event_banner_description}
+          content={dataServerSideProps?.data?.event_banner_description}
         />
       </Head>
       {isLoading ? null : (
