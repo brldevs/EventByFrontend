@@ -6,6 +6,8 @@ import { useAuthData } from "../../context/auth";
 import { signUpOrganizer } from "../../services/service";
 
 const VerificationEmail = () => {
+  const [counter, setCounter] = useState(0);
+
   const alert = useAlert();
   const { setAuthValues, data } = useAuthData();
   const [isLoading, setIsLoading] = useState(false);
@@ -15,9 +17,23 @@ const VerificationEmail = () => {
     setTempEmail(email);
   }, []);
 
+  useEffect(() => {
+    counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
+
+    if (counter <= 0) {
+      // console.log("Times up!");
+      setShowCounter(false);
+      // setCounter(process.env.NEXT_PUBLIC_COUNT_DOWN_TIMER_VALUE_SECONDS);
+    }
+  }, [counter]);
+
+  const [showCounter, setShowCounter] = useState(false);
+
   const requestForAnotherVerificationEmail = async () => {
+    setCounter(process.env.NEXT_PUBLIC_COUNT_DOWN_TIMER_VALUE_SECONDS);
     setIsLoading(true);
     console.table(data);
+    setShowCounter(true);
 
     const dataLocalStorage = localStorage.getItem("signUpData");
     const signUpData = JSON.parse(dataLocalStorage);
@@ -52,12 +68,18 @@ const VerificationEmail = () => {
         </div>
         <div className="text-gray-2 my-4 mb-5">
           Didn’t get an email?
-          <a
-            className="ps-1 cursor-pointer"
-            onClick={requestForAnotherVerificationEmail}
-          >
-            Request for another verification email
-          </a>
+          {!showCounter ? (
+            <a
+              className="ps-1 cursor-pointer"
+              onClick={requestForAnotherVerificationEmail}
+            >
+              Request for another verification email
+            </a>
+          ) : (
+            <p>
+              Please wait... <strong className="text-black"> {counter}</strong>
+            </p>
+          )}
         </div>
         <div className="text-gray-2 my-4 mt-5">
           Already have an account? Please
