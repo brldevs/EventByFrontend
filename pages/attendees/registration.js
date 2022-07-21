@@ -201,7 +201,7 @@ const Registration = () => {
                         required: "This is required.",
                         pattern: {
                           value: /^[a-z ,.'-]+$/i,
-                          message: "Invalid Name",
+                          message: "Only letters are allowed",
                         },
                       })}
                       className="form-control"
@@ -232,7 +232,7 @@ const Registration = () => {
                         required: "This is required.",
                         pattern: {
                           value: /^[a-z ,.'-]+$/i,
-                          message: "Invalid Name",
+                          message: "Only letters are allowed",
                         },
                       })}
                       placeholder="Last Name"
