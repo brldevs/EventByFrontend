@@ -42,7 +42,7 @@ const ForgetPassword = () => {
     } else if (res.message === "Please provide a valid email!") {
       alert.show(
         <div style={{ textTransform: "none" }}>
-          Please Provide a Valid Email
+          Please provide a valid email
         </div>,
         {
           type: "error",

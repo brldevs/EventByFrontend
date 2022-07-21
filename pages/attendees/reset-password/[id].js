@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import FromAppendPrepend from "../../../components/utils/FromAppendPrepend";
 import Sideimage from "../../../components/utils/Sideimage";
 import { resetPassword } from "../../../services/service";
+import { ALERT_MESSAGE_PASSWORD_RESET_SUCCESS } from "../../../constants";
 const Resetpassword = () => {
   const router = useRouter();
   const alert = useAlert();
@@ -33,10 +34,19 @@ const Resetpassword = () => {
     console.table(data);
     const res = await resetPassword(data, id);
     if (res.status === 200) {
-      alert.show(res.message);
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_PASSWORD_RESET_SUCCESS}
+        </div>,
+        {
+          type: "success",
+        }
+      );
       router.push("/attendees/login");
     } else {
-      alert.show(res.message);
+      alert.show(res.message, {
+        type: "error",
+      });
     }
   };
 
