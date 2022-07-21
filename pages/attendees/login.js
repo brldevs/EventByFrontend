@@ -52,6 +52,14 @@ function attendLogin() {
       router.push("/attendees");
 
       setIsLoading(false);
+    } else if (res.message === "Invalid email or password") {
+      alert.show(
+        <div style={{ textTransform: "none" }}>Invalid Email or Password</div>,
+        {
+          type: "error",
+        }
+      );
+      setIsLoading(false);
     } else {
       alert.show(res.message);
       setIsLoading(false);
