@@ -289,21 +289,12 @@ const Registration = () => {
                   {...register("password", {
                     required: "This is required.",
                     validate: {
-                      isAtLeastOneLetter: (v) =>
-                        v.search(/[a-zA-z]/) > -1 ||
-                        "Your password must contain at least one letter.",
-
-                      isAtLeastOneDigit: (v) =>
-                        v.match(/[0-9]/) > 0 ||
-                        "Your password must contain at least one digit.",
-
-                      isAtLeastOneSpecialCharacter: (v) =>
-                        v.search(/[@$!%*#?&]/) > -1 ||
-                        "Your password must contain at least one special character.",
-
-                      isLengthLessThanEight: (v) =>
-                        v.length > 7 ||
-                        "Your password must be at least 8 characters.",
+                      validatePassword: (v) =>
+                        (v.search(/[a-zA-z]/) > -1 &&
+                          v.match(/[0-9]/) > 0 &&
+                          v.search(/[@$!%*#?&]/) > -1 &&
+                          v.length > 7) ||
+                        "Your password must contain at least one letter, one digit, one special character and password length must be at least 8 characters",
                     },
                   })}
                   placeholder="Enter Your Password"
