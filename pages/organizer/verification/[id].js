@@ -24,7 +24,7 @@ const verification = () => {
             router.push("/organizer/login");
           }}
         >
-          Log In
+          Sign In
         </button>
       </div>
 

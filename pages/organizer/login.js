@@ -227,7 +227,7 @@ const Login = () => {
       <Row>
         <div className="col-md-8 mx-md-auto mx-lg-0 col-lg-6">
           <div className="mx-470">
-            <h1 className="mb-5 text-dark">Log In to EventBy</h1>
+            <h1 className="mb-5 text-dark">Sign In to EventBy</h1>
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
               <Form.Group className="mb-3">
                 <Form.Label className="font-weight-500">Email*</Form.Label>
@@ -314,7 +314,7 @@ const Login = () => {
                 disabled={isLoading}
                 className="btn btn-primary btn-lg w-100"
               >
-                Log In
+                Sign In
               </Button>
             </form>
             <div className="text-gray-2 my-4">

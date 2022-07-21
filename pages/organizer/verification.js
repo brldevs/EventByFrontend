@@ -32,7 +32,7 @@ const verification = () => {
           <div className="text-gray-2 my-4">
             Already have an account? Please
             <Link href="/">
-              <a className="font-weight-700"> Log In</a>
+              <a className="font-weight-700"> Sign In</a>
             </Link>
           </div>
         </div>

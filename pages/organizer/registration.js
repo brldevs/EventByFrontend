@@ -397,7 +397,7 @@ const Registration = () => {
               <div className="text-gray-2 my-4">
                 Already have an account? Please
                 <Link href="/organizer/login">
-                  <a className="font-weight-700"> Log In</a>
+                  <a className="font-weight-700"> Sign In</a>
                 </Link>
               </div>
             </form>

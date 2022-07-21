@@ -177,7 +177,7 @@ function attendLogin() {
       </Head>
       <Row>
         <div className="col-md-8 mx-md-auto mx-lg-0 col-lg-6">
-          <h1 className="mb-5">Log In to EventBy</h1>
+          <h1 className="mb-5">Sign In to EventBy</h1>
           <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
             <Form.Group className="mb-3">
               <Form.Label>Email*</Form.Label>
@@ -262,7 +262,7 @@ function attendLogin() {
               disabled={isLoading}
               className="btn btn-primary btn-lg w-100"
             >
-              Log In
+              Sign In
             </Button>
           </form>
           <div className="text-gray-2 my-4">

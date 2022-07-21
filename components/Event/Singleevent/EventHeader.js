@@ -2134,7 +2134,7 @@ function EventHeader({
 
                   <div className="mb-3 text-gray-2">
                     Already have an account on EventBy? Please{" "}
-                    <a href="/attendees/login">Log In</a>
+                    <a href="/attendees/login">Sign In</a>
                   </div>
                   <span
                     style={{

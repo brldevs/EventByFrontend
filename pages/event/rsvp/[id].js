@@ -277,10 +277,8 @@ const eventDetails = ({ dataServerSideProps }) => {
   const [organizerEmail, setOrganizerEmail] = useState(null);
   const [organizerProfilePicture, setOrganizerProfilePicture] = useState(null);
 
-  const [
-    moreEventsFromOrganizerList,
-    setMoreEventsFromOrganizerList,
-  ] = useState([]);
+  const [moreEventsFromOrganizerList, setMoreEventsFromOrganizerList] =
+    useState([]);
 
   const getMediaFilesData = async (accessToken, event_assets) => {
     const imgPathArray = await event_assets.map((d, i) => d.path);
@@ -320,13 +318,13 @@ const eventDetails = ({ dataServerSideProps }) => {
 
         const resBannerImg = await getEventBannerByEventId(eventId);
 
-        const resCoOrgSponsorSpeakerList = await getEventCoOrgSponsorSpeakerById(
-          eventId
-        );
+        const resCoOrgSponsorSpeakerList =
+          await getEventCoOrgSponsorSpeakerById(eventId);
 
-        const resAllEventsByOrganizerWithoutTokenByOrganizerId = await getAllEventsByOrganizerWithoutTokenByOrganizerId(
-          res.data.organizer
-        );
+        const resAllEventsByOrganizerWithoutTokenByOrganizerId =
+          await getAllEventsByOrganizerWithoutTokenByOrganizerId(
+            res.data.organizer
+          );
 
         if (resAllEventsByOrganizerWithoutTokenByOrganizerId.status === 200) {
           setMoreEventsFromOrganizerList(
@@ -1186,8 +1184,7 @@ const eventDetails = ({ dataServerSideProps }) => {
                       Sign Up
                     </button>
                     <div className="mb-3 text-gray-2">
-                      Already have an account on EventBy? Please{" "}
-                      <a href>Log In</a>
+                      Already have an account on EventBy? Please <a>Sign In</a>
                     </div>
                   </form>
                 </div>

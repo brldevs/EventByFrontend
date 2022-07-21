@@ -1187,8 +1187,7 @@ const eventDetails = ({ dataServerSideProps }) => {
                       Sign Up
                     </button>
                     <div className="mb-3 text-gray-2">
-                      Already have an account on EventBy? Please{" "}
-                      <a href>Log In</a>
+                      Already have an account on EventBy? Please <a>Sign In</a>
                     </div>
                   </form>
                 </div>

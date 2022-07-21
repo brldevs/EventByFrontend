@@ -251,17 +251,17 @@ const NavMenu = (params) => {
 
                 {router.pathname === "/organizer/registration" && (
                   <Link href="/organizer/login">
-                    <a className="btn btn-primary me-4">Login</a>
+                    <a className="btn btn-primary me-4">Sign In</a>
                   </Link>
                 )}
                 {router.pathname === "/organizer/forgetpassword" && (
                   <Link href="/organizer/login">
-                    <a className="btn btn-primary me-4">Login</a>
+                    <a className="btn btn-primary me-4">Sign In</a>
                   </Link>
                 )}
                 {router.pathname.includes("/organizer/reset-password") && (
                   <Link href="/organizer/login">
-                    <a className="btn btn-primary me-4">Login</a>
+                    <a className="btn btn-primary me-4">Sign In</a>
                   </Link>
                 )}
 
@@ -275,17 +275,17 @@ const NavMenu = (params) => {
 
                 {router.pathname === "/attendees/registration" && (
                   <Link href="/attendees/login">
-                    <a className="btn btn-primary me-4">Login</a>
+                    <a className="btn btn-primary me-4">Sign In</a>
                   </Link>
                 )}
                 {router.pathname === "/attendees/forgetpassword" && (
                   <Link href="/attendees/login">
-                    <a className="btn btn-primary me-4">Login</a>
+                    <a className="btn btn-primary me-4">Sign In</a>
                   </Link>
                 )}
                 {router.pathname.includes("/attendees/reset-password") && (
                   <Link href="/attendees/login">
-                    <a className="btn btn-primary me-4">Login</a>
+                    <a className="btn btn-primary me-4">Sign In</a>
                   </Link>
                 )}
                 {/* CONDITIONAL LOGIN / SIGNUP BUTTON END */}
@@ -296,7 +296,7 @@ const NavMenu = (params) => {
               !isSignUpWithoutEventBy && (
                 <Link href="/attendees/login">
                   <a className="btn btn-primary px-3 me-4">
-                    <i className="ri-calendar-line " /> Sign Up With EventBy{" "}
+                    <i className="ri-calendar-line" /> Sign Up With EventBy{" "}
                   </a>
                 </Link>
               )}

@@ -358,7 +358,7 @@ const Registration = () => {
             <div className="text-gray-2 my-4">
               Already have an account? Please
               <Link href="/attendees/login">
-                <a> Log In</a>
+                <a> Sign In</a>
               </Link>
             </div>
             <div className="hr-line mb-5">
