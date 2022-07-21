@@ -54,6 +54,11 @@ const Registration = () => {
       alert.show(res.message);
       router.push("/organizer/verificationemail");
       setIsLoading(false);
+    } else if (
+      res.message === "User with this email and role already exists!"
+    ) {
+      alert.show("Email Already Used");
+      setIsLoading(false);
     } else {
       alert.show(res.message);
       setIsLoading(false);
