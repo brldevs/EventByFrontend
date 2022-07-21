@@ -18,7 +18,7 @@ import {
 import Head from "next/head";
 import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react";
-
+import { ALERT_MESSAGE_EMAIL_ALREADY_USED } from "../../constants";
 const Registration = () => {
   const { data: session } = useSession();
   const router = useRouter();
@@ -57,7 +57,12 @@ const Registration = () => {
     } else if (
       res.message === "User with this email and role already exists!"
     ) {
-      alert.show("Email Already Used");
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_EMAIL_ALREADY_USED}
+        </div>,
+        { type: "info" }
+      );
       setIsLoading(false);
     } else {
       alert.show(res.message);

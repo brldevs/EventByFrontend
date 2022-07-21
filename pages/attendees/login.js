@@ -19,7 +19,7 @@ import { useAlert } from "react-alert";
 import { ErrorMessage } from "@hookform/error-message";
 import { useAuthData } from "../../context/auth";
 import { useSession, signIn, signOut } from "next-auth/react";
-
+import { ALERT_MESSAGE_INVALID_CREDENTIAL } from "../../constants";
 function attendLogin() {
   const { data: session } = useSession();
   const router = useRouter();
@@ -54,7 +54,9 @@ function attendLogin() {
       setIsLoading(false);
     } else if (res.message === "Invalid email or password") {
       alert.show(
-        <div style={{ textTransform: "none" }}>Invalid Email or Password</div>,
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_INVALID_CREDENTIAL}
+        </div>,
         {
           type: "error",
         }

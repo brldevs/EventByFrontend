@@ -7,6 +7,10 @@ import { forgotPassword } from "../../services/service";
 import { ErrorMessage } from "@hookform/error-message";
 import $ from "jquery";
 import Head from "next/head";
+import {
+  ALERT_MESSAGE_SUCCESSFULLY_SENT_EMAIL_TO_RESET_PASSWORD,
+  ALERT_MESSAGE_INVALID_EMAIL,
+} from "../../constants";
 import { useRef, useState, useEffect } from "react";
 const Forgetpassword = () => {
   const router = useRouter();
@@ -29,7 +33,7 @@ const Forgetpassword = () => {
     if (res.status === 200) {
       alert.show(
         <div style={{ textTransform: "none" }}>
-          Successfully Sent Email to Reset Password
+          {ALERT_MESSAGE_SUCCESSFULLY_SENT_EMAIL_TO_RESET_PASSWORD}
         </div>,
         {
           type: "info",
@@ -38,7 +42,7 @@ const Forgetpassword = () => {
     } else if (res.message === "Please provide a valid email!") {
       alert.show(
         <div style={{ textTransform: "none" }}>
-          Please Provide a Valid Email
+          {ALERT_MESSAGE_INVALID_EMAIL}
         </div>,
         {
           type: "error",

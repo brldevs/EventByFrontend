@@ -10,6 +10,7 @@ import Sideimage from "../../components/utils/Sideimage";
 import { FileUploader } from "react-drag-drop-files";
 import { useForm } from "react-hook-form";
 import { useAlert } from "react-alert";
+import { ALERT_MESSAGE_INVALID_CREDENTIAL } from "../../constants";
 import {
   signInOrganizer,
   signInWithGoogle,
@@ -69,7 +70,9 @@ const Login = () => {
       setIsLoading(false);
     } else if (res.message === "Invalid email or password") {
       alert.show(
-        <div style={{ textTransform: "none" }}>Invalid Email or Password</div>,
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_INVALID_CREDENTIAL}
+        </div>,
         {
           type: "error",
         }

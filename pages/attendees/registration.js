@@ -10,6 +10,7 @@ import FromAppendPrepend from "../../components/utils/FromAppendPrepend";
 import FromBottom from "../../components/utils/FromBottom";
 import Sideimage from "../../components/utils/Sideimage";
 import { useAuthData } from "../../context/auth";
+import { ALERT_MESSAGE_EMAIL_ALREADY_USED } from "../../constants";
 import {
   signUpAttendee,
   signInWithGoogle,
@@ -60,7 +61,14 @@ const Registration = () => {
     } else if (
       res.message === "User with this email and role already exists!"
     ) {
-      alert.show("Email Already Used");
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_EMAIL_ALREADY_USED}
+        </div>,
+        {
+          type: "info",
+        }
+      );
       setIsLoading(false);
     } else {
       alert.show(res.message, {
