@@ -21,7 +21,7 @@ const verification = () => {
         <button
           className="btn btn-primary btn-lg w-100"
           onClick={() => {
-            router.push("/");
+            router.push("/organizer/login");
           }}
         >
           Log In
