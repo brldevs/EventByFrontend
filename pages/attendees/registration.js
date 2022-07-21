@@ -183,7 +183,7 @@ const Registration = () => {
       <Row>
         <div className="col-md-8 mx-md-auto mx-lg-0 col-lg-6">
           <h1 className="mb-5">Sign Up For EventBy</h1>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
             <div>
               <div className="row">
                 <div className="col-sm-6 mb-3">
@@ -258,12 +258,13 @@ const Registration = () => {
                   {...register("email", {
                     required: "This is required.",
                     pattern: {
-                      value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      value:
+                        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                       message: "Please enter a valid email",
                     },
                   })}
                   placeholder="Enter Your Email"
-                  autoComplete="off"
+                  autoComplete="none"
                 />
               </div>
               <ErrorMessage
@@ -306,7 +307,7 @@ const Registration = () => {
                     },
                   })}
                   placeholder="Enter Your Password"
-                  autoComplete="off"
+                  autoComplete="none"
                 />
                 <FromAppendPrepend
                   prepend="true"

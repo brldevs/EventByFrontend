@@ -228,7 +228,7 @@ const Login = () => {
         <div className="col-md-8 mx-md-auto mx-lg-0 col-lg-6">
           <div className="mx-470">
             <h1 className="mb-5 text-dark">Log In to EventBy</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
               <Form.Group className="mb-3">
                 <Form.Label className="font-weight-500">Email*</Form.Label>
                 <div className="input-group">
@@ -238,12 +238,14 @@ const Login = () => {
                     {...register("email", {
                       required: "This is required.",
                       pattern: {
-                        value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        value:
+                          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                         message: "Please enter a valid email",
                       },
                     })}
                     placeholder="Enter Your Email"
                     // defaultValue="newgenbabylon@gmail.com"
+                    autoComplete="none"
                   />
                 </div>
                 <ErrorMessage
@@ -287,6 +289,7 @@ const Login = () => {
                       },
                     })}
                     placeholder="Enter Your Password"
+                    autoComplete="none"
                     // defaultValue="Aa12345678@"
                   />
                   <FromAppendPrepend

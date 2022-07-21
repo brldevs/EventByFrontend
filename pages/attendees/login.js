@@ -178,7 +178,7 @@ function attendLogin() {
       <Row>
         <div className="col-md-8 mx-md-auto mx-lg-0 col-lg-6">
           <h1 className="mb-5">Log In to EventBy</h1>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
             <Form.Group className="mb-3">
               <Form.Label>Email*</Form.Label>
               <div className="input-group">
@@ -188,11 +188,13 @@ function attendLogin() {
                   {...register("email", {
                     required: "This is required.",
                     pattern: {
-                      value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      value:
+                        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                       message: "Please enter a valid email",
                     },
                   })}
                   placeholder="Enter Your Email"
+                  autoComplete="none"
                   // defaultValue="shafaet@newgen-bd.com"
                 />
               </div>
@@ -237,6 +239,7 @@ function attendLogin() {
                     },
                   })}
                   placeholder="Enter Your Password"
+                  autoComplete="none"
                   // defaultValue="Aa12345678@"
                 />
                 <FromAppendPrepend
