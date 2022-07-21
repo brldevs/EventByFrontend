@@ -35,8 +35,19 @@ const Forgetpassword = () => {
           type: "info",
         }
       );
-
-      setIsLoading(false);
+    } else if (res.message === "Please provide a valid email!") {
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          Please Provide a Valid Email
+        </div>,
+        {
+          type: "error",
+        }
+      );
+    } else {
+      alert.show(<div style={{ textTransform: "none" }}>{res.message}</div>, {
+        type: "error",
+      });
     }
   };
 
