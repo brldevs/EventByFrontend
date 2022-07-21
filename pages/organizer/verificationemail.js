@@ -61,7 +61,7 @@ const VerificationEmail = () => {
         </div>
         <div className="text-gray-2 my-4 mt-5">
           Already have an account? Please
-          <Link href="/">
+          <Link href="/organizer/login">
             <a className="font-weight-700"> Sign In</a>
           </Link>
         </div>
