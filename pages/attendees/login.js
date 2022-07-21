@@ -173,7 +173,7 @@ function attendLogin() {
   return (
     <>
       <Head>
-        <title> Login</title>
+        <title>Sign In</title>
       </Head>
       <Row>
         <div className="col-md-8 mx-md-auto mx-lg-0 col-lg-6">

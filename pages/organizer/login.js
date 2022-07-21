@@ -221,7 +221,7 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>Login page</title>
+        <title>Sign In</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Row>
