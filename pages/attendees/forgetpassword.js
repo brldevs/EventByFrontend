@@ -27,7 +27,16 @@ const Forgetpassword = () => {
     const res = await forgotPassword(data);
 
     if (res.status === 200) {
-      alert.show(res.message);
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          Successfully Sent Email to Reset Password
+        </div>,
+        {
+          type: "info",
+        }
+      );
+
+      setIsLoading(false);
     }
   };
 
