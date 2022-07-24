@@ -25,6 +25,7 @@ const NavMenu = (params) => {
   const [userLastName, setUserLastName] = useState(null);
   const [userEmailAddress, setUserEmailAddress] = useState(null);
   const [profileImgPath, setProfileImgPath] = useState(null);
+  const [role, setRole] = useState(null);
   useEffect(async () => {
     console.log("Calling useEffect-> ");
     const result =
@@ -34,6 +35,7 @@ const NavMenu = (params) => {
       setUserFirstName(resultParse.firstName);
       setUserLastName(resultParse.lastName);
       setUserEmailAddress(resultParse.email);
+      setRole(resultParse.role);
     }
 
     import("bootstrap/dist/js/bootstrap.bundle.js");
@@ -591,6 +593,15 @@ const NavMenu = (params) => {
                             <span className="text-gray-2 font-13">
                               {data.token && userEmailAddress}
                               {/* {data.token && data.result.email} */}
+                            </span>
+                            <br />
+                            <span className="text-gray-2 font-13">
+                              {data.token &&
+                                role === "organizer" &&
+                                "Role: Organizer"}
+                              {data.token &&
+                                role === "attendee" &&
+                                "Role: Attendee"}
                             </span>
                           </div>
                         </div>
