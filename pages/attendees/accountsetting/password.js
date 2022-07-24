@@ -150,21 +150,12 @@ function PasswordChange() {
                           {...register("currentPassword", {
                             required: "This is required.",
                             validate: {
-                              isAtLeastOneLetter: (v) =>
-                                v.search(/[a-zA-z]/) > -1 ||
-                                "Your password must contain at least one letter.",
-
-                              isAtLeastOneDigit: (v) =>
-                                v.match(/[0-9]/) > 0 ||
-                                "Your password must contain at least one digit.",
-
-                              isAtLeastOneSpecialCharacter: (v) =>
-                                v.search(/[@$!%*#?&]/) > -1 ||
-                                "Your password must contain at least one special character.",
-
-                              isLengthLessThanEight: (v) =>
-                                v.length > 7 ||
-                                "Your password must be at least 8 characters.",
+                              validatePassword: (v) =>
+                                (v.search(/[a-zA-z]/) > -1 &&
+                                  v.match(/[0-9]/) > 0 &&
+                                  v.search(/[@$!%*#?&]/) > -1 &&
+                                  v.length > 7) ||
+                                "Your password must contain at least one letter, one digit, one special character and password length must be at least 8 characters",
                             },
                           })}
                           placeholder="Current Password"
@@ -205,21 +196,12 @@ function PasswordChange() {
                           {...register("newPassword", {
                             required: "This is required.",
                             validate: {
-                              isAtLeastOneLetter: (v) =>
-                                v.search(/[a-zA-z]/) > -1 ||
-                                "Your password must contain at least one letter.",
-
-                              isAtLeastOneDigit: (v) =>
-                                v.match(/[0-9]/) > 0 ||
-                                "Your password must contain at least one digit.",
-
-                              isAtLeastOneSpecialCharacter: (v) =>
-                                v.search(/[@$!%*#?&]/) > -1 ||
-                                "Your password must contain at least one special character.",
-
-                              isLengthLessThanEight: (v) =>
-                                v.length > 7 ||
-                                "Your password must be at least 8 characters.",
+                              validatePassword: (v) =>
+                                (v.search(/[a-zA-z]/) > -1 &&
+                                  v.match(/[0-9]/) > 0 &&
+                                  v.search(/[@$!%*#?&]/) > -1 &&
+                                  v.length > 7) ||
+                                "Your password must contain at least one letter, one digit, one special character and password length must be at least 8 characters",
                             },
                           })}
                           placeholder="Change Password"
@@ -260,24 +242,13 @@ function PasswordChange() {
                           {...register("repeatPassword", {
                             required: "This is required.",
                             validate: {
-                              isAtLeastOneLetter: (v) =>
-                                v.search(/[a-zA-z]/) > -1 ||
-                                "Your password must contain at least one letter.",
-
-                              isAtLeastOneDigit: (v) =>
-                                v.match(/[0-9]/) > 0 ||
-                                "Your password must contain at least one digit.",
-
-                              isAtLeastOneSpecialCharacter: (v) =>
-                                v.search(/[@$!%*#?&]/) > -1 ||
-                                "Your password must contain at least one special character.",
-
-                              isLengthLessThanEight: (v) =>
-                                v.length > 7 ||
-                                "Your password must be at least 8 characters.",
-                              isCurrentPasswordAndConfirmPasswordSame: (v) =>
-                                v === newPassword.current ||
-                                "Change Password and Confirm password does not match",
+                              validatePassword: (v) =>
+                                (v.search(/[a-zA-z]/) > -1 &&
+                                  v.match(/[0-9]/) > 0 &&
+                                  v.search(/[@$!%*#?&]/) > -1 &&
+                                  v.length > 7 &&
+                                  v === newPassword.current) ||
+                                "Your password must contain at least one letter, one digit, one special character and password length must be at least 8 characters and Change Password and Confirm password should be same",
                             },
                           })}
                           placeholder="Confirm Password"
