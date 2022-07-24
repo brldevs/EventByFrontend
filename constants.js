@@ -8,6 +8,8 @@ const ALERT_MESSAGE_INVALID_CREDENTIAL = "Invalid email or password";
 const ALERT_MESSAGE_EMAIL_ALREADY_USED = "Email already used";
 const ALERT_MESSAGE_USER_PROFILE_SETUP_SUCCESS =
   "User information saved successfully";
+const ALERT_MESSAGE_PAYMENT_INFORMATION_SAVE_SUCCESS =
+  "Payment information saved successfully";
 
 module.exports = {
   MAX_PROFILE_PHOTO_SIZE,
@@ -17,4 +19,5 @@ module.exports = {
   ALERT_MESSAGE_INVALID_CREDENTIAL,
   ALERT_MESSAGE_EMAIL_ALREADY_USED,
   ALERT_MESSAGE_USER_PROFILE_SETUP_SUCCESS,
+  ALERT_MESSAGE_PAYMENT_INFORMATION_SAVE_SUCCESS,
 };

@@ -10,6 +10,7 @@ import { useAlert } from "react-alert";
 import $ from "jquery";
 import FromAppendPrepend from "../../../components/utils/FromAppendPrepend";
 import { Row, Form, Button, Col } from "react-bootstrap";
+import { ALERT_MESSAGE_PAYMENT_INFORMATION_SAVE_SUCCESS } from "../../../constants";
 function Paymentsetting() {
   const alert = useAlert();
 
@@ -87,7 +88,14 @@ function Paymentsetting() {
         };
         const response = await saveCheckoutMethod(data, token);
         if (response.status === 200) {
-          alert.show("Saved Successfully!", { type: "success" });
+          alert.show(
+            <div style={{ textTransform: "none" }}>
+              {ALERT_MESSAGE_PAYMENT_INFORMATION_SAVE_SUCCESS}
+            </div>,
+            {
+              type: "success",
+            }
+          );
 
           const data = {
             checkout_id: response.data._id,
