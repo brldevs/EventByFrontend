@@ -14,6 +14,8 @@ const ALERT_MESSAGE_PAYMENT_METHOD_EXISTS = "Payment method already exists";
 const ALERT_MESSAGE_PAYMENT_UPDATE_SUCCESS =
   "Payment information updated successfully";
 const ALERT_MESSAGE_PAYMENT_NOT_SETUP = "Payment information setup not found";
+const ALERT_MESSAGE_AT_LEAST_ONE_PACKAGE_SUBSCRIPTION =
+  "Please subscribe at least one package to create event";
 
 module.exports = {
   MAX_PROFILE_PHOTO_SIZE,
@@ -27,4 +29,5 @@ module.exports = {
   ALERT_MESSAGE_PAYMENT_METHOD_EXISTS,
   ALERT_MESSAGE_PAYMENT_UPDATE_SUCCESS,
   ALERT_MESSAGE_PAYMENT_NOT_SETUP,
+  ALERT_MESSAGE_AT_LEAST_ONE_PACKAGE_SUBSCRIPTION,
 };

@@ -12,6 +12,7 @@ import {
   stripeCheckoutSession,
 } from "../../../services/service";
 import { useAlert } from "react-alert";
+import { ALERT_MESSAGE_AT_LEAST_ONE_PACKAGE_SUBSCRIPTION } from "../../../constants";
 function Subscription() {
   const [isPackageUpdated, setIsPackageUpdated] = useState(false);
   const alert = useAlert();
@@ -20,9 +21,8 @@ function Subscription() {
 
   const [currentSubscriptionPlan, setCurrentSubscriptionPlan] = useState({});
 
-  const [subscriptionErrorMessage, setSubscriptionErrorMessage] = useState(
-    null
-  );
+  const [subscriptionErrorMessage, setSubscriptionErrorMessage] =
+    useState(null);
   const [packageValidity, setPackageValidity] = useState(null);
   const [packageStatus, setPackageStatus] = useState(null);
   const router = useRouter();
@@ -238,7 +238,7 @@ function Subscription() {
             {subscriptionErrorMessage && (
               <div className="single-event bg-warning p-4 border-radius-10">
                 {subscriptionErrorMessage && (
-                  <span>{subscriptionErrorMessage}</span>
+                  <span>{ALERT_MESSAGE_AT_LEAST_ONE_PACKAGE_SUBSCRIPTION}</span>
                 )}
               </div>
             )}
