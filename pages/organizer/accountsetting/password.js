@@ -10,7 +10,10 @@ import Sideimage from "../../../components/utils/Sideimage";
 import { changePassword, logOut } from "../../../services/service";
 import { useAuthData } from "../../../context/auth";
 import $ from "jquery";
-import { ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD } from "../../../constants";
+import {
+  ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD,
+  ALERT_MESSAGE_UPDATE_PASSWORD_SUCCESS,
+} from "../../../constants";
 
 function PasswordChange() {
   const router = useRouter();
@@ -58,10 +61,18 @@ function PasswordChange() {
 
     const res = await changePassword(data, token);
     if (res.status === 200) {
-      alert.show("Password Saved Successfully", { type: "success" });
-      logOut();
-      removeAuthValues();
-      router.push("/");
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_UPDATE_PASSWORD_SUCCESS}
+        </div>,
+        {
+          type: "success",
+        }
+      );
+
+      // logOut();
+      // removeAuthValues();
+      // router.push("/");
     } else if (res.status === 205) {
       alert.show(
         <div style={{ textTransform: "none" }}>

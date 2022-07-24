@@ -8,7 +8,10 @@ import { useForm } from "react-hook-form";
 import FromAppendPrepend from "../../../components/utils/FromAppendPrepend";
 import { useAuthData } from "../../../context/auth";
 import { changePassword, logOut } from "../../../services/service";
-import { ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD } from "../../../constants";
+import {
+  ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD,
+  ALERT_MESSAGE_UPDATE_PASSWORD_SUCCESS,
+} from "../../../constants";
 function PasswordChange() {
   const router = useRouter();
   const alert = useAlert();
@@ -34,10 +37,18 @@ function PasswordChange() {
 
     const res = await changePassword(data, token);
     if (res.status === 200) {
-      alert.show("Password Saved Successfully", { type: "success" });
-      logOut();
-      removeAuthValues();
-      router.push("/attendees/login");
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_UPDATE_PASSWORD_SUCCESS}
+        </div>,
+        {
+          type: "success",
+        }
+      );
+
+      // logOut();
+      // removeAuthValues();
+      // router.push("/attendees/login");
     } else if (res.status === 205) {
       alert.show(
         <div style={{ textTransform: "none" }}>
@@ -109,11 +120,6 @@ function PasswordChange() {
       <div className="content_area flex-1">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="bg-white border-radius-10">
-            <div className="text-end px-50 py-50 pb-0">
-              <button type="submit" className="btn btn-secondary text-white">
-                Save Changes
-              </button>
-            </div>
             <div className="dashboard_event_container mw-470 pb-5">
               <h2 className="text-center">Passwords</h2>
               <p className="text-gray-2 text-center mb-5">
@@ -289,6 +295,11 @@ function PasswordChange() {
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="text-end px-50 py-50 pb-50">
+              <button type="submit" className="btn btn-secondary text-white">
+                Save Changes
+              </button>
             </div>
           </div>
         </form>
