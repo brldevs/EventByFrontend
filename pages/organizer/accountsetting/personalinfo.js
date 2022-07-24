@@ -15,7 +15,10 @@ import { ErrorMessage } from "@hookform/error-message";
 import { useRouter } from "next/router";
 import { useAlert } from "react-alert";
 import { useAuthData } from "../../../context/auth";
-import { MAX_PROFILE_PHOTO_SIZE } from "../../../constants";
+import {
+  MAX_PROFILE_PHOTO_SIZE,
+  ALERT_MESSAGE_PERSONAL_INFORMATION_UPDATE_SUCCESS,
+} from "../../../constants";
 
 var languageStrings = [
   {
@@ -252,18 +255,13 @@ const personalinfo = () => {
     setIsDateOfBirthOpen(!isDateOfBirthOpen);
   };
 
-  const [
-    timeZoneSelectedValueErrorMsg,
-    setTimeZoneSelectedValueErrorMsg,
-  ] = useState(null);
-  const [
-    languageSelectedValueErrorMsg,
-    setLanguageSelectedValueErrorMsg,
-  ] = useState(null);
+  const [timeZoneSelectedValueErrorMsg, setTimeZoneSelectedValueErrorMsg] =
+    useState(null);
+  const [languageSelectedValueErrorMsg, setLanguageSelectedValueErrorMsg] =
+    useState(null);
 
-  const [selectedStartDateErrorMsg, setSelectedStartDateErrorMsg] = useState(
-    null
-  );
+  const [selectedStartDateErrorMsg, setSelectedStartDateErrorMsg] =
+    useState(null);
   const onSubmit = async (d) => {
     setTimeZoneSelectedValueErrorMsg(null);
     setLanguageSelectedValueErrorMsg(null);
@@ -307,7 +305,14 @@ const personalinfo = () => {
             setAuthValues({
               result: { ...data.result, firstName: d.firstName },
             });
-            alert.show("Information Saved Successfully", { type: "success" });
+            alert.show(
+              <div style={{ textTransform: "none" }}>
+                {ALERT_MESSAGE_PERSONAL_INFORMATION_UPDATE_SUCCESS}
+              </div>,
+              {
+                type: "success",
+              }
+            );
           }
         } else {
           setLanguageSelectedValueErrorMsg("This field is required!");
@@ -411,9 +416,8 @@ const personalinfo = () => {
     }
   };
 
-  const [fileValidationErrorMessage, setFileValidationErrorMessage] = useState(
-    null
-  );
+  const [fileValidationErrorMessage, setFileValidationErrorMessage] =
+    useState(null);
   const fileValidationHandler = (e) => {
     let file_size = e?.target?.files[0]?.size;
 
@@ -483,15 +487,6 @@ const personalinfo = () => {
     <>
       <div className="bg-white border-radius-10">
         <form>
-          <div className="text-end px-50 py-50 pb-0">
-            <button
-              type="submit"
-              className="btn btn-secondary text-white"
-              onClick={handleSubmit(onSubmit)}
-            >
-              Save Changes
-            </button>
-          </div>
           <div className="dashboard_event_container pb-5">
             <h2 className="text-center">Personal Information</h2>
             <p className="text-gray-2 text-center mb-5">
@@ -551,6 +546,10 @@ const personalinfo = () => {
                       className="form-control"
                       {...register("firstName", {
                         required: "This is required.",
+                        pattern: {
+                          value: /^[a-z ,.'-]+$/i,
+                          message: "Only letters are allowed",
+                        },
                       })}
                     />
                   </div>
@@ -582,6 +581,10 @@ const personalinfo = () => {
                       className="form-control"
                       {...register("lastName", {
                         required: "This is required.",
+                        pattern: {
+                          value: /^[a-z ,.'-]+$/i,
+                          message: "Only letters are allowed",
+                        },
                       })}
                     />
                   </div>
@@ -633,8 +636,9 @@ const personalinfo = () => {
                       {...register("contact_number", {
                         required: "This is required.",
                         pattern: {
-                          value: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
-                          message: `Invalid contact number`,
+                          value:
+                            /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
+                          message: `Only numbers are allowed`,
                         },
                       })}
                     />
@@ -675,6 +679,7 @@ const personalinfo = () => {
                       // defaultValue={data.event_start_date || new Date()}
                       render={({ ref, ...rest }) => (
                         <DatePicker
+                          placeholderText="dd/MM/yyyy"
                           dateFormat="dd/MM/yyyy"
                           selected={selectedStartDate}
                           maxDate={new Date()}
@@ -762,7 +767,8 @@ const personalinfo = () => {
                   {...register("website", {
                     required: "This is required.",
                     pattern: {
-                      value: /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
+                      value:
+                        /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
                       message: `Invalid website address`,
                     },
                   })}
@@ -865,6 +871,15 @@ const personalinfo = () => {
             </div>
           </div>
         </form>
+        <div className="text-end px-50 py-50 pb-50">
+          <button
+            type="submit"
+            className="btn btn-secondary text-white"
+            onClick={handleSubmit(onSubmit)}
+          >
+            Save Changes
+          </button>
+        </div>
       </div>
     </>
   );

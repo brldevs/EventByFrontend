@@ -8,7 +8,11 @@ import { useForm } from "react-hook-form";
 import FromAppendPrepend from "../../../components/utils/FromAppendPrepend";
 import { useAuthData } from "../../../context/auth";
 import { changePassword, logOut } from "../../../services/service";
-
+import {
+  ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD,
+  ALERT_MESSAGE_UPDATE_PASSWORD_SUCCESS,
+  ALERT_MESSAGE_INCORRECT_CURRENT_PASSWORD,
+} from "../../../constants";
 function PasswordChange() {
   const router = useRouter();
   const alert = useAlert();
@@ -34,10 +38,39 @@ function PasswordChange() {
 
     const res = await changePassword(data, token);
     if (res.status === 200) {
-      alert.show("Password Saved Successfully", { type: "success" });
-      logOut();
-      removeAuthValues();
-      router.push("/attendees/login");
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_UPDATE_PASSWORD_SUCCESS}
+        </div>,
+        {
+          type: "success",
+        }
+      );
+
+      // logOut();
+      // removeAuthValues();
+      // router.push("/attendees/login");
+    } else if (res.status === 205) {
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD}
+        </div>,
+        {
+          type: "error",
+        }
+      );
+    } else if (
+      res.status === 401 &&
+      res.message === "Check current password. Password doesn't match!"
+    ) {
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_INCORRECT_CURRENT_PASSWORD}
+        </div>,
+        {
+          type: "error",
+        }
+      );
     } else {
       alert.show(res.message);
     }
@@ -100,11 +133,6 @@ function PasswordChange() {
       <div className="content_area flex-1">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="bg-white border-radius-10">
-            <div className="text-end px-50 py-50 pb-0">
-              <button type="submit" className="btn btn-secondary text-white">
-                Save Changes
-              </button>
-            </div>
             <div className="dashboard_event_container mw-470 pb-5">
               <h2 className="text-center">Passwords</h2>
               <p className="text-gray-2 text-center mb-5">
@@ -122,21 +150,12 @@ function PasswordChange() {
                           {...register("currentPassword", {
                             required: "This is required.",
                             validate: {
-                              isAtLeastOneLetter: (v) =>
-                                v.search(/[a-zA-z]/) > -1 ||
-                                "Your password must contain at least one letter.",
-
-                              isAtLeastOneDigit: (v) =>
-                                v.match(/[0-9]/) > 0 ||
-                                "Your password must contain at least one digit.",
-
-                              isAtLeastOneSpecialCharacter: (v) =>
-                                v.search(/[@$!%*#?&]/) > -1 ||
-                                "Your password must contain at least one special character.",
-
-                              isLengthLessThanEight: (v) =>
-                                v.length > 7 ||
-                                "Your password must be at least 8 characters.",
+                              validatePassword: (v) =>
+                                (v.search(/[a-zA-z]/) > -1 &&
+                                  v.match(/[0-9]/) > 0 &&
+                                  v.search(/[@$!%*#?&]/) > -1 &&
+                                  v.length > 7) ||
+                                "Your password must contain at least one letter, one digit, one special character and password length must be at least 8 characters",
                             },
                           })}
                           placeholder="Current Password"
@@ -177,21 +196,12 @@ function PasswordChange() {
                           {...register("newPassword", {
                             required: "This is required.",
                             validate: {
-                              isAtLeastOneLetter: (v) =>
-                                v.search(/[a-zA-z]/) > -1 ||
-                                "Your password must contain at least one letter.",
-
-                              isAtLeastOneDigit: (v) =>
-                                v.match(/[0-9]/) > 0 ||
-                                "Your password must contain at least one digit.",
-
-                              isAtLeastOneSpecialCharacter: (v) =>
-                                v.search(/[@$!%*#?&]/) > -1 ||
-                                "Your password must contain at least one special character.",
-
-                              isLengthLessThanEight: (v) =>
-                                v.length > 7 ||
-                                "Your password must be at least 8 characters.",
+                              validatePassword: (v) =>
+                                (v.search(/[a-zA-z]/) > -1 &&
+                                  v.match(/[0-9]/) > 0 &&
+                                  v.search(/[@$!%*#?&]/) > -1 &&
+                                  v.length > 7) ||
+                                "Your password must contain at least one letter, one digit, one special character and password length must be at least 8 characters",
                             },
                           })}
                           placeholder="Change Password"
@@ -232,24 +242,13 @@ function PasswordChange() {
                           {...register("repeatPassword", {
                             required: "This is required.",
                             validate: {
-                              isAtLeastOneLetter: (v) =>
-                                v.search(/[a-zA-z]/) > -1 ||
-                                "Your password must contain at least one letter.",
-
-                              isAtLeastOneDigit: (v) =>
-                                v.match(/[0-9]/) > 0 ||
-                                "Your password must contain at least one digit.",
-
-                              isAtLeastOneSpecialCharacter: (v) =>
-                                v.search(/[@$!%*#?&]/) > -1 ||
-                                "Your password must contain at least one special character.",
-
-                              isLengthLessThanEight: (v) =>
-                                v.length > 7 ||
-                                "Your password must be at least 8 characters.",
-                              isCurrentPasswordAndConfirmPasswordSame: (v) =>
-                                v === newPassword.current ||
-                                "Change Password and Confirm password does not match",
+                              validatePassword: (v) =>
+                                (v.search(/[a-zA-z]/) > -1 &&
+                                  v.match(/[0-9]/) > 0 &&
+                                  v.search(/[@$!%*#?&]/) > -1 &&
+                                  v.length > 7 &&
+                                  v === newPassword.current) ||
+                                "Your password must contain at least one letter, one digit, one special character and password length must be at least 8 characters and Change Password and Confirm password should be same",
                             },
                           })}
                           placeholder="Confirm Password"
@@ -280,6 +279,11 @@ function PasswordChange() {
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="text-end px-50 py-50 pb-50">
+              <button type="submit" className="btn btn-secondary text-white">
+                Save Changes
+              </button>
             </div>
           </div>
         </form>

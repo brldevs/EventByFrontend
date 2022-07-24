@@ -19,7 +19,7 @@ import { useAlert } from "react-alert";
 import { ErrorMessage } from "@hookform/error-message";
 import { useAuthData } from "../../context/auth";
 import { useSession, signIn, signOut } from "next-auth/react";
-
+import { ALERT_MESSAGE_INVALID_CREDENTIAL } from "../../constants";
 function attendLogin() {
   const { data: session } = useSession();
   const router = useRouter();
@@ -51,6 +51,16 @@ function attendLogin() {
       setAuthValues(res);
       router.push("/attendees");
 
+      setIsLoading(false);
+    } else if (res.message === "Invalid email or password") {
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_INVALID_CREDENTIAL}
+        </div>,
+        {
+          type: "error",
+        }
+      );
       setIsLoading(false);
     } else {
       alert.show(res.message);
@@ -173,12 +183,12 @@ function attendLogin() {
   return (
     <>
       <Head>
-        <title> Login</title>
+        <title>Sign In</title>
       </Head>
       <Row>
         <div className="col-md-8 mx-md-auto mx-lg-0 col-lg-6">
-          <h1 className="mb-5">Log In to EventBy</h1>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <h1 className="mb-5">Sign In to EventBy</h1>
+          <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
             <Form.Group className="mb-3">
               <Form.Label>Email*</Form.Label>
               <div className="input-group">
@@ -188,11 +198,13 @@ function attendLogin() {
                   {...register("email", {
                     required: "This is required.",
                     pattern: {
-                      value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      value:
+                        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                       message: "Please enter a valid email",
                     },
                   })}
                   placeholder="Enter Your Email"
+                  autoComplete="none"
                   // defaultValue="shafaet@newgen-bd.com"
                 />
               </div>
@@ -219,24 +231,16 @@ function attendLogin() {
                   {...register("password", {
                     required: "This is required.",
                     validate: {
-                      isAtLeastOneLetter: (v) =>
-                        v.search(/[a-zA-z]/) > -1 ||
-                        "Your password must contain at least one letter.",
-
-                      isAtLeastOneDigit: (v) =>
-                        v.match(/[0-9]/) > 0 ||
-                        "Your password must contain at least one digit.",
-
-                      isAtLeastOneSpecialCharacter: (v) =>
-                        v.search(/[@$!%*#?&]/) > -1 ||
-                        "Your password must contain at least one special character.",
-
-                      isLengthLessThanEight: (v) =>
-                        v.length > 7 ||
-                        "Your password must be at least 8 characters.",
+                      validatePassword: (v) =>
+                        (v.search(/[a-zA-z]/) > -1 &&
+                          v.match(/[0-9]/) > 0 &&
+                          v.search(/[@$!%*#?&]/) > -1 &&
+                          v.length > 7) ||
+                        "Your password must contain at least one letter, one digit, one special character and password length must be at least 8 characters",
                     },
                   })}
                   placeholder="Enter Your Password"
+                  autoComplete="none"
                   // defaultValue="Aa12345678@"
                 />
                 <FromAppendPrepend
@@ -268,7 +272,7 @@ function attendLogin() {
               disabled={isLoading}
               className="btn btn-primary btn-lg w-100"
             >
-              Log In
+              Sign In
             </Button>
           </form>
           <div className="text-gray-2 my-4">

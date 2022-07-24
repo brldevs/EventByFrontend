@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { useState, useEffect } from "react";
+import { useState, useEffect, CSSProperties } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { Row, Form, Button, Col } from "react-bootstrap";
@@ -10,6 +10,7 @@ import Sideimage from "../../components/utils/Sideimage";
 import { FileUploader } from "react-drag-drop-files";
 import { useForm } from "react-hook-form";
 import { useAlert } from "react-alert";
+import { ALERT_MESSAGE_INVALID_CREDENTIAL } from "../../constants";
 import {
   signInOrganizer,
   signInWithGoogle,
@@ -24,7 +25,24 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { customNotification } from "../../components/Notificationui";
 import { from } from "form-data";
 
+import ClipLoader from "react-spinners/ClipLoader";
+import SyncLoader from "react-spinners/SyncLoader";
+const newValue = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
+
+const customLoaderDiv = {
+  margin: "auto",
+  width: "50%",
+
+  padding: "10px",
+};
+
 const Login = () => {
+  let [color, setColor] = useState("#5232f8");
+
   const { data: session } = useSession();
   const router = useRouter();
   const alert = useAlert();
@@ -49,6 +67,8 @@ const Login = () => {
     const res = await signInOrganizer(data);
 
     if (res.status === 200) {
+      setIsLoading(false);
+
       localStorage.setItem("token", res.token);
       localStorage.setItem("result", JSON.stringify(res.result));
       if (res.result.location_address) {
@@ -65,7 +85,15 @@ const Login = () => {
       } else {
         router.push("/users/setup");
       }
-
+    } else if (res.message === "Invalid email or password") {
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_INVALID_CREDENTIAL}
+        </div>,
+        {
+          type: "error",
+        }
+      );
       setIsLoading(false);
     } else {
       alert.show(res.message);
@@ -221,14 +249,14 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>Login page</title>
+        <title>Sign In</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Row>
         <div className="col-md-8 mx-md-auto mx-lg-0 col-lg-6">
           <div className="mx-470">
-            <h1 className="mb-5 text-dark">Log In to EventBy</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <h1 className="mb-5 text-dark">Sign In to EventBy</h1>
+            <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
               <Form.Group className="mb-3">
                 <Form.Label className="font-weight-500">Email*</Form.Label>
                 <div className="input-group">
@@ -238,12 +266,15 @@ const Login = () => {
                     {...register("email", {
                       required: "This is required.",
                       pattern: {
-                        value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        value:
+                          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                         message: "Please enter a valid email",
                       },
                     })}
                     placeholder="Enter Your Email"
                     // defaultValue="newgenbabylon@gmail.com"
+                    autoComplete="none"
+                    // value={"turzoxpress@gmail.com"}
                   />
                 </div>
                 <ErrorMessage
@@ -269,25 +300,18 @@ const Login = () => {
                     {...register("password", {
                       required: "This is required.",
                       validate: {
-                        isAtLeastOneLetter: (v) =>
-                          v.search(/[a-zA-z]/) > -1 ||
-                          "Your password must contain at least one letter.",
-
-                        isAtLeastOneDigit: (v) =>
-                          v.match(/[0-9]/) > 0 ||
-                          "Your password must contain at least one digit.",
-
-                        isAtLeastOneSpecialCharacter: (v) =>
-                          v.search(/[@$!%*#?&]/) > -1 ||
-                          "Your password must contain at least one special character.",
-
-                        isLengthLessThanEight: (v) =>
-                          v.length > 7 ||
-                          "Your password must be at least 8 characters.",
+                        validatePassword: (v) =>
+                          (v.search(/[a-zA-z]/) > -1 &&
+                            v.match(/[0-9]/) > 0 &&
+                            v.search(/[@$!%*#?&]/) > -1 &&
+                            v.length > 7) ||
+                          "Your password must contain at least one letter, one digit, one special character and password length must be at least 8 characters",
                       },
                     })}
                     placeholder="Enter Your Password"
+                    autoComplete="none"
                     // defaultValue="Aa12345678@"
+                    // value={"123456Aa@"}
                   />
                   <FromAppendPrepend
                     prepend="true"
@@ -315,13 +339,25 @@ const Login = () => {
                 </a>
               </Link>
 
-              <Button
-                type="submit"
-                disabled={isLoading}
-                className="btn btn-primary btn-lg w-100"
-              >
-                Log In
-              </Button>
+              {isLoading ? (
+                <div style={customLoaderDiv}>
+                  {" "}
+                  <SyncLoader
+                    color={color}
+                    loading={isLoading}
+                    cssOverride={newValue}
+                    size={12}
+                  />
+                </div>
+              ) : (
+                <Button
+                  type="submit"
+                  disabled={isLoading}
+                  className="btn btn-primary btn-lg w-100"
+                >
+                  Sign In
+                </Button>
+              )}
             </form>
             <div className="text-gray-2 my-4">
               Not Registered Yet? Please

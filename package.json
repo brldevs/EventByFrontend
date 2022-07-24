@@ -65,6 +65,7 @@
     "react-places-autocomplete": "^7.3.0",
     "react-quill": "^2.0.0-beta.4",
     "react-responsive-modal": "^6.2.0",
+    "react-spinners": "^0.13.3",
     "reactstrap": "^9.0.1",
     "remixicon": "^2.5.0",
     "sass": "^1.49.7",

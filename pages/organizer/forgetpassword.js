@@ -11,6 +11,10 @@ import Link from "next/link";
 import FromBottom from "../../components/utils/FromBottom";
 import Image from "next/image";
 import React, { useEffect } from "react";
+import {
+  ALERT_MESSAGE_SUCCESSFULLY_SENT_EMAIL_TO_RESET_PASSWORD,
+  ALERT_MESSAGE_INVALID_EMAIL,
+} from "../../constants";
 const ForgetPassword = () => {
   const router = useRouter();
   const alert = useAlert();
@@ -31,7 +35,27 @@ const ForgetPassword = () => {
     const res = await forgotPassword(data);
 
     if (res.status === 200) {
-      alert.show(res.message);
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_SUCCESSFULLY_SENT_EMAIL_TO_RESET_PASSWORD}
+        </div>,
+        {
+          type: "info",
+        }
+      );
+    } else if (res.message === "Please provide a valid email!") {
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_INVALID_EMAIL}
+        </div>,
+        {
+          type: "error",
+        }
+      );
+    } else {
+      alert.show(<div style={{ textTransform: "none" }}>{res.message}</div>, {
+        type: "error",
+      });
     }
   };
 

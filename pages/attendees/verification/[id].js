@@ -26,7 +26,7 @@ const verification = () => {
             router.push("/attendees/login");
           }}
         >
-          Log In
+          Sign In
         </button>
       </div>
 

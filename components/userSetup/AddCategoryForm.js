@@ -11,6 +11,7 @@ import {
   getAllCategories,
 } from "../../services/service";
 import { useAlert } from "react-alert";
+import { ALERT_MESSAGE_USER_PROFILE_SETUP_SUCCESS } from "../../constants";
 
 function AddCategoryForm({
   currentStep,
@@ -56,7 +57,7 @@ function AddCategoryForm({
     const selected_category = getSelectedCategory(d);
 
     if (selected_category.length > 5) {
-      setIsCategoryErrorMessage("Maximum 5 Category Selected!");
+      setIsCategoryErrorMessage("Maximum 5 Category Select!");
       setIsLoading(false);
     } else if (selected_category.length < 1) {
       setIsCategoryErrorMessage("This field is required!");
@@ -93,7 +94,14 @@ function AddCategoryForm({
 
           localStorage.setItem("result", JSON.stringify(tempResultObj));
 
-          alert.show(res.message);
+          alert.show(
+            <div style={{ textTransform: "none" }}>
+              {ALERT_MESSAGE_USER_PROFILE_SETUP_SUCCESS}
+            </div>,
+            {
+              type: "success",
+            }
+          );
         } else {
           alert.show(res.message);
         }

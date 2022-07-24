@@ -26,7 +26,7 @@ function CategoryList(props) {
 
     if (cnt > 5) {
       console.log("Greater Than 5")
-      props.setIsCategoryErrorMessage('Maximum 5 Category Selected!');
+      props.setIsCategoryErrorMessage('Maximum 5 Category Select!');
       const newList2 = list.map((item) => {
         if (item.id === id) {
           const updatedItem = {

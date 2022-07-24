@@ -18,7 +18,7 @@ import {
 import Head from "next/head";
 import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react";
-
+import { ALERT_MESSAGE_EMAIL_ALREADY_USED } from "../../constants";
 const Registration = () => {
   const { data: session } = useSession();
   const router = useRouter();
@@ -53,6 +53,16 @@ const Registration = () => {
     if (res.status === 200) {
       alert.show(res.message);
       router.push("/organizer/verificationemail");
+      setIsLoading(false);
+    } else if (
+      res.message === "User with this email and role already exists!"
+    ) {
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_EMAIL_ALREADY_USED}
+        </div>,
+        { type: "info" }
+      );
       setIsLoading(false);
     } else {
       alert.show(res.message);
@@ -207,14 +217,14 @@ const Registration = () => {
   return (
     <>
       <Head>
-        <title>Register</title>
+        <title>Sign Up</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Row>
         <div className="col-md-8 mx-md-auto mx-lg-0 col-lg-6">
           <div className="mx-470">
             <h1 className="mb-5 text-dark">Sign Up For EventBy</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
               <div className>
                 <div className="row">
                   <div className="col-sm-6 mb-3">
@@ -229,7 +239,7 @@ const Registration = () => {
                           required: "This is required.",
                           pattern: {
                             value: /^[a-z ,.'-]+$/i,
-                            message: "Invalid Name",
+                            message: "Only letters are allowed",
                           },
                         })}
                         className="form-control"
@@ -262,7 +272,7 @@ const Registration = () => {
                           required: "This is required.",
                           pattern: {
                             value: /^[a-z ,.'-]+$/i,
-                            message: "Invalid Name",
+                            message: "Only letters are allowed",
                           },
                         })}
                         placeholder="Last Name"
@@ -295,12 +305,13 @@ const Registration = () => {
                     {...register("email", {
                       required: "This is required.",
                       pattern: {
-                        value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        value:
+                          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                         message: "Please enter a valid email",
                       },
                     })}
                     placeholder="Enter Your Email"
-                    autoComplete="off"
+                    autoComplete="none"
                   />
                 </div>
                 <ErrorMessage
@@ -327,25 +338,16 @@ const Registration = () => {
                     {...register("password", {
                       required: "This is required.",
                       validate: {
-                        isAtLeastOneLetter: (v) =>
-                          v.search(/[a-zA-z]/) > -1 ||
-                          "Your password must contain at least one letter.",
-
-                        isAtLeastOneDigit: (v) =>
-                          v.match(/[0-9]/) > 0 ||
-                          "Your password must contain at least one digit.",
-
-                        isAtLeastOneSpecialCharacter: (v) =>
-                          v.search(/[@$!%*#?&]/) > -1 ||
-                          "Your password must contain at least one special character.",
-
-                        isLengthLessThanEight: (v) =>
-                          v.length > 7 ||
-                          "Your password must be at least 8 characters.",
+                        validatePassword: (v) =>
+                          (v.search(/[a-zA-z]/) > -1 &&
+                            v.match(/[0-9]/) > 0 &&
+                            v.search(/[@$!%*#?&]/) > -1 &&
+                            v.length > 7) ||
+                          "Your password must contain at least one letter, one digit, one special character and password length must be at least 8 characters",
                       },
                     })}
                     placeholder="Enter Your Password"
-                    autoComplete="off"
+                    autoComplete="none"
                   />
                   <FromAppendPrepend
                     prepend="true"
@@ -405,7 +407,7 @@ const Registration = () => {
               <div className="text-gray-2 my-4">
                 Already have an account? Please
                 <Link href="/organizer/login">
-                  <a className="font-weight-700"> Log In</a>
+                  <a className="font-weight-700"> Sign In</a>
                 </Link>
               </div>
             </form>

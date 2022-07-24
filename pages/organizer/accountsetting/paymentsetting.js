@@ -10,6 +10,11 @@ import { useAlert } from "react-alert";
 import $ from "jquery";
 import FromAppendPrepend from "../../../components/utils/FromAppendPrepend";
 import { Row, Form, Button, Col } from "react-bootstrap";
+import {
+  ALERT_MESSAGE_PAYMENT_INFORMATION_SAVE_SUCCESS,
+  ALERT_MESSAGE_PAYMENT_METHOD_EXISTS,
+  ALERT_MESSAGE_PAYMENT_NOT_SETUP,
+} from "../../../constants";
 function Paymentsetting() {
   const alert = useAlert();
 
@@ -44,7 +49,14 @@ function Paymentsetting() {
     const res = await getDefaultCheckoutMethod(token);
 
     if (res.status === 404) {
-      alert.show("No Checkout Method Found!", { type: "error" });
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_PAYMENT_NOT_SETUP}
+        </div>,
+        {
+          type: "error",
+        }
+      );
     } else {
       const response = await getUserCheckoutMethods(token);
       if (response.status === 200) {
@@ -55,7 +67,14 @@ function Paymentsetting() {
           setCheckOutId(response.data[0]._id);
         }
       } else if (response.status === 404) {
-        alert.show("No Checkout Method Found!", { type: "error" });
+        alert.show(
+          <div style={{ textTransform: "none" }}>
+            {ALERT_MESSAGE_PAYMENT_NOT_SETUP}
+          </div>,
+          {
+            type: "error",
+          }
+        );
       } else {
         alert.show(response.message, { type: "error" });
       }
@@ -63,6 +82,22 @@ function Paymentsetting() {
   }, []);
 
   const savePaymentSetting = async () => {
+    //before save check checkout id exist or not start
+    const res = await getDefaultCheckoutMethod(token);
+
+    if (res.status !== 404) {
+      const response = await getUserCheckoutMethods(token);
+      if (response.status === 200) {
+        setCheckoutMethodData(response.data);
+        if (response.data.length > 0) {
+          setPublicId(res.data.public_id);
+          setSecretId(res.data.secret_id);
+          setCheckOutId(response.data[0]._id);
+        }
+      }
+    }
+    //before save check checkout id exist or not end
+
     if (publicId && secretId) {
       console.log("SUBMIT: " + publicId + " = " + secretId);
 
@@ -87,7 +122,14 @@ function Paymentsetting() {
         };
         const response = await saveCheckoutMethod(data, token);
         if (response.status === 200) {
-          alert.show("Saved Successfully!", { type: "success" });
+          alert.show(
+            <div style={{ textTransform: "none" }}>
+              {ALERT_MESSAGE_PAYMENT_INFORMATION_SAVE_SUCCESS}
+            </div>,
+            {
+              type: "success",
+            }
+          );
 
           const data = {
             checkout_id: response.data._id,
@@ -126,14 +168,14 @@ function Paymentsetting() {
   return (
     <>
       <div className="bg-white border-radius-10">
-        <div className="text-end px-50 py-50 pb-0">
+        {/* <div className="text-end px-50 py-50 pb-0">
           <button
             className="btn btn-secondary text-white"
             onClick={savePaymentSetting}
           >
             Save Changes
           </button>
-        </div>
+        </div> */}
         <div className="dashboard_event_container px-4 pb-5">
           <h2 className="text-center">Payment Settings</h2>
           <p className="text-gray-2 text-center mb-5">
@@ -342,6 +384,14 @@ function Paymentsetting() {
               </div>
             </form>
           </div>
+        </div>
+        <div className="text-end px-50 py-50 pb-50">
+          <button
+            className="btn btn-secondary text-white"
+            onClick={savePaymentSetting}
+          >
+            Save Changes
+          </button>
         </div>
       </div>
     </>
