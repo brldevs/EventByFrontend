@@ -126,14 +126,14 @@ function Paymentsetting() {
   return (
     <>
       <div className="bg-white border-radius-10">
-        <div className="text-end px-50 py-50 pb-0">
+        {/* <div className="text-end px-50 py-50 pb-0">
           <button
             className="btn btn-secondary text-white"
             onClick={savePaymentSetting}
           >
             Save Changes
           </button>
-        </div>
+        </div> */}
         <div className="dashboard_event_container px-4 pb-5">
           <h2 className="text-center">Payment Settings</h2>
           <p className="text-gray-2 text-center mb-5">
@@ -342,6 +342,14 @@ function Paymentsetting() {
               </div>
             </form>
           </div>
+        </div>
+        <div className="text-end px-50 py-50 pb-50">
+          <button
+            className="btn btn-secondary text-white"
+            onClick={savePaymentSetting}
+          >
+            Save Changes
+          </button>
         </div>
       </div>
     </>
