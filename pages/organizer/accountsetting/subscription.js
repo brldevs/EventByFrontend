@@ -209,7 +209,7 @@ function Subscription() {
                         <th>Status</th>
                         <th>Bill</th>
                         <th>Renewal Date</th>
-                        <th>Actions</th>
+                        <th>Action</th>
                       </tr>
                       <tr>
                         <td>
