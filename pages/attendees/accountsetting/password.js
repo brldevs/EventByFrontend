@@ -11,6 +11,7 @@ import { changePassword, logOut } from "../../../services/service";
 import {
   ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD,
   ALERT_MESSAGE_UPDATE_PASSWORD_SUCCESS,
+  ALERT_MESSAGE_INCORRECT_CURRENT_PASSWORD,
 } from "../../../constants";
 function PasswordChange() {
   const router = useRouter();
@@ -53,6 +54,18 @@ function PasswordChange() {
       alert.show(
         <div style={{ textTransform: "none" }}>
           {ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD}
+        </div>,
+        {
+          type: "error",
+        }
+      );
+    } else if (
+      res.status === 401 &&
+      res.message === "Check current password. Password doesn't match!"
+    ) {
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_INCORRECT_CURRENT_PASSWORD}
         </div>,
         {
           type: "error",

@@ -22,6 +22,8 @@ const ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD =
   "You can not use previous password as your new password!";
 const ALERT_MESSAGE_UPDATE_PASSWORD_SUCCESS =
   "Your password has been changed successfully";
+const ALERT_MESSAGE_INCORRECT_CURRENT_PASSWORD =
+  "Current password is incorrect, please try again";
 
 module.exports = {
   MAX_PROFILE_PHOTO_SIZE,
@@ -39,4 +41,5 @@ module.exports = {
   ALERT_MESSAGE_PERSONAL_INFORMATION_UPDATE_SUCCESS,
   ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD,
   ALERT_MESSAGE_UPDATE_PASSWORD_SUCCESS,
+  ALERT_MESSAGE_INCORRECT_CURRENT_PASSWORD,
 };
