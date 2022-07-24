@@ -10,7 +10,10 @@ import { useAlert } from "react-alert";
 import $ from "jquery";
 import FromAppendPrepend from "../../../components/utils/FromAppendPrepend";
 import { Row, Form, Button, Col } from "react-bootstrap";
-import { ALERT_MESSAGE_PAYMENT_INFORMATION_SAVE_SUCCESS } from "../../../constants";
+import {
+  ALERT_MESSAGE_PAYMENT_INFORMATION_SAVE_SUCCESS,
+  ALERT_MESSAGE_PAYMENT_METHOD_EXISTS,
+} from "../../../constants";
 function Paymentsetting() {
   const alert = useAlert();
 
@@ -67,9 +70,7 @@ function Paymentsetting() {
     //before save check checkout id exist or not start
     const res = await getDefaultCheckoutMethod(token);
 
-    if (res.status === 404) {
-      // alert.show("No Checkout Method Found!", { type: "error" });
-    } else {
+    if (res.status !== 404) {
       const response = await getUserCheckoutMethods(token);
       if (response.status === 200) {
         setCheckoutMethodData(response.data);
@@ -78,10 +79,6 @@ function Paymentsetting() {
           setSecretId(res.data.secret_id);
           setCheckOutId(response.data[0]._id);
         }
-      } else if (response.status === 404) {
-        // alert.show("No Checkout Method Found!", { type: "error" });
-      } else {
-        // alert.show(response.message, { type: "error" });
       }
     }
     //before save check checkout id exist or not end
