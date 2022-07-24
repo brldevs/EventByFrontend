@@ -10,6 +10,7 @@ import Sideimage from "../../../components/utils/Sideimage";
 import { changePassword, logOut } from "../../../services/service";
 import { useAuthData } from "../../../context/auth";
 import $ from "jquery";
+import { ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD } from "../../../constants";
 
 function PasswordChange() {
   const router = useRouter();
@@ -61,6 +62,15 @@ function PasswordChange() {
       logOut();
       removeAuthValues();
       router.push("/");
+    } else if (res.status === 205) {
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD}
+        </div>,
+        {
+          type: "error",
+        }
+      );
     } else {
       alert.show(res.message);
     }
@@ -108,13 +118,8 @@ function PasswordChange() {
       <div className="content_area flex-1">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="bg-white border-radius-10">
-            <div className="text-end px-50 py-50 pb-0">
-              <button type="submit" className="btn btn-secondary text-white">
-                Save Changes
-              </button>
-            </div>
             <div className="dashboard_event_container mw-470 pb-5">
-              <h2 className="text-center">Passwords</h2>
+              <h2 className="text-center">Password</h2>
               <p className="text-gray-2 text-center mb-5">
                 Set up or change your EventBy profile password here with ease
               </p>
@@ -288,6 +293,11 @@ function PasswordChange() {
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="text-end px-50 py-50 pb-50">
+              <button type="submit" className="btn btn-secondary text-white">
+                Save Changes
+              </button>
             </div>
           </div>
         </form>

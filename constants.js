@@ -18,6 +18,8 @@ const ALERT_MESSAGE_AT_LEAST_ONE_PACKAGE_SUBSCRIPTION =
   "Please subscribe at least one package to create event";
 const ALERT_MESSAGE_PERSONAL_INFORMATION_UPDATE_SUCCESS =
   "Personal information updated successfully";
+const ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD =
+  "You can not use previous password as your new password!";
 
 module.exports = {
   MAX_PROFILE_PHOTO_SIZE,
@@ -33,4 +35,5 @@ module.exports = {
   ALERT_MESSAGE_PAYMENT_NOT_SETUP,
   ALERT_MESSAGE_AT_LEAST_ONE_PACKAGE_SUBSCRIPTION,
   ALERT_MESSAGE_PERSONAL_INFORMATION_UPDATE_SUCCESS,
+  ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD,
 };

@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import FromAppendPrepend from "../../../components/utils/FromAppendPrepend";
 import { useAuthData } from "../../../context/auth";
 import { changePassword, logOut } from "../../../services/service";
-
+import { ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD } from "../../../constants";
 function PasswordChange() {
   const router = useRouter();
   const alert = useAlert();
@@ -38,6 +38,15 @@ function PasswordChange() {
       logOut();
       removeAuthValues();
       router.push("/attendees/login");
+    } else if (res.status === 205) {
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_CAN_NOT_USE_PREVIOUS_PASSWORD}
+        </div>,
+        {
+          type: "error",
+        }
+      );
     } else {
       alert.show(res.message);
     }
