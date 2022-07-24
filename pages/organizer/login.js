@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { useState, useEffect } from "react";
+import { useState, useEffect, CSSProperties } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { Row, Form, Button, Col } from "react-bootstrap";
@@ -25,7 +25,24 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { customNotification } from "../../components/Notificationui";
 import { from } from "form-data";
 
+import ClipLoader from "react-spinners/ClipLoader";
+import SyncLoader from "react-spinners/SyncLoader";
+const newValue = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
+
+const customLoaderDiv = {
+  margin: "auto",
+  width: "50%",
+
+  padding: "10px",
+};
+
 const Login = () => {
+  let [color, setColor] = useState("#5232f8");
+
   const { data: session } = useSession();
   const router = useRouter();
   const alert = useAlert();
@@ -50,6 +67,8 @@ const Login = () => {
     const res = await signInOrganizer(data);
 
     if (res.status === 200) {
+      setIsLoading(false);
+
       localStorage.setItem("token", res.token);
       localStorage.setItem("result", JSON.stringify(res.result));
       if (res.result.location_address) {
@@ -66,8 +85,6 @@ const Login = () => {
       } else {
         router.push("/users/setup");
       }
-
-      setIsLoading(false);
     } else if (res.message === "Invalid email or password") {
       alert.show(
         <div style={{ textTransform: "none" }}>
@@ -257,6 +274,7 @@ const Login = () => {
                     placeholder="Enter Your Email"
                     // defaultValue="newgenbabylon@gmail.com"
                     autoComplete="none"
+                    // value={"turzoxpress@gmail.com"}
                   />
                 </div>
                 <ErrorMessage
@@ -293,6 +311,7 @@ const Login = () => {
                     placeholder="Enter Your Password"
                     autoComplete="none"
                     // defaultValue="Aa12345678@"
+                    // value={"123456Aa@"}
                   />
                   <FromAppendPrepend
                     prepend="true"
@@ -320,13 +339,25 @@ const Login = () => {
                 </a>
               </Link>
 
-              <Button
-                type="submit"
-                disabled={isLoading}
-                className="btn btn-primary btn-lg w-100"
-              >
-                Sign In
-              </Button>
+              {isLoading ? (
+                <div style={customLoaderDiv}>
+                  {" "}
+                  <SyncLoader
+                    color={color}
+                    loading={isLoading}
+                    cssOverride={newValue}
+                    size={12}
+                  />
+                </div>
+              ) : (
+                <Button
+                  type="submit"
+                  disabled={isLoading}
+                  className="btn btn-primary btn-lg w-100"
+                >
+                  Sign In
+                </Button>
+              )}
             </form>
             <div className="text-gray-2 my-4">
               Not Registered Yet? Please
