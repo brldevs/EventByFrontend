@@ -64,6 +64,28 @@ function Paymentsetting() {
   }, []);
 
   const savePaymentSetting = async () => {
+    //before save check checkout id exist or not start
+    const res = await getDefaultCheckoutMethod(token);
+
+    if (res.status === 404) {
+      // alert.show("No Checkout Method Found!", { type: "error" });
+    } else {
+      const response = await getUserCheckoutMethods(token);
+      if (response.status === 200) {
+        setCheckoutMethodData(response.data);
+        if (response.data.length > 0) {
+          setPublicId(res.data.public_id);
+          setSecretId(res.data.secret_id);
+          setCheckOutId(response.data[0]._id);
+        }
+      } else if (response.status === 404) {
+        // alert.show("No Checkout Method Found!", { type: "error" });
+      } else {
+        // alert.show(response.message, { type: "error" });
+      }
+    }
+    //before save check checkout id exist or not end
+
     if (publicId && secretId) {
       console.log("SUBMIT: " + publicId + " = " + secretId);
 
