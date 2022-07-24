@@ -56,7 +56,7 @@ function AddCategoryForm({
     const selected_category = getSelectedCategory(d);
 
     if (selected_category.length > 5) {
-      setIsCategoryErrorMessage("Maximum 5 Category Selected!");
+      setIsCategoryErrorMessage("Maximum 5 Category Select!");
       setIsLoading(false);
     } else if (selected_category.length < 1) {
       setIsCategoryErrorMessage("This field is required!");
