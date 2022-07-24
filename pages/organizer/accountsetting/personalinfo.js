@@ -252,18 +252,13 @@ const personalinfo = () => {
     setIsDateOfBirthOpen(!isDateOfBirthOpen);
   };
 
-  const [
-    timeZoneSelectedValueErrorMsg,
-    setTimeZoneSelectedValueErrorMsg,
-  ] = useState(null);
-  const [
-    languageSelectedValueErrorMsg,
-    setLanguageSelectedValueErrorMsg,
-  ] = useState(null);
+  const [timeZoneSelectedValueErrorMsg, setTimeZoneSelectedValueErrorMsg] =
+    useState(null);
+  const [languageSelectedValueErrorMsg, setLanguageSelectedValueErrorMsg] =
+    useState(null);
 
-  const [selectedStartDateErrorMsg, setSelectedStartDateErrorMsg] = useState(
-    null
-  );
+  const [selectedStartDateErrorMsg, setSelectedStartDateErrorMsg] =
+    useState(null);
   const onSubmit = async (d) => {
     setTimeZoneSelectedValueErrorMsg(null);
     setLanguageSelectedValueErrorMsg(null);
@@ -411,9 +406,8 @@ const personalinfo = () => {
     }
   };
 
-  const [fileValidationErrorMessage, setFileValidationErrorMessage] = useState(
-    null
-  );
+  const [fileValidationErrorMessage, setFileValidationErrorMessage] =
+    useState(null);
   const fileValidationHandler = (e) => {
     let file_size = e?.target?.files[0]?.size;
 
@@ -551,6 +545,10 @@ const personalinfo = () => {
                       className="form-control"
                       {...register("firstName", {
                         required: "This is required.",
+                        pattern: {
+                          value: /^[a-z ,.'-]+$/i,
+                          message: "Only letters are allowed",
+                        },
                       })}
                     />
                   </div>
@@ -582,6 +580,10 @@ const personalinfo = () => {
                       className="form-control"
                       {...register("lastName", {
                         required: "This is required.",
+                        pattern: {
+                          value: /^[a-z ,.'-]+$/i,
+                          message: "Only letters are allowed",
+                        },
                       })}
                     />
                   </div>
@@ -633,7 +635,8 @@ const personalinfo = () => {
                       {...register("contact_number", {
                         required: "This is required.",
                         pattern: {
-                          value: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
+                          value:
+                            /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
                           message: `Invalid contact number`,
                         },
                       })}
@@ -762,7 +765,8 @@ const personalinfo = () => {
                   {...register("website", {
                     required: "This is required.",
                     pattern: {
-                      value: /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
+                      value:
+                        /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/,
                       message: `Invalid website address`,
                     },
                   })}
