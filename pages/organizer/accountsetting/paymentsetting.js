@@ -13,6 +13,7 @@ import { Row, Form, Button, Col } from "react-bootstrap";
 import {
   ALERT_MESSAGE_PAYMENT_INFORMATION_SAVE_SUCCESS,
   ALERT_MESSAGE_PAYMENT_METHOD_EXISTS,
+  ALERT_MESSAGE_PAYMENT_NOT_SETUP,
 } from "../../../constants";
 function Paymentsetting() {
   const alert = useAlert();
@@ -48,7 +49,14 @@ function Paymentsetting() {
     const res = await getDefaultCheckoutMethod(token);
 
     if (res.status === 404) {
-      alert.show("No Checkout Method Found!", { type: "error" });
+      alert.show(
+        <div style={{ textTransform: "none" }}>
+          {ALERT_MESSAGE_PAYMENT_NOT_SETUP}
+        </div>,
+        {
+          type: "error",
+        }
+      );
     } else {
       const response = await getUserCheckoutMethods(token);
       if (response.status === 200) {
@@ -59,7 +67,14 @@ function Paymentsetting() {
           setCheckOutId(response.data[0]._id);
         }
       } else if (response.status === 404) {
-        alert.show("No Checkout Method Found!", { type: "error" });
+        alert.show(
+          <div style={{ textTransform: "none" }}>
+            {ALERT_MESSAGE_PAYMENT_NOT_SETUP}
+          </div>,
+          {
+            type: "error",
+          }
+        );
       } else {
         alert.show(response.message, { type: "error" });
       }
