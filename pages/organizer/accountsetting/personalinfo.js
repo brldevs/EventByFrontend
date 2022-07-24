@@ -679,6 +679,7 @@ const personalinfo = () => {
                       // defaultValue={data.event_start_date || new Date()}
                       render={({ ref, ...rest }) => (
                         <DatePicker
+                          placeholderText="dd/MM/yyyy"
                           dateFormat="dd/MM/yyyy"
                           selected={selectedStartDate}
                           maxDate={new Date()}
